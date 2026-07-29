@@ -1,0 +1,91 @@
+import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import hljs from 'highlight.js/lib/core';
+import typescript from 'highlight.js/lib/languages/typescript';
+import xml from 'highlight.js/lib/languages/xml';
+import css from 'highlight.js/lib/languages/css';
+import { CommonModule } from '@angular/common';
+
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('html', xml);
+hljs.registerLanguage('css', css);
+
+@Component({
+  selector: 'app-code-block',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="code-block-wrapper">
+      <div class="code-header">
+        <span class="lang-label">{{ lang }}</span>
+        <button class="copy-btn" (click)="copy()" [class.copied]="copied">
+          {{ copied ? '✅ Copied!' : '📋 Copy' }}
+        </button>
+      </div>
+      <pre><code #codeEl class="language-{{ lang }}">{{ code }}</code></pre>
+    </div>
+  `,
+  styles: [`
+    .code-block-wrapper {
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 16px 0;
+      border: 1px solid #3e3e42;
+    }
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2d2d30;
+      padding: 6px 14px;
+      border-bottom: 1px solid #3e3e42;
+    }
+    .lang-label {
+      font-size: 12px;
+      color: #858585;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid #3e3e42;
+      color: #cccccc;
+      padding: 3px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover { background: #3e3e42; }
+    .copy-btn.copied { border-color: #4ec9b0; color: #4ec9b0; }
+    pre {
+      margin: 0;
+      background: #1e1e1e;
+      padding: 16px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      background: transparent !important;
+    }
+  `]
+})
+export class CodeBlockComponent implements AfterViewInit {
+  @Input() code = '';
+  @Input() lang = 'html';
+  @ViewChild('codeEl') codeEl!: ElementRef<HTMLElement>;
+
+  copied = false;
+
+  ngAfterViewInit() {
+    hljs.highlightElement(this.codeEl.nativeElement);
+  }
+
+  copy() {
+    navigator.clipboard.writeText(this.code.trim());
+    this.copied = true;
+    setTimeout(() => (this.copied = false), 2000);
+  }
+}

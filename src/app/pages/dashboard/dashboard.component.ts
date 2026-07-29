@@ -1,0 +1,227 @@
+import { Component, inject, signal, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProgressService, StudentProgress } from '../../core/services/progress.service';
+
+const ALL_STEPS = [
+  'act1-for', 'act1-track', 'act1-track-deep', 'act1-empty',
+  'act2-if', 'act2-switch', 'act2-choose',
+  'act3-oneway-down', 'act3-oneway-up', 'act3-twoway',
+  'act4-signals', 'act4-computed', 'act4-full',
+  'lab-task1', 'lab-task2', 'lab-task3'
+];
+
+@Component({
+  selector: 'app-dashboard',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="dashboard">
+      <div class="dash-header">
+        <h1>📊 Teacher Dashboard</h1>
+        <p class="dash-subtitle">Live student progress — refreshes automatically</p>
+        <button class="btn-refresh" (click)="load()" [disabled]="loading()">
+          {{ loading() ? '⏳ Loading...' : '🔄 Refresh' }}
+        </button>
+      </div>
+
+      @if (loading()) {
+        <div class="loading-state">Loading student data...</div>
+      } @else if (students().length === 0) {
+        <div class="empty-state">
+          <p>No students have signed in yet.</p>
+          <p>Students appear here after they log in with Google and mark their first step complete.</p>
+        </div>
+      } @else {
+        <!-- Summary cards -->
+        <div class="summary-row">
+          <div class="summary-card">
+            <div class="summary-value">{{ students().length }}</div>
+            <div class="summary-label">Students</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value">{{ avgCompletionPercent() }}%</div>
+            <div class="summary-label">Avg Completion</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value">{{ studentsFinished() }}</div>
+            <div class="summary-label">Fully Completed</div>
+          </div>
+          <div class="summary-card warning">
+            <div class="summary-value">{{ studentsStuck() }}</div>
+            <div class="summary-label">Need Help (0 steps)</div>
+          </div>
+        </div>
+
+        <!-- Per-step progress -->
+        <div class="section">
+          <h2>Step Completion Overview</h2>
+          <div class="step-grid">
+            @for (step of allSteps; track step) {
+              <div class="step-item">
+                <div class="step-name">{{ step }}</div>
+                <div class="step-bar-outer">
+                  <div class="step-bar-inner" [style.width.%]="stepPercent(step)"></div>
+                </div>
+                <div class="step-count">{{ stepCount(step) }}/{{ students().length }}</div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Student table -->
+        <div class="section">
+          <h2>All Students</h2>
+          <div class="table-wrapper">
+            <table class="student-table">
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Email</th>
+                  <th>Progress</th>
+                  <th>Steps Done</th>
+                  <th>Last Active</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (s of sortedStudents(); track s.uid) {
+                  <tr [class.complete]="s.completedSteps.length === totalSteps">
+                    <td>{{ s.displayName }}</td>
+                    <td class="email">{{ s.email }}</td>
+                    <td>
+                      <div class="mini-bar-outer">
+                        <div class="mini-bar-inner" [style.width.%]="studentPercent(s)"></div>
+                      </div>
+                      <span class="pct">{{ studentPercent(s) }}%</span>
+                    </td>
+                    <td class="count">{{ s.completedSteps.length }} / {{ totalSteps }}</td>
+                    <td class="last-active">{{ formatDate(s.lastActive) }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      }
+    </div>
+  `,
+  styles: [`
+    .dashboard { max-width: 1000px; }
+    .dash-header { margin-bottom: 28px; }
+    .dash-header h1 { margin-bottom: 6px; }
+    .dash-subtitle { color: #858585; margin-bottom: 12px; }
+    .btn-refresh {
+      background: transparent; border: 1px solid #3e3e42; color: #cccccc;
+      padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 13px;
+    }
+    .btn-refresh:hover:not(:disabled) { background: #3e3e42; }
+    .btn-refresh:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .loading-state, .empty-state {
+      text-align: center; padding: 60px 20px; color: #858585;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 700px) { .summary-row { grid-template-columns: repeat(2, 1fr); } }
+    .summary-card {
+      background: #252526; border: 1px solid #3e3e42; border-radius: 10px;
+      padding: 20px; text-align: center;
+    }
+    .summary-card.warning { border-color: #5c3800; background: #2a1a00; }
+    .summary-value { font-size: 32px; font-weight: 700; color: #4fc3f7; }
+    .summary-card.warning .summary-value { color: #ff9d00; }
+    .summary-label { font-size: 12px; color: #858585; margin-top: 4px; }
+
+    .section { margin-bottom: 40px; }
+    .section h2 { font-size: 16px; margin-bottom: 16px; color: #cccccc; }
+
+    .step-grid { display: flex; flex-direction: column; gap: 8px; }
+    .step-item { display: grid; grid-template-columns: 180px 1fr 60px; gap: 12px; align-items: center; font-size: 13px; }
+    .step-name { font-family: monospace; color: #89ddff; }
+    .step-bar-outer { height: 8px; background: #3e3e42; border-radius: 4px; }
+    .step-bar-inner { height: 100%; background: linear-gradient(90deg, #4fc3f7, #4ec9b0); border-radius: 4px; transition: width 0.5s; }
+    .step-count { color: #858585; text-align: right; }
+
+    .table-wrapper { overflow-x: auto; }
+    .student-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .student-table th {
+      background: #2d2d30; color: #858585; padding: 10px 14px;
+      text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .student-table td {
+      padding: 12px 14px; border-bottom: 1px solid #3e3e42; color: #cccccc;
+    }
+    .student-table tr:hover td { background: #252526; }
+    .student-table tr.complete td { color: #4ec9b0; }
+    .email { color: #858585; font-size: 13px; }
+    .count { font-family: monospace; }
+    .last-active { color: #858585; font-size: 12px; }
+
+    .mini-bar-outer {
+      display: inline-block; width: 80px; height: 6px;
+      background: #3e3e42; border-radius: 3px; vertical-align: middle; margin-right: 8px;
+    }
+    .mini-bar-inner { height: 100%; background: #4fc3f7; border-radius: 3px; }
+    .pct { font-size: 12px; color: #858585; }
+  `]
+})
+export class DashboardComponent implements OnInit {
+  private progressService = inject(ProgressService);
+
+  students = signal<StudentProgress[]>([]);
+  loading = signal(true);
+  allSteps = ALL_STEPS;
+  totalSteps = ALL_STEPS.length;
+
+  ngOnInit() {
+    this.load();
+  }
+
+  async load() {
+    this.loading.set(true);
+    this.students.set(await this.progressService.getAllStudentProgress());
+    this.loading.set(false);
+  }
+
+  sortedStudents() {
+    return [...this.students()].sort((a, b) => b.completedSteps.length - a.completedSteps.length);
+  }
+
+  studentPercent(s: StudentProgress): number {
+    return Math.round((s.completedSteps.length / this.totalSteps) * 100);
+  }
+
+  avgCompletionPercent(): number {
+    const list = this.students();
+    if (!list.length) return 0;
+    const total = list.reduce((sum, s) => sum + s.completedSteps.length, 0);
+    return Math.round((total / (list.length * this.totalSteps)) * 100);
+  }
+
+  studentsFinished(): number {
+    return this.students().filter(s => s.completedSteps.length === this.totalSteps).length;
+  }
+
+  studentsStuck(): number {
+    return this.students().filter(s => s.completedSteps.length === 0).length;
+  }
+
+  stepCount(stepId: string): number {
+    return this.students().filter(s => s.completedSteps.includes(stepId)).length;
+  }
+
+  stepPercent(stepId: string): number {
+    const list = this.students();
+    if (!list.length) return 0;
+    return Math.round((this.stepCount(stepId) / list.length) * 100);
+  }
+
+  formatDate(d: Date | null): string {
+    if (!d) return 'Never';
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+}
