@@ -19,8 +19,24 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
       <app-mental-model-card [models]="models" />
 
+      <section class="lesson-framework">
+        <h3>Lesson Map</h3>
+        <ul>
+          <li><strong>Learning Goal:</strong> Connect form input and TypeScript state in one-way and two-way patterns.</li>
+          <li><strong>Why It Matters:</strong> Most apps need user input to immediately affect what users see.</li>
+          <li><strong>Build Steps:</strong> Data down with <code>[value]</code> → data up with <code>(input)</code> → combine with <code>[(ngModel)]</code>.</li>
+          <li><strong>Expected Outcome:</strong> You can explain and implement two-way binding without guessing syntax.</li>
+        </ul>
+      </section>
+
+      <section class="selfguided-panel">
+        <p><strong>You are here:</strong> Act 3 (Two-way binding)</p>
+        <p><strong>Next step:</strong> Act 4 (Signals + computed)</p>
+      </section>
+
       <!-- Build-up approach: 3 steps -->
       <app-lesson-step stepId="act3-oneway-down" [stepNumber]="1" title="Step 1 — One-Way Data DOWN: [property] (Data → Screen)">
+        <p><span class="effort-tag effort-short">Effort: Short</span></p>
         <p>First, let's understand <strong>one-way binding going down</strong>. JavaScript owns the data. HTML just displays it.</p>
 
         <app-code-block lang="html" [code]="oneWayDown" />
@@ -39,9 +55,17 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p>Square brackets <code>[property]</code> tell Angular to <strong>evaluate the expression</strong> and set it as the property. Without the brackets, it would treat it as a plain string:</p>
           <app-code-block lang="html" [code]="bracketHint" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — Define the signal first">
+          <p>The template is reading from this TypeScript signal. If this line is missing, the binding has nothing to display.</p>
+          <app-code-block lang="typescript" [code]="oneWayDownTs" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can send state from TypeScript to an input value.</div>
       </app-lesson-step>
 
       <app-lesson-step stepId="act3-oneway-up" [stepNumber]="2" title="Step 2 — One-Way Data UP: (event) (Screen → Data)">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>Now let's add the <strong>return trip</strong>. HTML listens for user keypresses and sends the data back to JavaScript.</p>
 
         <app-code-block lang="html" [code]="oneWayUp" />
@@ -69,9 +93,17 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <app-code-block lang="html" [code]="verboseAnswer" />
           <p style="margin-top:12px; color: #858585; font-size:13px;">This works! But we can do much better with <code>[(ngModel)]</code>.</p>
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — Move event logic into a method">
+          <p>Inline handlers are okay for quick demos, but beginners should know the cleaner pattern:</p>
+          <app-code-block lang="typescript" [code]="oneWayUpTs" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can capture user typing and write it back to a signal.</div>
       </app-lesson-step>
 
       <app-lesson-step stepId="act3-twoway" [stepNumber]="3" title="Step 3 — Two-Way Binding: [(ngModel)] (The Walkie-Talkie)">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>Now we combine <code>[</code> (data down) and <code>(</code> (events up) into Angular's famous <strong>Banana in a Box</strong> syntax: <code>[(ngModel)]</code>.</p>
 
         <div class="banana-callout">
@@ -105,6 +137,13 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <app-code-block lang="typescript" [code]="fullTsAnswer" />
           <app-code-block lang="html" [code]="fullHtmlAnswer" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — Why this works end-to-end">
+          <p>In one place, this snippet shows setup + signal state + template binding so beginners can connect all pieces.</p>
+          <app-code-block lang="typescript" [code]="ngModelTsStarter" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can implement <code>[(ngModel)]</code> with <code>FormsModule</code> and explain the data flow.</div>
       </app-lesson-step>
 
       <div class="nav-footer">
@@ -180,6 +219,11 @@ export class Act3Component {
 
 <!-- That's it! No more [value] + (input) separately -->`;
 
+  oneWayDownTs = `import { signal } from '@angular/core';
+
+// TypeScript source of truth for the input
+searchTerm = signal('Severance');`;
+
   walkieTalkieDiagram = `
            ┌───────────────────────────┐
            │  JavaScript Signal         │
@@ -209,6 +253,11 @@ import { FormsModule } from '@angular/forms';
   (input)="searchTerm.set($event.target.value)" 
 />`;
 
+  oneWayUpTs = `onSearchInput(event: Event) {
+  const value = (event.target as HTMLInputElement).value;
+  this.searchTerm.set(value);
+}`;
+
   fullTsAnswer = `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // 👈 MUST import this!
 
@@ -217,6 +266,21 @@ import { FormsModule } from '@angular/forms'; // 👈 MUST import this!
   standalone: true,
   imports: [FormsModule], // 👈 AND add it here!
   templateUrl: './app.component.html'
+})
+export class AppComponent {
+  searchTerm = signal('');
+}`;
+
+  ngModelTsStarter = `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule],
+  template: \`
+    <input [(ngModel)]="searchTerm" />
+    <p>You typed: {{ searchTerm() }}</p>
+  \`
 })
 export class AppComponent {
   searchTerm = signal('');

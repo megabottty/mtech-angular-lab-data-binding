@@ -186,3 +186,66 @@ code {
 }
 .task-checklist li:last-child { border-bottom: none; }
 .task-checklist .checkbox { color: var(--success); font-size: 18px; flex-shrink: 0; }
+
+.lesson-framework {
+  background: #1b1d2b;
+  border: 1px solid #323758;
+  border-left: 4px solid var(--purple);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 0 0 24px 0;
+}
+.lesson-framework h3 {
+  color: var(--purple);
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.lesson-framework ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.lesson-framework li {
+  margin: 8px 0;
+  color: #c9cdee;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.outcome-check {
+  background: #132718;
+  border: 1px solid #2a5c2a;
+  border-left: 4px solid var(--success);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #b5ddb9;
+}
+
+.selfguided-panel {
+  background: #1f2734;
+  border: 1px solid #36506d;
+  border-left: 4px solid var(--accent-light);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 0 0 20px 0;
+}
+.selfguided-panel p {
+  margin: 4px 0;
+  color: #b8d0e7;
+  font-size: 14px;
+}
+
+.effort-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.effort-short { background: #1a2e1a; color: #4ec9b0; border: 1px solid #2a5c2a; }
+.effort-medium { background: #2a2a1a; color: #ffcf70; border: 1px solid #5c4a00; }
+.effort-challenge { background: #2a1a1a; color: #ff8f8f; border: 1px solid #5c1a1a; }

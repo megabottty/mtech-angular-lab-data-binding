@@ -24,6 +24,21 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>Copy the complete code from <a routerLink="/lesson/4">Act 4 Step 3</a> into your project before starting. Your <code>app.component.ts</code> and <code>app.component.html</code> should already have the search bar and show grid working.</p>
       </div>
 
+      <section class="lesson-framework">
+        <h3>Lab Map</h3>
+        <ul>
+          <li><strong>Learning Goal:</strong> Extend a working Angular app with multi-filter logic and useful UX feedback.</li>
+          <li><strong>Why It Matters:</strong> This is the same pattern used in real dashboards, e-commerce filters, and media search pages.</li>
+          <li><strong>Build Steps:</strong> Add genre state → add reset behavior → add live stats and warning feedback.</li>
+          <li><strong>Expected Outcome:</strong> You can independently modify both TypeScript logic and template UI in a real mini-feature.</li>
+        </ul>
+      </section>
+
+      <section class="selfguided-panel">
+        <p><strong>You are here:</strong> Student Lab (capstone)</p>
+        <p><strong>Next step:</strong> Finish all 3 tasks, then review your “I can now…” checklist below.</p>
+      </section>
+
       <!-- Task 1 -->
       <app-lesson-step stepId="lab-task1" [stepNumber]="'Task 1'" title="Add a Genre Filter Dropdown">
         <div class="task-meta">
@@ -48,6 +63,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             <span>Update <code>filteredShows</code> computed to check <strong>both</strong> search text AND genre</span>
           </div>
         </div>
+        <div class="outcome-check">✅ <strong>Expected outcome:</strong> Students can filter by both text and genre at the same time.</div>
 
         <app-collapsible icon="💡" label="Hint — How do I structure the select element?">
           <p>A select element with two-way binding looks like this. The <code>value</code> attribute on each option is what gets stored in your signal:</p>
@@ -91,6 +107,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             <span>Create a <code>clearFilters()</code> method in TypeScript that calls <code>.set()</code> on both signals</span>
           </div>
         </div>
+        <div class="outcome-check">✅ <strong>Expected outcome:</strong> Students can recover from an empty result state with one click.</div>
 
         <div class="info-box">
           <strong>Bonus challenge:</strong> Also add an <code>&#64;if</code> block at the top of the page that shows a warning message when the <code>filteredShows</code> array is empty (but the full list is not). Try this before looking at the hint!
@@ -144,6 +161,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             <span>Show a warning <code>&#64;if</code> block when <code>filteredShows().length === 0</code></span>
           </div>
         </div>
+        <div class="outcome-check">✅ <strong>Expected outcome:</strong> Students can compute and display derived stats from filtered data.</div>
 
         <app-collapsible icon="💡" label="Hint — How do I calculate an average in JavaScript?">
           <p>Sum all ratings, then divide by the count. Use <code>.reduce()</code> for the sum and <code>toFixed(1)</code> to round to 1 decimal:</p>

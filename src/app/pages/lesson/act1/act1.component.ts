@@ -19,16 +19,34 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
       <app-mental-model-card [models]="models" />
 
+      <section class="lesson-framework">
+        <h3>Lesson Map</h3>
+        <ul>
+          <li><strong>Learning Goal:</strong> Render list data from TypeScript without manual copy/paste HTML.</li>
+          <li><strong>Why It Matters:</strong> Real apps have changing arrays (add/remove/filter), so UI must update safely and fast.</li>
+          <li><strong>Build Steps:</strong> Identify the problem → add <code>&#64;for</code> → add <code>track</code> → handle empty state with <code>&#64;empty</code>.</li>
+          <li><strong>Expected Outcome:</strong> You can read an array from TypeScript and correctly render, update, and fallback in the template.</li>
+        </ul>
+      </section>
+
+      <section class="selfguided-panel">
+        <p><strong>You are here:</strong> Act 1 (Lists)</p>
+        <p><strong>Next step:</strong> Act 2 (Decisions with &#64;if / &#64;switch)</p>
+      </section>
+
       <!-- Step 1 -->
       <app-lesson-step stepId="act1-for" [stepNumber]="1" title="The Problem — Why plain HTML fails us">
+        <p><span class="effort-tag effort-short">Effort: Short</span></p>
         <p>Imagine you have 100 TV shows in your JavaScript file. In plain HTML you'd have to write this card 100 times:</p>
         <app-code-block lang="html" [code]="htmlProblem" />
         <div class="ask-class">If we have 100 TV shows, do we copy and paste this div 100 times? What happens when a user deletes a show?</div>
         <p style="margin-top:12px">This is exactly the problem Angular's <code>&#64;for</code> loop solves.</p>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain why repeating static HTML does not scale.</div>
       </app-lesson-step>
 
       <!-- Step 2 -->
       <app-lesson-step stepId="act1-track" [stepNumber]="2" title="The Solution — @for (The Cookie Cutter)">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>Think of <code>&#64;for</code> as a <strong>cookie cutter</strong>. The array is your dough, and the HTML inside is the shape that gets stamped for every item.</p>
         <app-code-block lang="html" [code]="forSolution" />
 
@@ -48,10 +66,19 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p>Here's the complete pattern. Your array name will differ from project to project:</p>
           <app-code-block lang="html" [code]="forAnswer" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — Where does shows() come from?">
+          <p>Beginners often ask: <em>\"Why does HTML call <code>shows()</code> like a function?\"</em> Because in Angular Signals, your list lives in TypeScript as a signal:</p>
+          <app-code-block lang="typescript" [code]="forTsStarter" />
+          <p style="margin-top: 12px;">In this lesson, HTML renders the list. TypeScript is where the list is created and updated.</p>
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can write a working <code>&#64;for (item of signal(); track item.id)</code> loop.</div>
       </app-lesson-step>
 
       <!-- Step 3 -->
       <app-lesson-step stepId="act1-track-deep" [stepNumber]="3" title="Deep Dive — Why is track mandatory? (The Luggage Tag)">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>Angular requires <code>track</code> for performance. Here's the best analogy:</p>
 
         <div class="luggage-analogy">
@@ -82,10 +109,18 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-collapsible icon="✅" label="Show Answer — Correct track syntax for different scenarios">
           <app-code-block lang="html" [code]="trackAnswer" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — What happens when an item is removed?">
+          <p>If you remove one show in TypeScript, Angular compares old vs new list and updates the DOM. <code>track show.id</code> is what makes this fast and precise.</p>
+          <app-code-block lang="typescript" [code]="removeShowTs" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can describe what <code>track</code> does and pick a good unique key.</div>
       </app-lesson-step>
 
       <!-- Step 4 -->
       <app-lesson-step stepId="act1-empty" [stepNumber]="4" title="Bonus — @empty (What if the list is empty?)">
+        <p><span class="effort-tag effort-short">Effort: Short</span></p>
         <p>What happens when the array has zero items? Angular gives you a built-in fallback block called <code>&#64;empty</code>:</p>
         <app-code-block lang="html" [code]="emptyExample" />
 
@@ -100,6 +135,13 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-collapsible icon="✅" label="Show Answer — Full @for with @empty">
           <app-code-block lang="html" [code]="emptyAnswer" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — Initialize arrays safely">
+          <p>For <code>&#64;empty</code> to behave predictably, beginners should initialize list signals to an empty array (not null):</p>
+          <app-code-block lang="typescript" [code]="emptyTsStarter" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can provide a clear empty-state message when no results are found.</div>
       </app-lesson-step>
 
       <div class="nav-footer">
@@ -154,6 +196,38 @@ export class Act1Component {
     <p>Rating: ⭐ {{ show.rating }}</p>
   </div>
 }`;
+
+  forTsStarter = `import { Component, signal } from '@angular/core';
+
+type Show = {
+  id: number;
+  title: string;
+  genre: string;
+  rating: number;
+};
+
+@Component({ ... })
+export class AppComponent {
+  // Signal that stores the list used by @for
+  shows = signal<Show[]>([
+    { id: 1, title: 'Severance', genre: 'Thriller', rating: 8.7 },
+    { id: 2, title: 'Bluey', genre: 'Kids', rating: 9.5 }
+  ]);
+}`;
+
+  removeShowTs = `removeShow(idToRemove: number) {
+  this.shows.update(currentShows =>
+    currentShows.filter(show => show.id !== idToRemove)
+  );
+}`;
+
+  emptyTsStarter = `// Good beginner default: never start list state as null
+filteredShows = signal<Show[]>([]);
+
+// Later, set real data after fetch/filter logic
+this.filteredShows.set([
+  { id: 1, title: 'Severance', genre: 'Thriller', rating: 8.7 }
+]);`;
 
   trackExample = `<!-- ✅ Always track by a unique identifier like 'id' -->
 @for (show of shows(); track show.id) {

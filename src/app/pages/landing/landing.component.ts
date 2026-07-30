@@ -17,6 +17,16 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         <a routerLink="/lesson/1" class="btn-primary cta-btn">Start Lesson 1 →</a>
       </div>
 
+      <section class="selfguided-panel">
+        <h3>🧭 Start Here (Self-Guided Path)</h3>
+        <ul>
+          <li><strong>1.</strong> Start with Act 1 and complete each step in order.</li>
+          <li><strong>2.</strong> Use Hint first, then Show Answer only if stuck.</li>
+          <li><strong>3.</strong> Mark steps complete so you can resume later.</li>
+          <li><strong>4.</strong> Save the Student Lab for last as your mastery check.</li>
+        </ul>
+      </section>
+
       <app-mental-model-card [models]="overviewModels" />
 
       <div class="lesson-map">

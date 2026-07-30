@@ -19,7 +19,23 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
       <app-mental-model-card [models]="models" />
 
+      <section class="lesson-framework">
+        <h3>Lesson Map</h3>
+        <ul>
+          <li><strong>Learning Goal:</strong> Build reactive TypeScript state that auto-updates UI without manual DOM code.</li>
+          <li><strong>Why It Matters:</strong> Real filtering/search UIs should update instantly when state changes.</li>
+          <li><strong>Build Steps:</strong> Create signals → derive computed values → wire into template loops and conditions.</li>
+          <li><strong>Expected Outcome:</strong> You can build a full filter flow from input signal to rendered cards.</li>
+        </ul>
+      </section>
+
+      <section class="selfguided-panel">
+        <p><strong>You are here:</strong> Act 4 (Reactive engine)</p>
+        <p><strong>Next step:</strong> Student Lab (independent build)</p>
+      </section>
+
       <app-lesson-step stepId="act4-signals" [stepNumber]="1" title="What is a Signal? (The Reactive Container)">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>Before we get to <code>computed()</code>, we need to understand what a Signal is — because we've been using them since Act 1!</p>
 
         <div class="signal-explainer">
@@ -48,9 +64,17 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-collapsible icon="✅" label="Show Answer — signal vs plain variable comparison">
           <app-code-block lang="typescript" [code]="signalVsVariable" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — Add explicit types for beginners">
+          <p>When students are new, explicit types make code easier to read and debug.</p>
+          <app-code-block lang="typescript" [code]="signalTypedStarter" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can create, read, and update signal state in TypeScript.</div>
       </app-lesson-step>
 
       <app-lesson-step stepId="act4-computed" [stepNumber]="2" title="What is computed()? (The Excel Formula)">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>If <code>signal()</code> is a cell with a value, <code>computed()</code> is an Excel formula that <strong>automatically recalculates</strong> whenever its source signals change.</p>
 
         <div class="excel-analogy">
@@ -84,9 +108,17 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-collapsible icon="✅" label="Show Answer — computed() with multiple dependencies">
           <app-code-block lang="typescript" [code]="computedAnswer" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — computed() is read-only output">
+          <p>This pattern separates raw state from derived state so students know where updates belong.</p>
+          <app-code-block lang="typescript" [code]="computedTypedStarter" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can derive values with <code>computed()</code> and know not to call <code>.set()</code> inside it.</div>
       </app-lesson-step>
 
       <app-lesson-step stepId="act4-full" [stepNumber]="3" title="Putting It All Together — The Live TV Show Filter">
+        <p><span class="effort-tag effort-challenge">Effort: Challenge</span></p>
         <p>Now let's combine everything from Acts 1–4 into one complete, working application. This is the full TV show filter your students will be expanding in the Lab.</p>
 
         <div class="info-box">
@@ -119,6 +151,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-collapsible icon="✅" label="Show Answer — Full working app (copy this as your starting point)">
           <p>The code above <em>is</em> the full working app! Copy both files exactly as shown. Remember to add <code>FormsModule</code> to your imports in the TypeScript file.</p>
         </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can trace one keystroke all the way from input to filtered UI results.</div>
       </app-lesson-step>
 
       <div class="nav-footer">
@@ -213,6 +247,16 @@ export class AppComponent {
   searchTerm = signal(''); // Angular reacts when this changes
 }`;
 
+  signalTypedStarter = `type Show = {
+  id: number;
+  title: string;
+  genre: string;
+  rating: number;
+};
+
+shows = signal<Show[]>([]);
+searchTerm = signal<string>('');`;
+
   computedBasics = `import { signal, computed } from '@angular/core';
 
 // Source signals
@@ -235,6 +279,19 @@ fullName = computed(() => \`\${this.firstName()} \${this.lastName()}\`);
 
 // A computed can even depend on another computed!
 greeting = computed(() => \`Hello, \${this.fullName()}!\`);`;
+
+  computedTypedStarter = `type Show = { id: number; title: string; genre: string; rating: number };
+
+shows = signal<Show[]>([]);
+searchTerm = signal('');
+
+// Derived state: recomputed whenever shows() or searchTerm() changes
+filteredShows = computed(() => {
+  const query = this.searchTerm().toLowerCase().trim();
+  return this.shows().filter(show =>
+    show.title.toLowerCase().includes(query)
+  );
+});`;
 
   fullTs = `import { Component, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // 👈 MANDATORY

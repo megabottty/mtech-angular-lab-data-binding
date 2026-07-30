@@ -19,8 +19,24 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
       <app-mental-model-card [models]="models" />
 
+      <section class="lesson-framework">
+        <h3>Lesson Map</h3>
+        <ul>
+          <li><strong>Learning Goal:</strong> Show different UI output based on data conditions.</li>
+          <li><strong>Why It Matters:</strong> User interfaces are full of decisions (status, score, role, type).</li>
+          <li><strong>Build Steps:</strong> Start with <code>&#64;if</code> for ranges, then use <code>&#64;switch</code> for exact values.</li>
+          <li><strong>Expected Outcome:</strong> You can choose between <code>&#64;if</code> and <code>&#64;switch</code> and explain why.</li>
+        </ul>
+      </section>
+
+      <section class="selfguided-panel">
+        <p><strong>You are here:</strong> Act 2 (Decisions)</p>
+        <p><strong>Next step:</strong> Act 3 (Two-way binding)</p>
+      </section>
+
       <!-- Step 1: @if -->
       <app-lesson-step stepId="act2-if" [stepNumber]="1" title="@if / @else — The Security Guard">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>Think of <code>&#64;if</code> like a <strong>security guard at a venue door</strong>. Only people who meet the requirement get in. Everyone else sees the fallback.</p>
 
         <app-code-block lang="html" [code]="ifBasic" />
@@ -49,10 +65,18 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p>Here's the complete rating badge with all three conditions:</p>
           <app-code-block lang="html" [code]="ifAnswer" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — Where does show.rating come from?">
+          <p>The template condition is reading TypeScript object fields. If <code>rating</code> is missing, your template conditions fail.</p>
+          <app-code-block lang="typescript" [code]="ifTsStarter" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can write a 3-branch <code>&#64;if / &#64;else if / &#64;else</code> rule.</div>
       </app-lesson-step>
 
       <!-- Step 2: @switch -->
       <app-lesson-step stepId="act2-switch" [stepNumber]="2" title="@switch — The Multi-Option Highway">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>When you have <strong>3 or more specific exact values</strong> to check (like genre names), long <code>&#64;if / &#64;else if</code> chains get messy. <code>&#64;switch</code> is the clean alternative.</p>
 
         <div class="comparison-grid">
@@ -83,10 +107,18 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-collapsible icon="✅" label="Show Answer — Full genre @switch with Comedy added">
           <app-code-block lang="html" [code]="switchAnswer" />
         </app-collapsible>
+
+        <app-collapsible icon="🧩" label="TypeScript Side — Strongly type genre values">
+          <p>Define allowed genres in TypeScript so you catch spelling mistakes before runtime.</p>
+          <app-code-block lang="typescript" [code]="switchTsStarter" />
+        </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can map exact values to different UI labels with <code>&#64;switch</code>.</div>
       </app-lesson-step>
 
       <!-- Step 3: When to use each -->
       <app-lesson-step stepId="act2-choose" [stepNumber]="3" title="When to use @if vs @switch — The Decision Rule">
+        <p><span class="effort-tag effort-short">Effort: Short</span></p>
         <div class="decision-table">
           <div class="decision-row header">
             <span>Situation</span><span>Use</span>
@@ -117,6 +149,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p>Here's the same logic written both ways so you can compare:</p>
           <app-code-block lang="html" [code]="decisionAnswer" />
         </app-collapsible>
+
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can decide whether a condition is range-based (<code>&#64;if</code>) or exact-value-based (<code>&#64;switch</code>).</div>
       </app-lesson-step>
 
       <div class="nav-footer">
@@ -203,6 +237,20 @@ export class Act2Component {
   <span class="badge standard">📺 Good Watch (⭐ {{ show.rating }})</span>
 }`;
 
+  ifTsStarter = `import { signal } from '@angular/core';
+
+type Show = {
+  id: number;
+  title: string;
+  genre: string;
+  rating: number;
+};
+
+shows = signal<Show[]>([
+  { id: 1, title: 'Bluey', genre: 'Kids', rating: 9.5 },
+  { id: 2, title: 'Dark', genre: 'Sci-Fi', rating: 6.8 }
+]);`;
+
   switchBad = `@if (show.genre === 'Kids') {
   <span>👨‍👩‍👧 Family</span>
 } @else if (show.genre === 'Thriller') {
@@ -243,6 +291,18 @@ export class Act2Component {
   @case ('Comedy')   { <span class="badge yellow">😂 Comedy</span> }
   @default           { <span class="badge gray">📺 {{ show.genre }}</span> }
 }`;
+
+  switchTsStarter = `type Genre = 'Kids' | 'Thriller' | 'Sci-Fi' | 'Drama' | 'Comedy';
+
+type Show = {
+  id: number;
+  title: string;
+  genre: Genre;
+  rating: number;
+};
+
+// Good pattern: keep allowed values in one place
+const GENRES: Genre[] = ['Kids', 'Thriller', 'Sci-Fi', 'Drama', 'Comedy'];`;
 
   decisionAnswer = `<!-- Same logic, two styles -->
 
