@@ -38,6 +38,31 @@ export const routes: Routes = [
           import('./pages/lesson/act5-lab/act5-lab.component').then(m => m.Act5LabComponent)
       },
       {
+        path: 'day9/act1',
+        loadComponent: () =>
+          import('./pages/day9/act1/act1.component').then(m => m.Act1Component)
+      },
+      {
+        path: 'day9/act2',
+        loadComponent: () =>
+          import('./pages/day9/act2/act2.component').then(m => m.Act2Component)
+      },
+      {
+        path: 'day9/act3',
+        loadComponent: () =>
+          import('./pages/day9/act3/act3.component').then(m => m.Act3Component)
+      },
+      {
+        path: 'day9/act4',
+        loadComponent: () =>
+          import('./pages/day9/act4/act4.component').then(m => m.Act4Component)
+      },
+      {
+        path: 'day9/lab',
+        loadComponent: () =>
+          import('./pages/day9/lab/lab.component').then(m => m.Day9LabComponent)
+      },
+      {
         path: 'dashboard',
         canActivate: [teacherGuard],
         loadComponent: () =>

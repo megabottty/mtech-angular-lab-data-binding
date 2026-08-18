@@ -7,7 +7,12 @@ const ALL_STEPS = [
   'act2-if', 'act2-switch', 'act2-choose',
   'act3-oneway-down', 'act3-oneway-up', 'act3-twoway',
   'act4-signals', 'act4-computed', 'act4-full',
-  'lab-task1', 'lab-task2', 'lab-task3'
+  'lab-task1', 'lab-task2', 'lab-task3',
+  'd9-act1-service', 'd9-act1-route-param', 'd9-act1-detail-page', 'd9-act1-debug',
+  'd9-act2-navigate', 'd9-act2-rule',
+  'd9-act3-guard-create', 'd9-act3-guard-wire',
+  'd9-act4-lazy-convert', 'd9-act4-verify',
+  'd9-lab-prevnext', 'd9-lab-notfound', 'd9-lab-guard-watchlist', 'd9-lab-stretch'
 ];
 
 @Component({

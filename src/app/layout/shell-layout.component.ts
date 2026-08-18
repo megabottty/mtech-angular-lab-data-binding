@@ -1,6 +1,8 @@
-import { Component, inject, signal, computed } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject, signal, computed, effect } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
 import { ProgressService } from '../core/services/progress.service';
 import { environment } from '../../environments/environment';
@@ -10,7 +12,55 @@ const ALL_STEPS = [
   'act2-if', 'act2-switch',
   'act3-oneway-down', 'act3-oneway-up', 'act3-twoway',
   'act4-signals', 'act4-computed', 'act4-full',
-  'lab-task1', 'lab-task2', 'lab-task3'
+  'lab-task1', 'lab-task2', 'lab-task3',
+  'd9-act1-service', 'd9-act1-route-param', 'd9-act1-detail-page', 'd9-act1-debug',
+  'd9-act2-navigate', 'd9-act2-rule',
+  'd9-act3-guard-create', 'd9-act3-guard-wire',
+  'd9-act4-lazy-convert', 'd9-act4-verify',
+  'd9-lab-prevnext', 'd9-lab-notfound', 'd9-lab-guard-watchlist', 'd9-lab-stretch'
+];
+
+interface DayNavItem {
+  path: string;
+  label: string;
+  isLab?: boolean;
+}
+
+interface DayGroup {
+  id: string;
+  label: string;
+  /** URL prefix used to auto-expand this group when a matching route is active. */
+  prefix: string;
+  items: DayNavItem[];
+}
+
+// Add a new entry here for each future teaching day — the sidebar accordion
+// renders itself from this list, no template changes needed.
+const DAY_GROUPS: DayGroup[] = [
+  {
+    id: 'day5',
+    label: '📘 Day 5 — Data Binding',
+    prefix: '/lesson',
+    items: [
+      { path: '/lesson/1', label: '🔁 Act 1 — @for & track' },
+      { path: '/lesson/2', label: '🚦 Act 2 — @if & @switch' },
+      { path: '/lesson/3', label: '📡 Act 3 — [(ngModel)]' },
+      { path: '/lesson/4', label: '⚡ Act 4 — computed()' },
+      { path: '/lesson/5', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day9',
+    label: '🧭 Day 9 — Routing',
+    prefix: '/day9',
+    items: [
+      { path: '/day9/act1', label: '🔗 Act 1 — Route Params' },
+      { path: '/day9/act2', label: '🚀 Act 2 — Navigation' },
+      { path: '/day9/act3', label: '🛡️ Act 3 — Guards' },
+      { path: '/day9/act4', label: '📦 Act 4 — Lazy Loading' },
+      { path: '/day9/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  }
 ];
 
 @Component({
@@ -29,22 +79,33 @@ const ALL_STEPS = [
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
             🏠 Home
           </a>
-          <div class="nav-section-label">Lessons</div>
-          <a routerLink="/lesson/1" routerLinkActive="active" class="nav-item">
-            🔁 Act 1 — &#64;for &amp; track
-          </a>
-          <a routerLink="/lesson/2" routerLinkActive="active" class="nav-item">
-            🚦 Act 2 — &#64;if &amp; &#64;switch
-          </a>
-          <a routerLink="/lesson/3" routerLinkActive="active" class="nav-item">
-            📡 Act 3 — [(ngModel)]
-          </a>
-          <a routerLink="/lesson/4" routerLinkActive="active" class="nav-item">
-            ⚡ Act 4 — computed()
-          </a>
-          <a routerLink="/lesson/5" routerLinkActive="active" class="nav-item lab">
-            🛠️ Student Lab
-          </a>
+          @for (day of dayGroups; track day.id) {
+            <div class="day-group">
+              <button
+                class="day-group-header"
+                [class.expanded]="isExpanded(day.id)"
+                (click)="toggleDay(day.id)"
+                [attr.aria-expanded]="isExpanded(day.id)"
+              >
+                <span class="chevron">{{ isExpanded(day.id) ? '▾' : '▸' }}</span>
+                <span class="day-label">{{ day.label }}</span>
+              </button>
+              @if (isExpanded(day.id)) {
+                <div class="day-items">
+                  @for (item of day.items; track item.path) {
+                    <a
+                      [routerLink]="item.path"
+                      routerLinkActive="active"
+                      class="nav-item child"
+                      [class.lab]="item.isLab"
+                    >
+                      {{ item.label }}
+                    </a>
+                  }
+                </div>
+              }
+            </div>
+          }
           @if (isTeacher()) {
             <div class="nav-section-label">Teacher</div>
             <a routerLink="/dashboard" routerLinkActive="active" class="nav-item teacher">
@@ -137,6 +198,32 @@ const ALL_STEPS = [
       color: #858585;
     }
 
+    /* Day accordion groups */
+    .day-group { margin: 4px 0; }
+    .day-group-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      padding: 12px 16px 12px 12px;
+      color: #a8a8a8;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-align: left;
+      transition: color 0.15s, background 0.15s;
+    }
+    .day-group-header:hover { color: #ffffff; background: #2d2d30; }
+    .day-group-header.expanded { color: #4fc3f7; }
+    .day-group-header .chevron { font-size: 10px; width: 10px; flex-shrink: 0; }
+    .day-group-header .day-label { flex: 1; white-space: normal; line-height: 1.3; }
+    .day-items { display: flex; flex-direction: column; }
+    .nav-item.child { padding-left: 34px; font-size: 12.5px; }
+
     /* Top bar */
     .topbar {
       display: flex;
@@ -208,9 +295,58 @@ const ALL_STEPS = [
 export class ShellLayoutComponent {
   protected authService = inject(AuthService);
   private progressService = inject(ProgressService);
+  private router = inject(Router);
 
   sidebarOpen = signal(false);
   totalSteps = ALL_STEPS.length;
+  dayGroups = DAY_GROUPS;
+
+  // Which day-group accordions are open. Seeded from the current URL so a
+  // direct link/refresh lands with the right group already expanded.
+  private expandedDays = signal<Set<string>>(new Set(this.matchingDayIds(this.router.url)));
+
+  constructor() {
+    // Auto-expand (never auto-collapse) whichever day's page is currently active,
+    // on every navigation — not just initial load — so this also works when a
+    // student navigates via a lesson page's own prev/next links or the address bar.
+    const navigationEnd = toSignal(
+      this.router.events.pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd)),
+      { initialValue: null }
+    );
+
+    effect(() => {
+      const event = navigationEnd();
+      const url = event ? event.urlAfterRedirects : this.router.url;
+      const matches = this.matchingDayIds(url);
+      if (matches.length === 0) return;
+
+      this.expandedDays.update(current => {
+        const next = new Set(current);
+        matches.forEach(id => next.add(id));
+        return next;
+      });
+    });
+  }
+
+  private matchingDayIds(url: string): string[] {
+    return DAY_GROUPS.filter(day => url.startsWith(day.prefix)).map(day => day.id);
+  }
+
+  isExpanded(dayId: string): boolean {
+    return this.expandedDays().has(dayId);
+  }
+
+  toggleDay(dayId: string): void {
+    this.expandedDays.update(current => {
+      const next = new Set(current);
+      if (next.has(dayId)) {
+        next.delete(dayId);
+      } else {
+        next.add(dayId);
+      }
+      return next;
+    });
+  }
 
   completedCount = computed(() => {
     const set = this.progressService.completedSteps();

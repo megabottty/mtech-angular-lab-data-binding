@@ -42,6 +42,7 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">📘 Day 5 — Control Flow &amp; Two-Way Binding</h2>
       <div class="act-cards">
         <div class="act-card" routerLink="/lesson/1">
           <div class="act-icon">🔁</div>
@@ -85,6 +86,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
             <div class="act-num">Student Lab</div>
             <div class="act-name">3 Hands-On Tasks</div>
             <div class="act-desc">Build the full TV show filter — on your own!</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
+      <h2 class="day-heading">🧭 Day 9 — Routing II: Params, Navigation, Guards &amp; Lazy Loading</h2>
+      <p class="day-subheading">Continuing BingeBoard: deep-link to a show, navigate from code, protect a route, and stop shipping code nobody asked for.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day9/act1">
+          <div class="act-icon">🔗</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Route Params &amp; Input Binding</div>
+            <div class="act-desc">One route, /show/:id, drives the detail page for every show</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day9/act2">
+          <div class="act-icon">🚀</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Programmatic Navigation</div>
+            <div class="act-desc">Router.navigate() when no link was clicked</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day9/act3">
+          <div class="act-icon">🛡️</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Functional Guards</div>
+            <div class="act-desc">CanActivateFn: return true, or redirect with a UrlTree</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day9/act4">
+          <div class="act-icon">📦</div>
+          <div class="act-info">
+            <div class="act-num">Act 4</div>
+            <div class="act-name">Lazy Loading</div>
+            <div class="act-desc">loadComponent — verified live in the Network tab</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day9/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">4 Hands-On Tasks</div>
+            <div class="act-desc">Prev/next nav, not-found UX, guard judgment, lazy-load everything</div>
           </div>
           <span class="act-arrow">→</span>
         </div>
@@ -146,6 +197,8 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
     .step-pill small { display: block; color: #858585; font-weight: 400; font-size: 11px; margin-top: 2px; }
     .arrow { color: #858585; font-size: 20px; }
 
+    .day-heading { font-size: 20px; margin: 40px 0 6px; }
+    .day-subheading { color: #858585; font-size: 14px; margin-bottom: 20px; }
     .act-cards { display: flex; flex-direction: column; gap: 12px; }
     .act-card {
       display: flex;
