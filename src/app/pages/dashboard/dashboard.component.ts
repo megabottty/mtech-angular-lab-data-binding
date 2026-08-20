@@ -17,7 +17,11 @@ const ALL_STEPS = [
   'd13-act2-typing', 'd13-act2-adapter', 'd13-act2-service', 'd13-act2-subscribe-fires',
   'd13-act3-browse-component', 'd13-act3-three-state', 'd13-act3-debug',
   'd13-act4-detail-live', 'd13-act4-innerhtml', 'd13-act4-pitfalls',
-  'd13-lab-runtime', 'd13-lab-recent-searches', 'd13-lab-season-count', 'd13-lab-stretch-watchlist'
+  'd13-lab-runtime', 'd13-lab-recent-searches', 'd13-lab-season-count', 'd13-lab-stretch-watchlist',
+  'd14-act1-warmup-problem', 'd14-act1-error-signal', 'd14-act1-taxonomy',
+  'd14-act2-resource-intro', 'd14-act2-detail-rebuild', 'd14-act2-which-one-when',
+  'd14-act3-debug-resource', 'd14-act3-debug-subscribe-style', 'd14-act3-debug-loading-reset',
+  'd14-lab-404-grace', 'd14-lab-episodes-resource', 'd14-lab-skeleton-screens', 'd14-lab-stretch-interceptors'
 ];
 
 @Component({

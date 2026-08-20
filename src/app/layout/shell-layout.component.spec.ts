@@ -42,10 +42,11 @@ describe('ShellLayoutComponent — day accordion', () => {
 
   it('exposes one group per teaching day, driven by data (not hardcoded template links)', async () => {
     const { component } = await createAt('/');
-    expect(component.dayGroups.map(d => d.id)).toEqual(['day5', 'day9', 'day13']);
+    expect(component.dayGroups.map(d => d.id)).toEqual(['day5', 'day9', 'day13', 'day14']);
     expect(component.dayGroups.find(d => d.id === 'day5')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day9')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day13')?.items.length).toBe(5);
+    expect(component.dayGroups.find(d => d.id === 'day14')?.items.length).toBe(4);
   });
 
   it('auto-expands only the day group matching the initial route', async () => {
@@ -86,7 +87,7 @@ describe('ShellLayoutComponent — day accordion', () => {
     const { fixture, component } = await createAt('/');
     const el = fixture.nativeElement as HTMLElement;
 
-    expect(el.querySelectorAll('.day-group-header').length).toBe(3);
+    expect(el.querySelectorAll('.day-group-header').length).toBe(4);
     // Nothing matches "/" so all groups start collapsed.
     expect(component.isExpanded('day5')).toBe(false);
     expect(component.isExpanded('day9')).toBe(false);

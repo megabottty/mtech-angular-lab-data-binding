@@ -190,6 +190,47 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
           <span class="act-arrow">→</span>
         </div>
       </div>
+
+      <h2 class="day-heading">🚨 Day 14 — HTTP II: Errors, Resilience &amp; httpResource</h2>
+      <p class="day-subheading">Networks fail on purpose today: honest error states, retry, and the newer declarative httpResource API.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day14/act1">
+          <div class="act-icon">🚨</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Errors in the Subscribe World</div>
+            <div class="act-desc">An error signal, a retry button, and the 0/4xx/5xx taxonomy</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day14/act2">
+          <div class="act-icon">📡</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">httpResource — The Declarative Way</div>
+            <div class="act-desc">Loading, error, and refetch as signals — no ngOnInit, no subscribe</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day14/act3">
+          <div class="act-icon">🐛</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Debug It</div>
+            <div class="act-desc">A string vs. a function, deprecated subscribe style, the eternal spinner</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day14/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">4 Hands-On Tasks</div>
+            <div class="act-desc">Graceful 404s, a second resource, skeleton screens, a docs-reading stretch</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
