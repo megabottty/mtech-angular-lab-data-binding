@@ -140,6 +140,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
           <span class="act-arrow">→</span>
         </div>
       </div>
+
+      <h2 class="day-heading">🌐 Day 13 — HTTP I: Real Data from a Real API</h2>
+      <p class="day-subheading">BingeBoard's hardcoded array dies today: real HttpClient calls, a typed &amp; adapted third-party API, loading/empty states, and the async bug everyone meets once.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day13/act1">
+          <div class="act-icon">🌐</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">HttpClient &amp; the Mental Model</div>
+            <div class="act-desc">provideHttpClient() — an Observable is a value that arrives later</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day13/act2">
+          <div class="act-icon">🧩</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Typing &amp; Adapting the API</div>
+            <div class="act-desc">The API's shape ≠ our app's shape — write the adapter once</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day13/act3">
+          <div class="act-icon">🔍</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Browse Goes Live</div>
+            <div class="act-desc">The loading / results / empty three-state pattern</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day13/act4">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Act 4</div>
+            <div class="act-name">Detail Page Goes Live</div>
+            <div class="act-desc">Real HTTP lookup by id, plus safely rendering third-party HTML</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day13/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">4 Hands-On Tasks</div>
+            <div class="act-desc">Runtime reps, recent searches, a new endpoint solo, watchlist drift fix</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
     </div>
   `,
   styles: [`

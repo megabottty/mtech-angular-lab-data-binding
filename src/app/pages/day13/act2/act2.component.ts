@@ -1,0 +1,198 @@
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { MentalModelCardComponent, MentalModel } from '../../../shared/components/mental-model-card/mental-model-card.component';
+import { CodeBlockComponent } from '../../../shared/components/code-block/code-block.component';
+import { CollapsibleComponent } from '../../../shared/components/collapsible/collapsible.component';
+import { LessonStepComponent } from '../../../shared/components/lesson-step/lesson-step.component';
+
+@Component({
+  selector: 'app-day13-act2',
+  standalone: true,
+  imports: [RouterLink, MentalModelCardComponent, CodeBlockComponent, CollapsibleComponent, LessonStepComponent],
+  template: `
+    <div class="lesson-content">
+      <div class="page-header">
+        <span class="act-label">Day 13 · Act 2 of 4</span>
+        <h1>🧩 Typing the API &amp; the Adapter Pattern</h1>
+        <p class="subtitle">The API's shape is never your app's shape — write the adapter once, use Show everywhere else.</p>
+      </div>
+
+      <app-mental-model-card [models]="models" />
+
+      <section class="lesson-framework">
+        <h3>Lesson Map</h3>
+        <ul>
+          <li><strong>Learning Goal:</strong> Type the specific pieces of TVMaze we care about, adapt them into BingeBoard's <code>Show</code> shape, and move <code>ShowsService</code> from fake local data to real HTTP.</li>
+          <li><strong>Why It Matters:</strong> Professional apps almost never consume third-party JSON directly. They define a boundary, normalize the data, and keep the rest of the app insulated from outside quirks.</li>
+          <li><strong>Build Steps:</strong> Model TVMaze's search response → write <code>toShow()</code> to reconcile shapes → upgrade <code>ShowsService</code> to <code>HttpClient</code> → prove that nothing happens until <code>subscribe()</code>.</li>
+          <li><strong>Expected Outcome:</strong> You can explain why adapters exist, write null-safe mappings with <code>??</code>/<code>?.</code>, and recognize that HTTP Observables stay lazy until subscribed.</li>
+        </ul>
+      </section>
+
+      <section class="selfguided-panel">
+        <p><strong>You are here:</strong> Act 2 (Typing the API &amp; Adapter Pattern)</p>
+        <p><strong>Next step:</strong> Act 3 (Browse goes live and we debug the first real HTTP bugs.)</p>
+      </section>
+
+      <app-lesson-step stepId="d13-act2-typing" [stepNumber]="1" title="Modeling the API's Real Shape">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
+        <p>TVMaze's search endpoint does not return a plain array of shows. It returns an array of wrapper objects, each shaped like <code>&#123; score, show: ... &#125;</code>, which means our first job is to model the real JSON honestly before we try to use it.</p>
+        <p>Notice the discipline here: we are <strong>not</strong> trying to model the entire API. We define only the fields BingeBoard actually reads today, and we deliberately ignore the rest of TVMaze's much larger payload. That is realistic, professional TypeScript — model what you consume, not an entire third-party universe you do not control.</p>
+        <app-code-block lang="typescript" [code]="tvMazeModelCode" />
+        <div class="ask-class">Try it yourself in a browser tab: https://api.tvmaze.com/shows/431 — what other fields does the real response have that we're choosing to ignore?</div>
+        <div class="info-box">
+          <strong>Why this matters:</strong> a small, purposeful interface is easier to maintain, easier to read, and less fragile when the API team adds unrelated fields tomorrow.
+        </div>
+        <app-collapsible icon="💡" label="Hint — Minimal typing is not lazy typing">
+          <p>If our page only reads <code>id</code>, <code>name</code>, <code>genres</code>, <code>rating</code>, <code>image</code>, <code>summary</code>, and <code>runtime</code>, those are the fields worth modeling right now. We can always extend the interface later when a new screen genuinely needs a new field.</p>
+        </app-collapsible>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can write a minimal TypeScript interface for a subset of fields from a real JSON response.</div>
+      </app-lesson-step>
+
+      <app-lesson-step stepId="d13-act2-adapter" [stepNumber]="2" title="The Adapter — API Shape ≠ App Shape">
+        <p><span class="effort-tag effort-challenge">Effort: Challenge</span></p>
+        <p>Now for the teachable pause: TVMaze's shape is not BingeBoard's shape, and that is completely normal. Our app wants one clean <code>Show</code> model we can use everywhere, so we translate from API-shape to app-shape exactly once at the boundary.</p>
+        <p>This is also where Day 13 becomes a little disruptive in a good way. Day 9's local <code>Show</code> used names like <code>title</code> and <code>posterUrl</code>; after a real API integration, teams often standardize names such as <code>name</code> and <code>imageUrl</code>, and they add new fields like <code>summary</code> and <code>runtime</code>. That refactor is annoying for a day and worth it for months.</p>
+        <app-code-block lang="typescript" [code]="showInterfaceCode" />
+        <p style="margin-top: 12px;">Then the adapter does the reconciliation work:</p>
+        <app-code-block lang="typescript" [code]="toShowAdapterCode" />
+        <div class="info-box">
+          <strong>Nulls everywhere — welcome to real data.</strong> The chorus in this function is the lesson: <code>genres[0] ?? 'Unknown'</code> protects against an empty genres array, <code>rating.average ?? 0</code> protects against missing ratings, <code>image?.medium ?? 'assets/no-poster.png'</code> covers null images, and both <code>summary ?? ''</code> and <code>runtime ?? 0</code> defend against incomplete records.
+        </div>
+        <div class="ask-class">Why do we write an adapter function instead of just using <code>TvMazeShow</code> directly as our app's <code>Show</code> type everywhere?</div>
+        <app-collapsible icon="💡" label="Hint — Listen for the boundary answer">
+          <p>The answer to listen for is that the adapter isolates the rest of the app from a third-party API's shape, null rules, naming, and future changes. If TVMaze changes tomorrow, ideally only this mapping layer needs to change.</p>
+        </app-collapsible>
+        <app-collapsible icon="🧩" label="Deep Dive — Why use image?.medium but not rating?.average?">
+          <p><code>image</code> itself can be <code>null</code>, so we must use optional chaining before touching <code>medium</code>. By contrast, our type says <code>rating</code> is always an object; only <code>rating.average</code> can be <code>null</code>, so optional chaining is unnecessary there and <code>?? 0</code> is the right guard.</p>
+        </app-collapsible>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain the adapter pattern and write null-safe field mapping with <code>??</code> and <code>?.</code>.</div>
+      </app-lesson-step>
+
+      <app-lesson-step stepId="d13-act2-service" [stepNumber]="3" title="Upgrading ShowsService to Real HTTP">
+        <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
+        <p>With our types and adapter in place, the service upgrade becomes surprisingly small. We keep the public idea of the service the same — it still knows how to search shows and fetch one show by id — but now those methods describe real HTTP work instead of synchronously reading from a local array.</p>
+        <p>This replaces Day 9's in-memory signal version entirely. The big breaking change is timing: <code>byId(id)</code> is still conceptually "get me the show," but now it returns an <code>Observable&lt;Show&gt;</code> instead of a synchronous <code>Show | undefined</code>, and that ripple hits <code>Browse</code> and <code>ShowDetail</code> in Acts 3 and 4.</p>
+        <app-code-block lang="typescript" [code]="showsServiceHttpCode" />
+        <p style="margin-top: 12px;"><code>.pipe(map(...))</code> is today's tiny preview of RxJS operators: think "transform the package's contents before delivery." We are not teaching the whole operator story yet; Day 15 gives <code>pipe</code> and <code>map</code> their own proper spotlight.</p>
+        <div class="ask-class">Point to the two different jobs in this code: where is Angular doing HTTP work, and where are we reshaping third-party data into app data?</div>
+        <app-collapsible icon="💡" label="Hint — Same method names, new async contract">
+          <p>Notice how little the service's API surface changes. <code>search(query)</code> is still "search," and <code>byId(id)</code> is still "fetch one show" — but the return values are now lazy streams, not immediate objects, because the browser must wait for the network.</p>
+        </app-collapsible>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can write a service method that GETs from a real endpoint and maps the response through an adapter.</div>
+      </app-lesson-step>
+
+      <app-lesson-step stepId="d13-act2-subscribe-fires" [stepNumber]="4" title="Nothing Happens Until subscribe()">
+        <p><span class="effort-tag effort-short">Effort: Short</span></p>
+        <p>This is the critical mental model shift for HTTP in Angular: calling <code>this.showsSvc.search('office')</code> by itself does <strong>nothing</strong>. It builds an Observable — basically a request description — but the browser does not actually fire the HTTP call until someone subscribes to that Observable.</p>
+        <p>Prove it live with the Network tab. First call <code>search()</code> with no <code>.subscribe()</code> and show the class that no request appears in DevTools. Then add <code>.subscribe(...)</code>, run the same action again, and watch the request finally show up.</p>
+        <app-code-block lang="typescript" [code]="subscribeProofCode" />
+        <div class="ask-class">In one sentence: why does an Observable-returning method call alone never perform the side effect?</div>
+        <div class="warning-box">Hold onto this — it is exactly the bug we'll debug together in Act 3. If students remember only one trap from today, make it this one.</div>
+        <app-collapsible icon="✅" label="Show Answer — The sentence we want">
+          <p>An Observable is lazy: until something subscribes, Angular has only created the recipe for the request, not executed the request itself.</p>
+        </app-collapsible>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can state, in one sentence, why an Observable-returning method call alone never performs a side effect.</div>
+      </app-lesson-step>
+
+      <div class="nav-footer">
+        <a routerLink="/day13/act1" class="btn-secondary">← Act 1: HttpClient &amp; the Mental Model</a>
+        <a routerLink="/day13/act3" class="btn-primary">Act 3: Browse Goes Live →</a>
+      </div>
+    </div>
+  `
+})
+export class Act2Component {
+  models: MentalModel[] = [
+    {
+      concept: 'API model',
+      plainEnglish: 'A TypeScript description of the JSON shape the server actually sends.',
+      analogy: '📦 The shipping label on the package before you open it.'
+    },
+    {
+      concept: 'adapter',
+      plainEnglish: 'A function that converts outside data into the shape our app prefers.',
+      analogy: '🔌 A travel adapter that makes one plug fit another socket.'
+    },
+    {
+      concept: 'null-safe mapping',
+      plainEnglish: 'Defensive field handling for incomplete or missing real-world data.',
+      analogy: '🪖 A helmet you wear because the road is real, not ideal.'
+    },
+    {
+      concept: 'Observable laziness',
+      plainEnglish: 'The request is described first and only runs when something subscribes.',
+      analogy: '📬 A sealed letter that is not mailed until someone drops it in the box.'
+    }
+  ];
+
+  tvMazeModelCode = `export interface TvMazeShow {
+  id: number;
+  name: string;
+  genres: string[];
+  rating: { average: number | null };
+  image: { medium: string; original: string } | null;
+  summary: string | null;   // contains HTML!
+  runtime: number | null;
+}
+
+export interface TvMazeSearchResult {
+  score: number;
+  show: TvMazeShow;
+}`;
+
+  showInterfaceCode = `export interface Show {
+  id: number;
+  name: string;
+  genre: string;
+  rating: number;
+  imageUrl: string;
+  summary: string;
+  runtime: number;
+}`;
+
+  toShowAdapterCode = `import { Show } from './show.model';
+import { TvMazeShow } from './tvmaze.model';
+
+export function toShow(tv: TvMazeShow): Show {
+  return {
+    id: tv.id,
+    name: tv.name,
+    genre: tv.genres[0] ?? 'Unknown',
+    rating: tv.rating.average ?? 0,
+    imageUrl: tv.image?.medium ?? 'assets/no-poster.png',
+    summary: tv.summary ?? '',
+    runtime: tv.runtime ?? 0,
+  };
+}`;
+
+  showsServiceHttpCode = `import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
+import { TvMazeSearchResult, TvMazeShow } from './tvmaze.model';
+import { toShow } from './show.adapter';
+
+@Injectable({ providedIn: 'root' })
+export class ShowsService {
+  private http = inject(HttpClient);
+  private readonly base = 'https://api.tvmaze.com';
+
+  search(query: string) {
+    return this.http
+      .get<TvMazeSearchResult[]>(\`\${this.base}/search/shows\`, { params: { q: query } })
+      .pipe(map(results => results.map(r => toShow(r.show))));
+  }
+
+  byId(id: number) {
+    return this.http.get<TvMazeShow>(\`\${this.base}/shows/\${id}\`).pipe(map(toShow));
+  }
+}`;
+
+  subscribeProofCode = `// Builds the Observable, but fires no request:
+this.showsSvc.search(term);
+
+// Actually performs the HTTP call:
+this.showsSvc.search(term).subscribe(results => {
+  this.shows.set(results);
+});`;
+}

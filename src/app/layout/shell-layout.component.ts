@@ -17,7 +17,12 @@ const ALL_STEPS = [
   'd9-act2-navigate', 'd9-act2-rule',
   'd9-act3-guard-create', 'd9-act3-guard-wire',
   'd9-act4-lazy-convert', 'd9-act4-verify',
-  'd9-lab-prevnext', 'd9-lab-notfound', 'd9-lab-guard-watchlist', 'd9-lab-stretch'
+  'd9-lab-prevnext', 'd9-lab-notfound', 'd9-lab-guard-watchlist', 'd9-lab-stretch',
+  'd13-act1-problem', 'd13-act1-httpclient', 'd13-act1-observable-model',
+  'd13-act2-typing', 'd13-act2-adapter', 'd13-act2-service', 'd13-act2-subscribe-fires',
+  'd13-act3-browse-component', 'd13-act3-three-state', 'd13-act3-debug',
+  'd13-act4-detail-live', 'd13-act4-innerhtml', 'd13-act4-pitfalls',
+  'd13-lab-runtime', 'd13-lab-recent-searches', 'd13-lab-season-count', 'd13-lab-stretch-watchlist'
 ];
 
 interface DayNavItem {
@@ -59,6 +64,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day9/act3', label: '🛡️ Act 3 — Guards' },
       { path: '/day9/act4', label: '📦 Act 4 — Lazy Loading' },
       { path: '/day9/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day13',
+    label: '🌐 Day 13 — HTTP I',
+    prefix: '/day13',
+    items: [
+      { path: '/day13/act1', label: '🌐 Act 1 — HttpClient & the Mental Model' },
+      { path: '/day13/act2', label: '🧩 Act 2 — Typing & Adapting the API' },
+      { path: '/day13/act3', label: '🔍 Act 3 — Browse Goes Live' },
+      { path: '/day13/act4', label: '🎬 Act 4 — Detail Page Goes Live' },
+      { path: '/day13/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];

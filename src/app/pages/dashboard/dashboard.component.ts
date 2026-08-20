@@ -12,7 +12,12 @@ const ALL_STEPS = [
   'd9-act2-navigate', 'd9-act2-rule',
   'd9-act3-guard-create', 'd9-act3-guard-wire',
   'd9-act4-lazy-convert', 'd9-act4-verify',
-  'd9-lab-prevnext', 'd9-lab-notfound', 'd9-lab-guard-watchlist', 'd9-lab-stretch'
+  'd9-lab-prevnext', 'd9-lab-notfound', 'd9-lab-guard-watchlist', 'd9-lab-stretch',
+  'd13-act1-problem', 'd13-act1-httpclient', 'd13-act1-observable-model',
+  'd13-act2-typing', 'd13-act2-adapter', 'd13-act2-service', 'd13-act2-subscribe-fires',
+  'd13-act3-browse-component', 'd13-act3-three-state', 'd13-act3-debug',
+  'd13-act4-detail-live', 'd13-act4-innerhtml', 'd13-act4-pitfalls',
+  'd13-lab-runtime', 'd13-lab-recent-searches', 'd13-lab-season-count', 'd13-lab-stretch-watchlist'
 ];
 
 @Component({
