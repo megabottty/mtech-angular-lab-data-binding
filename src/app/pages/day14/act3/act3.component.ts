@@ -24,7 +24,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <ul>
           <li><strong>Learning Goal:</strong> Debug three realistic HTTP/resilience mistakes and turn them into habits students can reuse in code reviews and live bug hunts.</li>
           <li><strong>Why It Matters:</strong> Resilient apps fail honestly. The real skill is not just writing the happy path once; it is spotting subtle async and error-handling mistakes before users do.</li>
-          <li><strong>Build Steps:</strong> Diagnose a frozen <code>httpResource</code> caused by passing a value instead of a function → flag the deprecated positional <code>subscribe()</code> style → catch the missing loading reset that creates an eternal spinner.</li>
+          <li><strong>Build Steps:</strong> Diagnose a compile-time <code>httpResource</code> type error caused by passing a value instead of a function → flag the deprecated positional <code>subscribe()</code> style → catch the missing loading reset that creates an eternal spinner.</li>
           <li><strong>Expected Outcome:</strong> You can explain the “recipe, not a value” rule for <code>httpResource</code>, rewrite old <code>subscribe(next, error)</code> code into an observer object, and audit every terminal branch for proper loading cleanup.</li>
         </ul>
       </section>
@@ -36,25 +36,25 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
       <app-lesson-step stepId="d14-act3-debug-resource" [stepNumber]="1" title="Bug 1 — A String Instead of a Function">
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
-        <p>This first bug looks tiny because the URL text itself is correct. The deeper problem is that <code>httpResource</code> does not just want the final URL value; it wants the code that knows how to produce that URL again later when reactive dependencies change.</p>
-        <p style="margin-top: 12px;">With the buggy version below, <code>this.id()</code> is read exactly once while the field is initialized, so the interpolated string is frozen right there. Navigate from one show's route to another and nothing refetches, because the resource has no function to re-run and no tracked signal read to revisit.</p>
+        <p>This first "bug" doesn't even make it to the browser — and that's the lesson. It looks like an easy typo (forgetting the arrow function), but <code>httpResource</code>'s first parameter is typed to require a function, so TypeScript stops you at compile time, not at runtime.</p>
+        <p style="margin-top: 12px;">Try the snippet below in your editor and watch the red squiggly line appear immediately under the string argument.</p>
         <h4>Buggy snippet</h4>
         <app-code-block lang="typescript" [code]="buggyResourceCode" />
         <div class="info-box">
-          <strong>Mental model to say out loud:</strong> give the resource a <strong>recipe</strong>, not a value. A recipe (function) can be re-run; a value is frozen the moment it is computed.
+          <strong>The compiler error, roughly:</strong> "Argument of type 'string' is not assignable to parameter of type '() =&gt; string | undefined'." TypeScript is telling you, in its own words, exactly the mental model we want: <code>httpResource</code> wants a <strong>recipe</strong> (a function it can re-run), not a frozen value.
         </div>
-        <p style="margin-top: 12px;">The fix is one pair of parentheses and one arrow, but the idea underneath is the whole lesson. Angular can only track which signals were read while producing the request if you hand it executable code it can call again.</p>
+        <p style="margin-top: 12px;">The fix is one pair of parentheses and one arrow — but the idea underneath is the whole lesson. Angular can only track which signals were read while producing the request if you hand it executable code it can call again on every change.</p>
         <h4>Corrected snippet</h4>
         <app-code-block lang="typescript" [code]="resourceFixCode" />
-        <div class="ask-class">If <code>this.id()</code> is read once at construction either way, why does wrapping it in a function change anything?</div>
+        <div class="ask-class">If TypeScript catches this before the app even runs, why is it still worth walking through as a "bug"?</div>
         <div class="info-box">
-          <strong>Answer to listen for:</strong> it is not about <em>when</em> the first read happens. Angular's signal-tracking system needs a function it can re-invoke on every dependency change; a plain string gives it nothing to re-run.
+          <strong>Answer to listen for:</strong> because the compile error only tells you <em>what</em> is wrong syntactically, not <em>why</em> the API is shaped that way. Understanding "recipe, not a value" is what lets you reason about resources correctly everywhere else, including cases the type checker can't catch for you.
         </div>
         <app-collapsible icon="🧩" label="Deep Dive — What exactly is Angular tracking here?">
           <p>When <code>httpResource(() =&gt; \`...&#36;&#123;this.id()&#125;...\`)</code> runs that function, Angular observes that the function read the <code>id</code> signal. That dependency link lets Angular call the function again later when <code>id</code> changes and then refetch the new URL.</p>
-          <p style="margin-top: 12px;">When you pass a string instead, Angular receives only a finished answer. There is no executable recipe, no fresh signal read, and therefore no reason for the resource to reload when the route param changes.</p>
+          <p style="margin-top: 12px;">A plain string could never provide this — which is exactly why the type signature forbids it outright, rather than accepting it and silently failing to refetch at runtime.</p>
         </app-collapsible>
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain, in your own words, why <code>httpResource</code>'s first argument must be a function and not a plain value.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain, in your own words, why <code>httpResource</code>'s first argument must be a function and not a plain value — and why TypeScript enforces that at compile time rather than leaving it as a runtime footgun.</div>
       </app-lesson-step>
 
       <app-lesson-step stepId="d14-act3-debug-subscribe-style" [stepNumber]="2" title="Bug 2 — The Deprecated subscribe() Style">
