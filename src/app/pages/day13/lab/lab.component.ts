@@ -405,7 +405,64 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <a routerLink="/" class="btn-primary" style="display:inline-flex; margin-top: 20px">← Back to Home</a>
       </div>
     </div>
-  `
+  `,
+  styles: [`
+    .lab-label { background: #4ec9b0 !important; color: #1e1e1e !important; }
+    .lab-intro {
+      background: #1a2e4a;
+      border: 1px solid #2a4a7a;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .lab-intro h3 { color: #82aaff; margin-bottom: 8px; }
+    .lab-intro p { font-size: 14px; color: #b0c8e0; }
+
+    .task-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .difficulty {
+      font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 12px;
+    }
+    .difficulty.easy { background: #1a2e1a; color: #4ec9b0; border: 1px solid #2a5c2a; }
+    .difficulty.medium { background: #2a2a1a; color: #ff9d00; border: 1px solid #5c4a00; }
+    .difficulty.hard { background: #2a1a1a; color: #f44747; border: 1px solid #5c1a1a; }
+    .concepts { font-size: 12px; color: #858585; }
+
+    .task-steps { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+    .task-step {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: #cccccc;
+    }
+    .step-dot {
+      width: 24px; height: 24px; background: #3e3e42;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 12px; font-weight: 700;
+      flex-shrink: 0; color: #4fc3f7;
+    }
+
+    .checkpoint-card { margin-top: 32px; }
+
+    .completion-card {
+      background: linear-gradient(135deg, #1a2e1a, #0d1f0d);
+      border: 2px solid #4ec9b0;
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 40px;
+      text-align: center;
+    }
+    .completion-card h2 { font-size: 28px; margin-bottom: 12px; }
+    .completion-card p { color: #a0d0a0; margin-bottom: 16px; }
+    .complete-list {
+      list-style: none;
+      padding: 0;
+      display: inline-block;
+      text-align: left;
+    }
+    .complete-list li {
+      padding: 6px 0;
+      font-size: 14px;
+      color: #c3e88d;
+    }
+  `]
 })
 export class Day13LabComponent {
   task1Hint = `@if (show.runtime) {
