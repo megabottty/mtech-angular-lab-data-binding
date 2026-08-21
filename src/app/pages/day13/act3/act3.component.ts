@@ -38,7 +38,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>The Browse page now owns three separate questions, so it needs three separate signals. <code>shows</code> stores the current result list and starts as an empty array because we have not received anything yet. <code>loading</code> flips to true right before the request leaves and flips back to false only when the response actually lands.</p>
         <p style="margin-top: 12px;"><code>searched</code> is the subtle one. Its entire job is to separate “the student has not searched yet” from “the student searched and got zero matches.” Without that distinction, an empty-state message appears on first page load and lies to the user.</p>
-        <div class="ask-class">Why do we need THREE signals here instead of just <code>shows</code> alone? What would go wrong with only one?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Why do we need THREE signals here instead of just <code>shows</code> alone? What would go wrong with only one?</p>
+          <p class="tai-a">An empty <code>shows</code> array is ambiguous — it could mean "the page just loaded and nobody searched yet," "a request is in flight," or "the search finished and found nothing." Each of those is a different UI truth that deserves a different message. <code>loading</code> distinguishes the in-flight state, and <code>searched</code> distinguishes "never searched" from "searched and got zero results," so the template can display exactly the right message at every moment.</p>
+        </div>
         <app-code-block lang="typescript" [code]="browseLiveCode" />
         <div class="info-box">
           <strong>Why this shape is so common:</strong> arrays tell you what data you have, but they do not tell you whether you are still waiting or whether the search has never happened yet. Those are different UI facts, so they deserve different state.
@@ -54,7 +57,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>The template now asks three questions in order: are we loading, do we have results, or did we search and come up empty? That ordering matters because the screen must tell the truth about the most immediate state first. If the results check came later or the searched check came earlier, the wrong message would flash at the wrong time.</p>
         <p style="margin-top: 12px;">The <code>#q</code> name is a template reference variable. For today, that simply means “grab the live input element so we can read its current <code>value</code> when Enter is pressed or the button is clicked,” without introducing <code>[(ngModel)]</code>.</p>
-        <div class="ask-class">When the page first renders before any search has run, which branch should win — and why?</div>
+        <div class="think-about-it">
+          <p class="tai-q">When the page first renders before any search has run, which branch should win — and why?</p>
+          <p class="tai-a">None of the three content branches should win on first render — the page should show nothing (or a prompt to search), because <code>loading()</code> is false, <code>shows().length</code> is zero, and <code>searched()</code> is also false. The <code>searched()</code> guard is the critical one: it ensures the "no results" empty-state message only appears after the user has actually performed a search, not on initial page load.</p>
+        </div>
         <app-code-block lang="html" [code]="browseThreeStateHtmlCode" />
         <div class="info-box">
           <strong>The professional pattern:</strong> loading → results → empty-after-search. Production UIs live by this three-state pattern, and the order of the <code>&#64;else if</code> chain matters. <code>searched()</code> belongs last, after checking <code>shows().length</code>, or the page would show “no results” on the very first render before anyone searched.
@@ -85,7 +91,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p style="margin-top: 12px;">Walk the timeline on the board: call <code>search()</code> → call <code>subscribe()</code> and register the callback → <code>subscribe()</code> returns immediately → <code>loading.set(false)</code> runs NOW (wrong) → time passes → the HTTP response finally arrives → the callback runs later.</p>
         </app-collapsible>
         <div class="warning-box">Do not rush this. This is the single most important “this is what asynchronous actually means” moment of the week — the callback runs later, and code written after <code>.subscribe(...)</code> in your method runs immediately, not after the callback.</div>
-        <div class="ask-class">If <code>.subscribe()</code> doesn't block, what guarantees the callback function eventually runs at all, and why is it safe to put <code>loading.set(false)</code> inside it?</div>
+        <div class="think-about-it">
+          <p class="tai-q">If <code>.subscribe()</code> doesn't block, what guarantees the callback function eventually runs at all, and why is it safe to put <code>loading.set(false)</code> inside it?</p>
+          <p class="tai-a">Angular's <code>HttpClient</code> Observable is guaranteed to emit exactly once when the HTTP response arrives and then complete, so the callback will always run when the network delivers the response. It is safe to put <code>loading.set(false)</code> inside the callback precisely because that is the first moment the data actually exists — any code placed after <code>.subscribe()</code> in the method body runs immediately and synchronously, long before the response has arrived, which is why putting <code>loading.set(false)</code> outside the callback clears the spinner too early.</p>
+        </div>
         <app-collapsible icon="✅" label="Show Answer — Correct runSearch() timing">
           <p>The fix is to place every state update that depends on the response inside the subscription callback, because that callback is the first moment the data actually exists.</p>
           <app-code-block lang="typescript" [code]="correctedRunSearchCode" />

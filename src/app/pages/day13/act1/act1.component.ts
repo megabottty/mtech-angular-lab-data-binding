@@ -40,7 +40,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-code-block lang="typescript" [code]="tvMazeJsonExample" />
         <p style="margin-top: 12px;">Up through Day 9, BingeBoard behaved synchronously because the show list already lived in memory inside the app. The service owned a hardcoded array, the component read it immediately, and the screen rendered as if the data had always been there.</p>
         <p style="margin-top: 12px;">A real API changes the timeline. Sometimes the response is fast; sometimes the network stalls for seconds. That delay is the whole new problem: the UI must show a loading state during the gap, admit that failure is possible if the response never arrives, and then render real content once it lands.</p>
-        <div class="ask-class">Sketch on paper: what has to happen between “user opens Browse” and “cards appear” when the data lives on a server, not in this file?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Sketch on paper: what has to happen between "user opens Browse" and "cards appear" when the data lives on a server, not in this file?</p>
+          <p class="tai-a">The browser must send an HTTP GET request to the API server, then wait while the network delivers the response. Once the JSON arrives, Angular parses it, passes it through our adapter to produce <code>Show</code> objects, and only then can the template render the cards. The key new step compared to Day 9 is that waiting gap in the middle — the UI must show a loading state during that time instead of pretending the data was always there.</p>
+        </div>
         <div class="info-box">
           <strong>Answer to listen for:</strong> a request goes out → time passes → a response arrives → we render. The new complication is not the request itself; it is the waiting in the middle.
         </div>
@@ -55,7 +58,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>Angular does not let services start making HTTP requests by magic. First we turn on that capability once at app startup, using the standalone provider version of the HTTP client.</p>
         <app-code-block lang="typescript" [code]="httpClientProviderCode" />
         <p style="margin-top: 12px;">Notice where the new line goes: right beside the router provider you already added on Day 9. This is app-wide plumbing, not a per-component setting.</p>
-        <div class="ask-class">Where should <code>provideHttpClient()</code> live so every service can inject <code>HttpClient</code> without repeating setup?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Where should <code>provideHttpClient()</code> live so every service can inject <code>HttpClient</code> without repeating setup?</p>
+          <p class="tai-a">It belongs in <code>app.config.ts</code>, inside the root <code>providers</code> array alongside <code>provideRouter()</code>. Placing it there registers <code>HttpClient</code> once for the entire application, so any service — <code>ShowsService</code> or any future service — can inject it without each component or service having to configure HTTP on its own.</p>
+        </div>
         <div class="info-box">
           <strong>Most-forgotten line today:</strong> if you skip this, Angular throws <code>No provider for HttpClient</code> at runtime. The error is actually helpful — it names the missing dependency almost word for word.
         </div>
@@ -70,7 +76,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>Today's deliberately shallow rule is enough to move forward: <code>HttpClient</code> methods like <code>http.get(...)</code> return an <code>Observable</code>. For now, treat that as “a value that will arrive later, not a value I already have right now.”</p>
         <p style="margin-top: 12px;">That means today's code reads differently from Day 9's signal array. Instead of grabbing data immediately, we describe the request first and then tell Angular what to do once the response eventually shows up.</p>
         <app-code-block lang="typescript" [code]="httpGetSubscribeCode" />
-        <div class="ask-class">If I remove <code>subscribe()</code> from this method, what should the Network tab show?</div>
+        <div class="think-about-it">
+          <p class="tai-q">If I remove <code>subscribe()</code> from this method, what should the Network tab show?</p>
+          <p class="tai-a">Nothing — the Network tab will be empty. Calling <code>http.get(...)</code> only creates an Observable, which is a lazy description of the request, not the request itself. The browser never actually sends the HTTP call until something subscribes to that Observable. This is what "lazy" means in the RxJS world.</p>
+        </div>
         <div class="warning-box">Important: nothing happens when you only create the Observable with <code>http.get(...)</code>. The request is just described at that point. It does not actually fire until something subscribes.</div>
         <app-collapsible icon="🧩" label="Deep Dive — Why do older tutorials use HttpClientModule instead?">
           <p>Older Angular examples often import <code>HttpClientModule</code> through an NgModule. That is the pre-standalone pattern. In a modern standalone app, <code>provideHttpClient()</code> is the equivalent root-level setup and is the version you should expect to write in current codebases.</p>

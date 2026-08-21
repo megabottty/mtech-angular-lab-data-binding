@@ -46,7 +46,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p style="margin-top: 12px;">The fix is one pair of parentheses and one arrow — but the idea underneath is the whole lesson. Angular can only track which signals were read while producing the request if you hand it executable code it can call again on every change.</p>
         <h4>Corrected snippet</h4>
         <app-code-block lang="typescript" [code]="resourceFixCode" />
-        <div class="ask-class">If TypeScript catches this before the app even runs, why is it still worth walking through as a "bug"?</div>
+        <div class="think-about-it">
+          <p class="tai-q">If TypeScript catches this before the app even runs, why is it still worth walking through as a "bug"?</p>
+          <p class="tai-a">The compile error only tells you <em>what</em> the type mismatch is — "string is not assignable to <code>() =&gt; string</code>" — but it does not explain <em>why</em> the API was designed that way. Walking through the bug builds the mental model: <code>httpResource</code> requires a function because Angular must be able to re-run it and observe which signals it reads. That understanding lets you reason correctly about resources in situations where TypeScript cannot help you, such as accidentally reading a signal outside the factory function or using a computed value that never changes.</p>
+        </div>
         <div class="info-box">
           <strong>Answer to listen for:</strong> because the compile error only tells you <em>what</em> is wrong syntactically, not <em>why</em> the API is shaped that way. Understanding "recipe, not a value" is what lets you reason about resources correctly everywhere else, including cases the type checker can't catch for you.
         </div>
@@ -65,7 +68,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-code-block lang="typescript" [code]="buggySubscribeStyleCode" />
         <p style="margin-top: 12px;">The modern rewrite is more self-documenting immediately: you can scan <code>next</code> and <code>error</code> by name instead of mentally mapping “first callback means success, second callback means failure.”</p>
         <app-code-block lang="typescript" [code]="subscribeStyleFixCode" />
-        <div class="ask-class">If both versions still work today, why should a code reviewer still ask for the observer-object rewrite?</div>
+        <div class="think-about-it">
+          <p class="tai-q">If both versions still work today, why should a code reviewer still ask for the observer-object rewrite?</p>
+          <p class="tai-a">The positional form <code>.subscribe(nextFn, errorFn)</code> is deprecated in RxJS because it relies on argument position that you have to memorize rather than on named, self-documenting properties. The observer-object form <code>.subscribe(&#123; next, error &#125;)</code> makes each callback's role explicit at a glance, is easier to extend with a <code>complete</code> handler later, and matches the style that all new RxJS documentation and tooling encourages. Code that "works" today can still be the wrong model to copy and teach going forward.</p>
+        </div>
         <app-collapsible icon="✅" label="Show Answer — Observer-object form">
           <p>Because the observer object is clearer, easier to extend, and aligned with the style new RxJS code should use going forward. “Works” is not the same as “good enough to keep teaching and copying.”</p>
           <app-code-block lang="typescript" [code]="subscribeStyleFixCode" />
@@ -82,7 +88,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="info-box">
           <strong>Act 1 connection:</strong> this is why the error handler set <code>loading.set(false)</code> <strong>first</strong>, before setting the error message. Both branches of <code>subscribe</code> — success and failure — must reset loading every time, with no exceptions.
         </div>
-        <div class="ask-class">In your own words, write the one-sentence code-review comment you'd leave on a pull request containing this bug.</div>
+        <div class="think-about-it">
+          <p class="tai-q">In your own words, write the one-sentence code-review comment you'd leave on a pull request containing this bug.</p>
+          <p class="tai-a">A good code-review comment here would be: "The error callback is missing <code>loading.set(false)</code> — if the request fails, the spinner never clears and the UI is permanently stuck in a loading state that no longer reflects reality." The key habit this builds is treating the error branch with the same rigor as the success branch: every terminal path out of a fetch — success or failure — must fully reset shared UI state before doing its branch-specific work.</p>
+        </div>
         <div class="warning-box">This is the single most common bug in real-world error handling code — an unhappy path that was almost right, just missing one line. Reviewing your own error branches as carefully as your success branches is a habit, not a talent.</div>
         <app-collapsible icon="✅" label="Show Answer — the correct dual-branch handling">
           <p>The important structure is not just “use the observer object.” The deeper rule is that every terminal branch cleans up loading before doing its branch-specific work.</p>

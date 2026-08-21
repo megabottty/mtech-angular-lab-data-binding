@@ -40,7 +40,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p style="margin-top: 12px;">Today that contract changes. <code>byId()</code> now returns an <code>Observable&lt;Show&gt;</code>, which means the service is describing work whose answer arrives later; a <code>computed()</code> cannot synchronously grab the future result of an HTTP request that has not finished yet.</p>
         <p style="margin-top: 12px;">So we drop down one level and do the honest imperative version: create writable signals for <code>show</code> and <code>loading</code>, kick off the request in <code>ngOnInit()</code>, and update those signals when the response lands. This is Day 6 paying off directly: <code>ngOnInit</code> is for kicking off loads. Also say out loud that this pattern is a little manual; Day 14 introduces a cleaner, fully reactive option — <code>httpResource</code> — that replaces this exact <code>ngOnInit</code> + <code>subscribe</code> pair with signals, but today is not that day.</p>
         <app-code-block lang="typescript" [code]="showDetailLiveCode" />
-        <div class="ask-class">Why can't <code>show</code> stay a <code>computed()</code> the way it was on Day 9, now that <code>byId()</code> returns an <code>Observable</code> instead of a plain value?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Why can't <code>show</code> stay a <code>computed()</code> the way it was on Day 9, now that <code>byId()</code> returns an <code>Observable</code> instead of a plain value?</p>
+          <p class="tai-a"><code>computed()</code> must return a value synchronously right now, by reading other signals. But <code>byId()</code> returns an <code>Observable&lt;Show&gt;</code> — a description of data that will arrive later over the network. There is no way for a <code>computed()</code> to "wait" for that future response. Instead, we use a writable signal initialized to <code>null</code> and update it inside the <code>.subscribe()</code> callback once the HTTP response actually lands.</p>
+        </div>
         <div class="info-box">
           <strong>Listen for the timing answer:</strong> <code>computed()</code> can only derive from values available right now. An HTTP Observable describes a future response, so we need to start the load and then react when that response eventually arrives.
         </div>
@@ -59,7 +62,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>TVMaze's <code>summary</code> field is not plain text. Back in Act 2, our <code>TvMazeShow</code> interface deliberately warned us with the comment <code>summary: string | null;   // contains HTML!</code>, which means records may come back looking like <code>&lt;p&gt;A guy...&lt;/p&gt;</code> instead of a bare sentence.</p>
         <p style="margin-top: 12px;">If you want that markup to render as actual paragraphs instead of displaying literal angle brackets, bind it with <code>[innerHTML]</code>:</p>
         <app-code-block lang="html" [code]="summaryInnerHtmlCode" />
-        <div class="ask-class">If we used plain interpolation instead of <code>[innerHTML]</code>, what would the browser do with those HTML tags?</div>
+        <div class="think-about-it">
+          <p class="tai-q">If we used plain interpolation instead of <code>[innerHTML]</code>, what would the browser do with those HTML tags?</p>
+          <p class="tai-a">Angular's text interpolation (double-curly-brace syntax) escapes all HTML characters — angle brackets become <code>&amp;lt;</code> and <code>&amp;gt;</code> — so the raw tag text like <code>&lt;p&gt;A guy...&lt;/p&gt;</code> would be displayed as a literal string on screen instead of being parsed as markup. The user would see the HTML tags themselves rather than formatted paragraphs.</p>
+        </div>
         <div class="info-box">
           <strong>Why Angular allows this safely:</strong> Angular automatically sanitizes <code>[innerHTML]</code> content and strips dangerous things like <code>&lt;script&gt;</code> tags so untrusted HTML cannot run XSS code in your users' browsers.
         </div>
@@ -93,7 +99,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <strong>4) Rate limits are a teachable moment:</strong> TVMaze allows roughly 20 requests per 10 seconds per IP address, so an entire classroom hammering live search can occasionally trip a <code>429</code> response. Frame that as a gift, not a disaster: real production APIs have real limits, and the same fixture fallback above covers you instantly if it happens mid-demo.
         </div>
 
-        <div class="ask-class">If our whole class got rate-limited live right now, what would that teach us about designing real production apps that call third-party APIs?</div>
+        <div class="think-about-it">
+          <p class="tai-q">If our whole class got rate-limited live right now, what would that teach us about designing real production apps that call third-party APIs?</p>
+          <p class="tai-a">It would teach us that real APIs enforce rate limits and that production apps must plan for them. Good design responses include caching results so repeated lookups don't cost extra requests, implementing exponential backoff and retry logic for <code>429</code> responses, debouncing user input so rapid keystrokes don't each fire a request, and keeping a local fixture or CDN-cached fallback so the app stays functional during API outages or quota exhaustion.</p>
+        </div>
         <app-collapsible icon="🧩" label="Deep Dive — Why the fixture fallback is such a good emergency plan">
           <p>Because it preserves the exact same teaching shape: <code>HttpClient.get(...)</code> still returns an Observable, the adapter still runs, the component still subscribes, and the UI still goes through loading → response. You are only changing where the bytes come from, not the architecture students are practicing.</p>
         </app-collapsible>

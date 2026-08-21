@@ -39,7 +39,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>TVMaze's search endpoint does not return a plain array of shows. It returns an array of wrapper objects, each shaped like <code>&#123; score, show: ... &#125;</code>, which means our first job is to model the real JSON honestly before we try to use it.</p>
         <p>Notice the discipline here: we are <strong>not</strong> trying to model the entire API. We define only the fields BingeBoard actually reads today, and we deliberately ignore the rest of TVMaze's much larger payload. That is realistic, professional TypeScript — model what you consume, not an entire third-party universe you do not control.</p>
         <app-code-block lang="typescript" [code]="tvMazeModelCode" />
-        <div class="ask-class">Try it yourself in a browser tab: https://api.tvmaze.com/shows/431 — what other fields does the real response have that we're choosing to ignore?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Try it yourself in a browser tab: https://api.tvmaze.com/shows/431 — what other fields does the real response have that we're choosing to ignore?</p>
+          <p class="tai-a">The real response includes fields like <code>url</code>, <code>type</code>, <code>language</code>, <code>status</code>, <code>officialSite</code>, <code>schedule</code>, <code>network</code>, <code>webChannel</code>, <code>dvdCountry</code>, <code>externals</code>, <code>updated</code>, and <code>_links</code>, among others. BingeBoard only needs <code>id</code>, <code>name</code>, <code>genres</code>, <code>rating</code>, <code>image</code>, <code>summary</code>, and <code>runtime</code> today, so we ignore everything else. Modeling only what you consume keeps your interface small and stable when the API adds new fields.</p>
+        </div>
         <div class="info-box">
           <strong>Why this matters:</strong> a small, purposeful interface is easier to maintain, easier to read, and less fragile when the API team adds unrelated fields tomorrow.
         </div>
@@ -59,7 +62,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="info-box">
           <strong>Nulls everywhere — welcome to real data.</strong> The chorus in this function is the lesson: <code>genres[0] ?? 'Unknown'</code> protects against an empty genres array, <code>rating.average ?? 0</code> protects against missing ratings, <code>image?.medium ?? 'assets/no-poster.png'</code> covers null images, and both <code>summary ?? ''</code> and <code>runtime ?? 0</code> defend against incomplete records.
         </div>
-        <div class="ask-class">Why do we write an adapter function instead of just using <code>TvMazeShow</code> directly as our app's <code>Show</code> type everywhere?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Why do we write an adapter function instead of just using <code>TvMazeShow</code> directly as our app's <code>Show</code> type everywhere?</p>
+          <p class="tai-a">The adapter isolates the rest of the app from TVMaze's naming conventions, null rules, and future shape changes. If TVMaze renames <code>image.medium</code> tomorrow or changes how ratings are nested, only the <code>toShow()</code> function needs to change — every component and test that works with our app's <code>Show</code> type stays untouched. Without the adapter, a third-party API change would ripple through every file in the project.</p>
+        </div>
         <app-collapsible icon="💡" label="Hint — Listen for the boundary answer">
           <p>The answer to listen for is that the adapter isolates the rest of the app from a third-party API's shape, null rules, naming, and future changes. If TVMaze changes tomorrow, ideally only this mapping layer needs to change.</p>
         </app-collapsible>
@@ -75,7 +81,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>This replaces Day 9's in-memory signal version entirely. The big breaking change is timing: <code>byId(id)</code> is still conceptually "get me the show," but now it returns an <code>Observable&lt;Show&gt;</code> instead of a synchronous <code>Show | undefined</code>, and that ripple hits <code>Browse</code> and <code>ShowDetail</code> in Acts 3 and 4.</p>
         <app-code-block lang="typescript" [code]="showsServiceHttpCode" />
         <p style="margin-top: 12px;"><code>.pipe(map(...))</code> is today's tiny preview of RxJS operators: think "transform the package's contents before delivery." We are not teaching the whole operator story yet; Day 15 gives <code>pipe</code> and <code>map</code> their own proper spotlight.</p>
-        <div class="ask-class">Point to the two different jobs in this code: where is Angular doing HTTP work, and where are we reshaping third-party data into app data?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Point to the two different jobs in this code: where is Angular doing HTTP work, and where are we reshaping third-party data into app data?</p>
+          <p class="tai-a"><code>this.http.get&lt;TvMazeSearchResult[]&gt;(url)</code> is Angular doing HTTP work — it sends the network request and emits the raw response. The <code>.pipe(map(results =&gt; results.map(r =&gt; toShow(r.show))))</code> is us reshaping third-party data — it transforms each raw <code>TvMazeSearchResult</code> into our clean <code>Show</code> model using the adapter. The pipe operator connects these two jobs into one stream without mixing their responsibilities.</p>
+        </div>
         <app-collapsible icon="💡" label="Hint — Same method names, new async contract">
           <p>Notice how little the service's API surface changes. <code>search(query)</code> is still "search," and <code>byId(id)</code> is still "fetch one show" — but the return values are now lazy streams, not immediate objects, because the browser must wait for the network.</p>
         </app-collapsible>
@@ -87,7 +96,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>This is the critical mental model shift for HTTP in Angular: calling <code>this.showsSvc.search('office')</code> by itself does <strong>nothing</strong>. It builds an Observable — basically a request description — but the browser does not actually fire the HTTP call until someone subscribes to that Observable.</p>
         <p>Prove it live with the Network tab. First call <code>search()</code> with no <code>.subscribe()</code> and show the class that no request appears in DevTools. Then add <code>.subscribe(...)</code>, run the same action again, and watch the request finally show up.</p>
         <app-code-block lang="typescript" [code]="subscribeProofCode" />
-        <div class="ask-class">In one sentence: why does an Observable-returning method call alone never perform the side effect?</div>
+        <div class="think-about-it">
+          <p class="tai-q">In one sentence: why does an Observable-returning method call alone never perform the side effect?</p>
+          <p class="tai-a">An Observable is lazy — calling <code>showsSvc.search('office')</code> only builds the recipe for the HTTP request; the browser does not actually send the request until something calls <code>.subscribe()</code> on the returned Observable.</p>
+        </div>
         <div class="warning-box">Hold onto this — it is exactly the bug we'll debug together in Act 3. If students remember only one trap from today, make it this one.</div>
         <app-collapsible icon="✅" label="Show Answer — The sentence we want">
           <p>An Observable is lazy: until something subscribes, Angular has only created the recipe for the request, not executed the request itself.</p>

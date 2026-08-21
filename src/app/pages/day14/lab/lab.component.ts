@@ -90,9 +90,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           database” are different truths, so the screen should sound different too.
         </div>
 
-        <div class="ask-class">
-          If the id is valid syntax but the show truly does not exist, why is that a different
-          message from airplane-mode failure?
+        <div class="think-about-it">
+          <p class="tai-q">If the id is valid syntax but the show truly does not exist, why is that a different message from airplane-mode failure?</p>
+          <p class="tai-a">A <code>404</code> means the server was reachable and confidently replied "this id does not exist" — retrying will never change that answer, so the correct response is a message like "Show not found" with a link back to Browse. Airplane-mode failure (<code>status: 0</code>) means the request never reached the server at all, so the user should check their connection and then retry — because once online, the same request could succeed. The root cause, the recovery action, and the emotional tone of the message should all differ between these two categories.</p>
         </div>
 
         <div class="task-steps">
@@ -172,9 +172,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           Angular can fire both requests in parallel.
         </div>
 
-        <div class="ask-class">
-          If the show loads successfully but the episodes call fails, should the entire page die —
-          or should one section stay useful while the other asks for a retry?
+        <div class="think-about-it">
+          <p class="tai-q">If the show loads successfully but the episodes call fails, should the entire page die — or should one section stay useful while the other asks for a retry?</p>
+          <p class="tai-a">Only the episodes section should show an error; the show section should remain fully visible and useful. Because the two resources are independent — each with its own <code>isLoading()</code>, <code>error()</code>, and <code>value()</code> — a failure in one has no reason to tear down the other. Showing the show's title, poster, and summary while the episodes section displays "Could not load episodes — Retry" gives the user the maximum amount of correct information even when one of the two requests fails.</p>
         </div>
 
         <div class="task-steps">
@@ -250,9 +250,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           when the response arrives.
         </div>
 
-        <div class="ask-class">
-          Why can the same one-second wait feel slower with plain “Loading…” text than with a grid
-          of skeleton cards that already matches the final layout?
+        <div class="think-about-it">
+          <p class="tai-q">Why can the same one-second wait feel slower with plain "Loading…" text than with a grid of skeleton cards that already matches the final layout?</p>
+          <p class="tai-a">Plain text gives the eye nothing to anchor on — the page is blank, and the brain experiences that blank as uncertainty about whether anything is coming at all. Skeleton cards that match the real card dimensions show the user exactly what kind of content is about to arrive and where it will land, so the brain perceives the wait as intentional progress rather than emptiness. This is perceived performance: the objective network time is identical, but layout stability and visual continuity make the subjective experience feel faster and more trustworthy.</p>
         </div>
 
         <div class="task-steps">
@@ -326,9 +326,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           along does it for you.
         </div>
 
-        <div class="ask-class">
-          Why is reading official docs a real engineering skill instead of “cheating” compared to
-          writing code from memory?
+        <div class="think-about-it">
+          <p class="tai-q">Why is reading official docs a real engineering skill instead of "cheating" compared to writing code from memory?</p>
+          <p class="tai-a">Framework APIs evolve constantly — <code>httpResource</code> is experimental in Angular 21 today and its signature could change by Angular 22. A developer who only codes from memory is locked to a snapshot of the API from however long ago they learned it. Reading docs is how you find out what changed, what is now deprecated, what the framework team recommends instead, and what edge-case caveats apply that no tutorial covered. The engineers who stay current and avoid subtle breakage are the ones who treat official documentation as a primary source, not a last resort.</p>
         </div>
 
         <div class="task-steps">

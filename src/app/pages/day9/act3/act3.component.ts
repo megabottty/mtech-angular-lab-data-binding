@@ -37,7 +37,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <app-lesson-step stepId="d9-act3-guard-create" [stepNumber]="1" title="Scaffolding the Guard — ng g guard + CanActivateFn">
         <p><span class="effort-tag effort-short">Effort: Short</span></p>
         <p>The <code>/stats</code> page only makes sense after the learner has added at least one show to the watchlist. A guard is the router's checkpoint before the page opens.</p>
-        <div class="ask-class">Should a user be able to visit /stats with an empty watchlist? What should happen if they try?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Should a user be able to visit /stats with an empty watchlist? What should happen if they try?</p>
+          <p class="tai-a">No — the stats page only makes sense with data to analyze. If they try, the guard should redirect them to <code>/browse</code> (by returning a <code>UrlTree</code>) rather than letting them hit a blank or broken page. Returning a <code>UrlTree</code> is better than returning <code>false</code> because it sends the user somewhere useful instead of silently canceling their navigation and leaving them confused.</p>
+        </div>
         <p style="margin-top: 12px;">Generate the guard with the CLI, then choose <code>CanActivate</code> when Angular prompts you for the guard type:</p>
         <app-code-block lang="typescript" [code]="guardCliCommand" />
         <p style="margin-top: 12px;">Now write the functional guard. It checks watchlist state, then either allows navigation or hands the router a redirect target.</p>
@@ -63,7 +66,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <strong>Returning a UrlTree (redirect) beats returning false (dead click)</strong> — same docs page, much better UX. A <code>false</code> return just silently cancels the navigation and the user is left staring at the same page wondering what happened.
         </div>
 
-        <div class="ask-class">Demo both outcomes: with an empty watchlist, clicking /stats redirects to /browse; after adding a show to the watchlist, /stats loads normally.</div>
+        <div class="think-about-it">
+          <p class="tai-q">Demo both outcomes: with an empty watchlist, clicking /stats redirects to /browse; after adding a show to the watchlist, /stats loads normally.</p>
+          <p class="tai-a">When the watchlist is empty, <code>hasWatchlistGuard</code> returns <code>router.createUrlTree(['/browse'])</code>, so the router silently redirects before the Stats component ever loads. Once you add a show, the guard's condition passes and it returns <code>true</code>, allowing the navigation to complete and rendering the Stats page normally. This confirms that the guard is reading live watchlist state each time navigation is attempted.</p>
+        </div>
 
         <app-collapsible icon="✅" label="Show Answer — Complete guard file + route wiring">
           <p><strong>has-watchlist.guard.ts</strong></p>

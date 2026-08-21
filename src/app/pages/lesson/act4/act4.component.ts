@@ -135,7 +135,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <h4 style="margin: 20px 0 8px; color: #82aaff;">app.component.html</h4>
         <app-code-block lang="html" [code]="fullHtml" />
 
-        <div class="ask-class">Walk through the code step by step. Can you trace the path from "user types in the search box" all the way to "a card disappears from the grid"? Try to explain each step out loud.</div>
+        <div class="think-about-it">
+          <p class="tai-q">Walk through the code step by step. Can you trace the path from "user types in the search box" all the way to "a card disappears from the grid"? Try to explain each step out loud.</p>
+          <p class="tai-a">Here's the full chain: (1) The user types a character into the <code>&lt;input [(ngModel)]="searchTerm"&gt;</code>. (2) <code>[(ngModel)]</code> is two-way binding — it immediately calls <code>searchTerm.set(newValue)</code> on the signal. (3) Angular detects the signal changed and re-evaluates the <code>computed()</code> that derives <code>filteredShows</code>. (4) The computed re-runs its <code>filter()</code> call, comparing each show's title against the new search term. (5) The <code>&#64;for</code> loop in the template re-renders with only the matching shows — cards that no longer match simply aren't rendered, with zero manual DOM manipulation required.</p>
+        </div>
 
         <app-collapsible icon="💡" label="Hint — Trace the data flow when user types 'The'">
           <ol class="hint-list">

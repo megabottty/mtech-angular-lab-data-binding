@@ -94,7 +94,7 @@ a:hover { text-decoration: underline; }
 }
 .warning-box strong { color: var(--warning); }
 
-.ask-class {
+.think-about-it {
   background: #1a2e1a;
   border: 1px solid #2a5c2a;
   border-left: 4px solid var(--success);
@@ -104,7 +104,15 @@ a:hover { text-decoration: underline; }
   font-size: 14px;
   color: #a0d0a0;
 }
-.ask-class::before { content: '🎓 Ask the Class: '; font-weight: 700; color: var(--success); }
+.think-about-it .tai-q { margin: 0; }
+.think-about-it .tai-q::before { content: '🤔 Think About It: '; font-weight: 700; color: var(--success); }
+.think-about-it .tai-a {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed #2a5c2a;
+  color: #cfe8cf;
+}
+.think-about-it .tai-a::before { content: '💡 Answer: '; font-weight: 700; color: var(--accent-light); }
 
 .nav-footer {
   display: flex;

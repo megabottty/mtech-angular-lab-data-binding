@@ -83,9 +83,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           they see.
         </p>
 
-        <div class="ask-class">
-          Why is hiding <code>0</code> actually more honest than displaying <code>~0 min/ep</code>
-          to the user?
+        <div class="think-about-it">
+          <p class="tai-q">Why is hiding <code>0</code> actually more honest than displaying <code>~0 min/ep</code>
+          to the user?</p>
+          <p class="tai-a">A <code>0</code> runtime in the TVMaze API means the data is missing or unknown, not that the show literally has zero-minute episodes. Displaying <code>~0 min/ep</code> would mislead the user into thinking we have a real value. Hiding the field with an <code>&#64;if</code> guard communicates "we don't know" far more honestly than displaying a meaningless placeholder that looks like real data.</p>
         </div>
 
         <div class="task-steps">
@@ -149,10 +150,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           elsewhere?
         </p>
 
-        <div class="ask-class">
-          Should the recent-searches list live as a signal inside the Browse component, or move into
+        <div class="think-about-it">
+          <p class="tai-q">Should the recent-searches list live as a signal inside the Browse component, or move into
           <code>ShowsService</code> as shared state? Make the case for each — there's a real,
-          defensible answer on both sides.
+          defensible answer on both sides.</p>
+          <p class="tai-a">Keeping it local to Browse is the simpler, YAGNI-correct choice: the list only matters on that one page, so lifting it out adds complexity with no present benefit. Moving it into <code>ShowsService</code> makes sense if you anticipate a second page — like a "Recent Activity" dashboard — that needs the same history; service-level state survives navigation and is accessible app-wide. Both are defensible; the professional move is to start local and lift only when a second genuine consumer appears.</p>
         </div>
 
         <div class="info-box">
@@ -229,10 +231,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           script every line first.
         </p>
 
-        <div class="ask-class">
-          Would you make the episode call inside the existing <code>byId()</code> subscribe, or as a
+        <div class="think-about-it">
+          <p class="tai-q">Would you make the episode call inside the existing <code>byId()</code> subscribe, or as a
           second independent call? Both are acceptable today — what tradeoff are you making either
-          way?
+          way?</p>
+          <p class="tai-a">Nesting the episode call inside the <code>byId()</code> subscribe guarantees the show ID is available before you request episodes, but it creates a "subscribe inside subscribe" pattern that becomes messy to read and impossible to cancel cleanly. A second independent call is simpler to write but fires unconditionally and can't easily wait on the first result. Both work today; Day 15's <code>switchMap</code> teaches the clean way to chain dependent HTTP calls without nesting.</p>
         </div>
 
         <div class="warning-box">
@@ -323,10 +326,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>show.posterUrl</code> can silently break and render <code>undefined</code>.
         </p>
 
-        <div class="ask-class">
-          Is renaming a shared model's fields mid-course a good practice, or should the adapter have
+        <div class="think-about-it">
+          <p class="tai-q">Is renaming a shared model's fields mid-course a good practice, or should the adapter have
           kept the old field names (<code>title</code>/<code>posterUrl</code>) to avoid this churn
-          entirely?
+          entirely?</p>
+          <p class="tai-a">Neither answer is universally right. Renaming to match the real API's vocabulary (<code>name</code>, <code>imageUrl</code>) keeps the codebase honest and prevents a growing mismatch between what the API means and what our app calls things — a real long-term maintenance win. Keeping the old names avoids a short-term ripple through components, tests, and persisted data. Professional teams typically pay the rename cost once to keep names honest forever, accepting the one-time churn as cheaper than compounding confusion over many months.</p>
         </div>
 
         <div class="info-box">

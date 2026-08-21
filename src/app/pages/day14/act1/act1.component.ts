@@ -43,7 +43,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>Day 13 gave Browse an honest loading state, but it still quietly assumes success forever. With yesterday's app running, switch DevTools → Network to <code>Offline</code>, search for any show, and watch the page get trapped on <code>Searching…</code> because <code>loading.set(false)</code> only runs inside the success callback.</p>
         <p style="margin-top: 12px;">That infinite spinner is not a neutral default. It is a lie: the request already failed, the app knows nothing useful anymore, and the user deserves a new message plus a way forward instead of endless fake progress.</p>
         <p style="margin-top: 12px;">This is the entire Day 14 framing. Every real data-fetching UI must answer three questions: what shows while we wait (Day 13 solved that), what shows if it fails (today), and how the user recovers (also today).</p>
-        <div class="ask-class">What should a good app do right now, instead of an eternal spinner?</div>
+        <div class="think-about-it">
+          <p class="tai-q">What should a good app do right now, instead of an eternal spinner?</p>
+          <p class="tai-a">A good app should immediately clear the loading state, display a clear message explaining that the request failed, and offer a Retry button so the user has an actual path forward. Continuing to show a spinner after the request has already failed is dishonest — it promises ongoing progress when there is none. The three honest states are: loading while work is in progress, a result when it succeeds, and a failure message with a recovery option when it does not.</p>
+        </div>
         <div class="info-box">
           <strong>Class spec to collect out loud:</strong> tell the user something went wrong, offer a retry path, and never keep pretending work is still happening when the request has already failed.
         </div>
@@ -60,7 +63,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>The smallest honest upgrade is to admit a fourth state: failure. Keep Day 13's loading, results, and empty-after-search model, then add an <code>error</code> signal that starts as <code>null</code>, gets cleared before each new request, and becomes a user-facing message only if the HTTP call fails.</p>
         <p style="margin-top: 12px;">There is also a deliberate little gap students need to catch for themselves: the retry button needs memory. A careful builder notices that the component must store the most recent search term in <code>lastTerm</code>, or the UI can say “Retry” without actually knowing what to retry.</p>
         <p style="margin-top: 12px;">This excerpt zooms in on the new error-handling lines, so your Day 13 blank-term guard can still sit above it. Focus on the observer-object form of <code>.subscribe(...)</code>: named <code>next</code> and <code>error</code> handlers in one object, which is the modern/preferred style and the version we want students to practice.</p>
-        <div class="ask-class">Demo offline → friendly error → back online → retry works. That loop, working, is today's first checkpoint.</div>
+        <div class="think-about-it">
+          <p class="tai-q">Demo offline → friendly error → back online → retry works. That loop, working, is today's first checkpoint.</p>
+          <p class="tai-a">When the browser is offline, the error callback fires with <code>status: 0</code>, <code>loading.set(false)</code> clears the spinner, and <code>error.set(...)</code> displays the friendly message. When the user clicks Retry, <code>runSearch(lastTerm())</code> re-runs the request using the stored last search term — so the user never has to retype anything. Coming back online and clicking Retry should produce real results and clear the error message, completing the full recovery loop.</p>
+        </div>
         <app-code-block lang="typescript" [code]="runSearchWithErrorCode" />
         <div class="warning-box">Careful reader trap: the shown code only works as a real retry experience if you also add and maintain <code>lastTerm</code>. The button cannot magically remember the user's last query unless the component remembers it first.</div>
         <app-code-block lang="html" [code]="errorStateTemplateCode" />
@@ -81,7 +87,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>Once students can catch failure at all, the next maturity jump is noticing that the error object is not one generic blob. Open the browser console, inspect the <code>HttpErrorResponse</code>, and teach them to ask a production question: <em>what kind of failure is this?</em></p>
         <p style="margin-top: 12px;">Three categories matter immediately. <code>status: 0</code> means the request never really made it out at all — offline, DNS trouble, or a CORS block. <code>4xx</code> means the client asked badly or asked for something missing, so a live demo like <code>byId(999999999)</code> should produce a specific “show not found” style message. <code>5xx</code> means the server broke its side of the bargain, so the honest message becomes “try again shortly.”</p>
         <p style="margin-top: 12px;">This distinction is not academic trivia. A junior developer who knows how to separate <code>0</code>, <code>4xx</code>, and <code>5xx</code> already sounds more production-ready, because the UI stops flattening different problems into one lazy sentence.</p>
-        <div class="ask-class">If two students both see “Something went wrong,” what useful information are we hiding from them about what they should do next?</div>
+        <div class="think-about-it">
+          <p class="tai-q">If two students both see "Something went wrong," what useful information are we hiding from them about what they should do next?</p>
+          <p class="tai-a">A generic message hides both the cause and the correct recovery action. A <code>status: 0</code> failure means the request never left the device, so the user should check their connection — retrying immediately is pointless. A <code>404</code> means the show genuinely does not exist, so retrying will never help; the user should go back to Browse instead. A <code>500</code> means the server broke, so "try again in a moment" is the right advice. Flattening all three into one message strips away exactly the information that would tell the user what to do next.</p>
+        </div>
         <app-code-block lang="typescript" [code]="errorTaxonomyCode" />
         <div class="info-box">
           <strong>Three buckets to teach on the board:</strong>

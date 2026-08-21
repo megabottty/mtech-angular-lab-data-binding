@@ -37,7 +37,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <app-lesson-step stepId="d9-act4-lazy-convert" [stepNumber]="1" title="Converting a Route to loadComponent">
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>Lazy loading in standalone Angular is delightfully boring: replace <code>component</code> with <code>loadComponent</code>, keep the rest of the route config, and let the browser fetch that page only when needed.</p>
-        <div class="ask-class">In your old curriculum this conversion involved NgModules and lazy-loaded module ceremony. What's different now?</div>
+        <div class="think-about-it">
+          <p class="tai-q">In your old curriculum this conversion involved NgModules and lazy-loaded module ceremony. What's different now?</p>
+          <p class="tai-a">With standalone components, you no longer need a dedicated <code>NgModule</code> wrapper just to create a lazy chunk. You replace the <code>component</code> property with <code>loadComponent: () => import('./stats/stats.component').then(m => m.StatsComponent)</code> and the bundler creates the separate chunk automatically. One property swap replaces what used to be a new module file, <code>RouterModule.forChild()</code> config, and a barrel export.</p>
+        </div>
 
         <app-code-block lang="typescript" [code]="statsRouteConversion" />
 

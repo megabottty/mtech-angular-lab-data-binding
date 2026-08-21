@@ -36,7 +36,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
       <app-lesson-step stepId="d9-act2-navigate" [stepNumber]="1" title="Router.navigate() — The 🎲 Surprise Me Button">
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
-        <div class="ask-class">After you save a form, or after a login redirect — was a link clicked? What triggers that navigation?</div>
+        <div class="think-about-it">
+          <p class="tai-q">After you save a form, or after a login redirect — was a link clicked? What triggers that navigation?</p>
+          <p class="tai-a">Your TypeScript code triggers it. In these cases there is no anchor element for a user to click, so <code>routerLink</code> can't help. Instead you inject <code>Router</code> into the component and call <code>router.navigate(['/destination'])</code> from a method — exactly the same as a link click, but initiated programmatically in response to an event like a successful HTTP save or a resolved auth check.</p>
+        </div>
         <p>The answer is: <strong>your TypeScript code</strong>. In BingeBoard's <code>Header</code>, the destination is random, so a normal <code>routerLink</code> is not enough. The button click calls a method, that method picks a show, and then the router takes the user there.</p>
 
         <p><strong>Header TypeScript:</strong></p>

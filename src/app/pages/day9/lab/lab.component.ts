@@ -72,9 +72,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           and first goes to last.
         </p>
 
-        <div class="ask-class">
-          Should prev/next be <code>routerLink</code> with a computed target id, or a <code>navigate()</code> method
-          call? Both are defensible — which would you pick and why?
+        <div class="think-about-it">
+          <p class="tai-q">Should prev/next be <code>routerLink</code> with a computed target id, or a <code>navigate()</code> method
+          call? Both are defensible — which would you pick and why?</p>
+          <p class="tai-a">Use <code>routerLink</code> bound to a computed signal when the destination can be fully derived from reactive state — it keeps the navigation intent visible in the template and requires no method. Use <code>router.navigate()</code> when navigation must happen in response to an event with side effects (like saving data first). For prev/next, a computed <code>prevShowId</code>/<code>nextShowId</code> signal bound to <code>[routerLink]</code> is the cleaner choice because the destination is pure derived state with no side effects.</p>
         </div>
 
         <div class="task-steps">
@@ -135,8 +136,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           inline not-found state in the <code>&#64;else</code> block with a link back to Browse.
         </p>
 
-        <div class="ask-class">
-          Is rendering an inline "not found" state actually superior UX to redirecting?
+        <div class="think-about-it">
+          <p class="tai-q">Is rendering an inline "not found" state actually superior UX to redirecting?</p>
+          <p class="tai-a">Yes, in most cases. An inline not-found state keeps the user on the URL they tried to visit, explains what went wrong, and offers a recovery path — all without a disorienting page change. A redirect to a generic 404 page discards the context of which ID was bad and can confuse users who expected to land somewhere specific. The inline approach also avoids an extra navigation event, which matters for browser history.</p>
         </div>
 
         <div class="info-box">
@@ -194,8 +196,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>/stats</code>. Then discuss the behavior and back it out.
         </p>
 
-        <div class="ask-class">
-          Why is guarding <code>/watchlist</code> with this same guard bad product thinking?
+        <div class="think-about-it">
+          <p class="tai-q">Why is guarding <code>/watchlist</code> with this same guard bad product thinking?</p>
+          <p class="tai-a">Because an empty watchlist page is still a useful state — it's the perfect place to show onboarding guidance like "Browse shows and add one to get started." Bouncing the user away when the list is empty hides that helpful empty state and leaves them confused about why they can't reach the page. Guards should block content that genuinely cannot be used without a precondition (like stats with no data to analyze), not block pages that have a valid empty-state design.</p>
         </div>
 
         <div class="warning-box">

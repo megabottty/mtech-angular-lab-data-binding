@@ -48,7 +48,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>&#64;else</code> — the fallback when nothing matches
         </div>
 
-        <div class="ask-class">Before I reveal the code — what do you think should happen if a show has a rating below 7.0? What badge should appear?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Before I reveal the code — what do you think should happen if a show has a rating below 7.0? What badge should appear?</p>
+          <p class="tai-a">A show rated below 7.0 should display a "Low" or warning badge to signal it's below average. In the <code>&#64;if</code> chain, this maps to the final <code>&#64;else</code> branch — after checking for ratings ≥ 8.0 (Great) and ≥ 7.0 (Good), anything that falls through must be below 7.0, so it gets a "Low" badge. Angular evaluates each branch top to bottom and stops at the first true match, so the ordering from high to low is critical.</p>
+        </div>
 
         <app-code-block lang="html" [code]="ifFull" />
 
@@ -97,7 +100,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>&#64;default</code> — runs when no case matches (optional but recommended)
         </div>
 
-        <div class="ask-class">What would you add for a "Comedy" genre? Write the &#64;case line before checking the answer.</div>
+        <div class="think-about-it">
+          <p class="tai-q">What would you add for a "Comedy" genre? Write the &#64;case line before checking the answer.</p>
+          <p class="tai-a">You'd add <code>&#64;case ('Comedy') &#123; &lt;span class="badge comedy"&gt;😂 Comedy&lt;/span&gt; &#125;</code> inside the <code>&#64;switch (show.genre)</code> block, alongside the existing Drama and Action cases. The string in <code>&#64;case</code> must exactly match the genre value stored in your TypeScript data — including capitalization — otherwise no case will match and the <code>&#64;default</code> fallback will render instead.</p>
+        </div>
 
         <app-collapsible icon="💡" label="Hint — Can @switch check numbers too?">
           <p>Yes! <code>&#64;switch</code> works with any type — strings, numbers, booleans. Just make sure your <code>&#64;case</code> values match the exact type:</p>

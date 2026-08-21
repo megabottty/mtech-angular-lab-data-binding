@@ -42,7 +42,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-code-block lang="typescript" [code]="showDetailBeforeCode" />
         <p style="margin-top: 12px;">Now compare it to the resource version. The adapter stays, the route param stays, and the detail-page idea stays; what changes is who owns the fetch state.</p>
         <app-code-block lang="typescript" [code]="showDetailResourceCode" />
-        <div class="ask-class">Why does <code>httpResource</code> take a function returning the URL instead of a plain URL string written once?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Why does <code>httpResource</code> take a function returning the URL instead of a plain URL string written once?</p>
+          <p class="tai-a">Angular needs executable code — a recipe it can call again whenever a signal dependency changes. When the URL factory function runs, Angular tracks every signal it reads, such as <code>this.id()</code>. When that signal later changes (for example, the user navigates to a different show), Angular re-calls the function to get the new URL and fires a fresh GET request automatically. A plain string is a frozen value with no dependencies to track, so Angular would have no reactive trigger to ever issue a second request.</p>
+        </div>
         <div class="info-box">
           <strong>The key mechanism:</strong> <code>httpResource&lt;TvMazeShow&gt;(...)</code> takes a function because Angular re-runs that function whenever any signal read inside it changes. Here the function reads <code>this.id()</code>, so a new id means a new request automatically.
         </div>
@@ -65,7 +68,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p style="margin-top: 12px;">Show the three-branch template slowly and let the room absorb what just vanished: no <code>ngOnInit()</code>, no <code>.subscribe(...)</code>, no hand-rolled <code>loading</code> or <code>error</code> signals to maintain yourself. <code>httpResource</code> gives you <code>isLoading()</code>, <code>error()</code>, and <code>value()</code>/<code>hasValue()</code> automatically, and <code>reload()</code> is already a built-in retry method.</p>
         <app-code-block lang="html" [code]="showDetailResourceHtmlCode" />
         <p style="margin-top: 12px;">That means the success branch can keep using the adapted <code>show()</code> computed signal, while the loading and failure branches read directly from the resource. The component becomes a small description of the data relationship instead of a manual state machine.</p>
-        <div class="ask-class">What category of bugs does this eliminate compared to yesterday's <code>ngOnInit()</code> + <code>subscribe()</code> version?</div>
+        <div class="think-about-it">
+          <p class="tai-q">What category of bugs does this eliminate compared to yesterday's <code>ngOnInit()</code> + <code>subscribe()</code> version?</p>
+          <p class="tai-a">It eliminates the entire class of "forgot to reset a flag" lifecycle bugs: forgetting to set <code>loading</code> back to true before a new request, forgetting to clear a stale result before the new one arrives, and forgetting to call a load method again when the route id changes. Because <code>httpResource</code> owns <code>isLoading()</code>, <code>error()</code>, and <code>value()</code> internally, those state transitions are no longer your responsibility to coordinate — Angular does it for you every time the URL-recipe signal changes.</p>
+        </div>
         <div class="info-box">
           <strong>The payoff moment:</strong> because the resource's URL function reads <code>this.id()</code>, navigating between shows with Day 9's Prev/Next buttons automatically triggers a refetch. Show that live: click Next, watch the Network tab fire a new request with zero new code from us.
         </div>
@@ -87,7 +93,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>Students now need a rule, not just a neat demo. Put the decision on the board in two categories they can reuse all semester.</p>
         <p style="margin-top: 12px;"><strong>Category 1:</strong> fetching data a view depends on — detail pages, lists keyed by a signal, route-driven reads. <code>httpResource</code> is made for exactly this shape. <strong>Category 2:</strong> imperative moments — a button click that POSTs a form, a manually triggered action, or a user-driven search event. Use ordinary <code>HttpClient</code> calls there, just like the subscribe-based code you built on Day 13 and in today's Act 1.</p>
         <p style="margin-top: 12px;">Also be honest about framework motion: Angular's Signal Forms work and resource-based APIs are clearly converging in this direction, so “watch the docs” is a fair professional sentence here. And reassure the room explicitly: you will read subscribe-based code forever in existing production codebases, which is exactly why we learned that style first before meeting this newer alternative today.</p>
-        <div class="ask-class">Give me the one-sentence rule: when do you reach for <code>httpResource</code>, and when do you reach for ordinary <code>HttpClient</code> + <code>subscribe()</code>?</div>
+        <div class="think-about-it">
+          <p class="tai-q">Give me the one-sentence rule: when do you reach for <code>httpResource</code>, and when do you reach for ordinary <code>HttpClient</code> + <code>subscribe()</code>?</p>
+          <p class="tai-a">Use <code>httpResource</code> when the screen can describe <em>what</em> to fetch purely from signals — detail pages, route-driven reads, or any data the view depends on reactively — and use <code>HttpClient</code> + <code>subscribe()</code> when the user is triggering an imperative action right now, such as a button click that searches, POSTs a form, or issues a PUT. A quick test: if a signal change should automatically refetch, reach for <code>httpResource</code>; if a user gesture should fire the request, reach for <code>subscribe()</code>.</p>
+        </div>
         <div class="info-box">
           <strong>Fast rule of thumb:</strong> if the screen can describe what to fetch from signals, a resource is a strong fit. If the user is causing an action right now, use imperative <code>HttpClient</code> code.
         </div>

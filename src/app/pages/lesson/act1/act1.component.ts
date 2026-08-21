@@ -39,7 +39,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p><span class="effort-tag effort-short">Effort: Short</span></p>
         <p>Imagine you have 100 TV shows in your JavaScript file. In plain HTML you'd have to write this card 100 times:</p>
         <app-code-block lang="html" [code]="htmlProblem" />
-        <div class="ask-class">If we have 100 TV shows, do we copy and paste this div 100 times? What happens when a user deletes a show?</div>
+        <div class="think-about-it">
+          <p class="tai-q">If we have 100 TV shows, do we copy and paste this div 100 times? What happens when a user deletes a show?</p>
+          <p class="tai-a">No — copying HTML 100 times is completely unworkable. Every change (adding a field, fixing a typo) would need to be made 100 times. Worse, when a user deletes a show, the HTML doesn't update itself — you'd have to manually find and remove that exact block of HTML. Angular's <code>&#64;for</code> loop solves this by reading directly from your TypeScript array, so adding or removing a show from the array instantly updates the rendered list with no manual DOM changes.</p>
+        </div>
         <p style="margin-top:12px">This is exactly the problem Angular's <code>&#64;for</code> loop solves.</p>
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain why repeating static HTML does not scale.</div>
       </app-lesson-step>
