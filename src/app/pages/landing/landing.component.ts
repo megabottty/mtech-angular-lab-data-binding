@@ -231,6 +231,47 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
           <span class="act-arrow">→</span>
         </div>
       </div>
+
+      <h2 class="day-heading">🌊 Day 15 — RxJS I: Streams, Operators &amp; Living with Signals</h2>
+      <p class="day-subheading">Observables were there all along. Today we open the box: streams, operators, subscriptions, and the toSignal bridge.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day15/act1">
+          <div class="act-icon">🌊</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">The Stream Mental Model</div>
+            <div class="act-desc">Marble diagrams, a live leak demo, and the toSignal fix</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day15/act2">
+          <div class="act-icon">🔀</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Operators in the Wild</div>
+            <div class="act-desc">Two different maps, the async pipe, signals vs. Observables</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day15/act3">
+          <div class="act-icon">🧭</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Router Streams &amp; Debug It</div>
+            <div class="act-desc">paramMap as a stream, and the racing-timers bug</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day15/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">4 Hands-On Tasks</div>
+            <div class="act-desc">A live ticker, a top-rated stream, a leak hunt, a keyboard shortcut</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
     </div>
   `,
   styles: [`

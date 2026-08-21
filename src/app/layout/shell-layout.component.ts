@@ -26,7 +26,11 @@ const ALL_STEPS = [
   'd14-act1-warmup-problem', 'd14-act1-error-signal', 'd14-act1-taxonomy',
   'd14-act2-resource-intro', 'd14-act2-detail-rebuild', 'd14-act2-which-one-when',
   'd14-act3-debug-resource', 'd14-act3-debug-subscribe-style', 'd14-act3-debug-loading-reset',
-  'd14-lab-404-grace', 'd14-lab-episodes-resource', 'd14-lab-skeleton-screens', 'd14-lab-stretch-interceptors'
+  'd14-lab-404-grace', 'd14-lab-episodes-resource', 'd14-lab-skeleton-screens', 'd14-lab-stretch-interceptors',
+  'd15-act1-stream-model', 'd15-act1-leak-demo', 'd15-act1-tosignal-fix',
+  'd15-act2-map-real-work', 'd15-act2-async-pipe', 'd15-act2-signals-vs-observables',
+  'd15-act3-router-stream', 'd15-act3-debug-racing-timers', 'd15-act3-operator-scope-note',
+  'd15-lab-ticker', 'd15-lab-top-rated', 'd15-lab-leak-hunt', 'd15-lab-stretch-keydown'
 ];
 
 interface DayNavItem {
@@ -91,6 +95,17 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day14/act2', label: '📡 Act 2 — httpResource' },
       { path: '/day14/act3', label: '🐛 Act 3 — Debug It' },
       { path: '/day14/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day15',
+    label: '🌊 Day 15 — RxJS I',
+    prefix: '/day15',
+    items: [
+      { path: '/day15/act1', label: '🌊 Act 1 — Stream Mental Model' },
+      { path: '/day15/act2', label: '🔀 Act 2 — Operators in the Wild' },
+      { path: '/day15/act3', label: '🧭 Act 3 — Router Streams & Debug It' },
+      { path: '/day15/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];
