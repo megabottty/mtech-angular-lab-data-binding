@@ -14,7 +14,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <span class="act-label lab-label">🛠️ Student Lab</span>
         <h1>Your Turn — Ship the Rest of BingeBoard's Real Data</h1>
         <p class="subtitle">
-          50 minutes. 4 tasks. Extend the live search + detail page on your own, defend your
+          About 60–70 minutes. 4 tasks. Extend the live search + detail page on your own, defend your
           choices, and prove the real-data version of BingeBoard holds together end to end.
         </p>
       </div>
@@ -24,7 +24,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>
           Copy the working Act 4 code (live <code>ShowsService</code>, live Browse three-state
           search, live <code>ShowDetail</code> with <code>ngOnInit + subscribe</code> and
-          <code>[innerHTML]</code>) into your project before starting.
+          <code>[innerHTML]</code>) into your project before starting. If Browse and Detail aren't
+          both working against the real TVMaze API right now, stop and go finish Act 4 first — this
+          lab has no separate scaffolding of its own to fall back on.
         </p>
       </div>
 
@@ -39,7 +41,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <li>
             <strong>Why It Matters:</strong>
             Production apps constantly add new derived fields, new endpoints for related data,
-            recent-history UX, and must survive shared-model changes gracefully.
+            recent-history UX, and must survive shared-model changes gracefully. Today's build-along
+            showed you the pattern once; this lab is where it becomes a habit instead of something
+            you copied.
           </li>
           <li>
             <strong>Build Steps:</strong>
@@ -48,8 +52,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </li>
           <li>
             <strong>Expected Outcome:</strong>
-            Students can make and defend data-shape and state-placement decisions, not just follow
-            steps.
+            You can make and defend data-shape and state-placement decisions on your own, not just
+            follow steps someone else already worked out.
           </li>
         </ul>
       </section>
@@ -57,6 +61,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <section class="selfguided-panel">
         <p><strong>You are here:</strong> Student Lab (Day 13 capstone)</p>
         <p><strong>Next step:</strong> Review the Checkpoint below.</p>
+        <p><strong>Time:</strong> Tasks 1–2 are about 15 minutes each. Task 3 is the big one — budget 20–25 minutes. Task 4 is a stretch; skip it if you're short on time and come back later.</p>
       </section>
 
       <app-lesson-step
@@ -77,43 +82,47 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           like <code>~0 min/ep</code>.
         </p>
         <p style="margin-top: 12px;">
-          This is your first “real data rep” task: values that looked clean in a hardcoded array are
+          This is your first "real data rep" task: values that looked clean in a hardcoded array are
           now messy because the API is messy. Defensive rendering is not extra polish — it is the
           difference between a trustworthy UI and one that accidentally teaches users to ignore what
-          they see.
+          they see. Once a user spots one obviously-wrong number on your screen, they stop trusting
+          all the other numbers too.
         </p>
 
         <div class="think-about-it">
           <p class="tai-q">Why is hiding <code>0</code> actually more honest than displaying <code>~0 min/ep</code>
           to the user?</p>
-          <p class="tai-a">A <code>0</code> runtime in the TVMaze API means the data is missing or unknown, not that the show literally has zero-minute episodes. Displaying <code>~0 min/ep</code> would mislead the user into thinking we have a real value. Hiding the field with an <code>&#64;if</code> guard communicates "we don't know" far more honestly than displaying a meaningless placeholder that looks like real data.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — why hiding is the honest choice">
+          <p>A <code>0</code> runtime in the TVMaze API means the data is missing or unknown, not that the show literally has zero-minute episodes. Displaying <code>~0 min/ep</code> would mislead the user into thinking we have a real value. Hiding the field with an <code>&#64;if</code> guard communicates "we don't know" far more honestly than displaying a meaningless placeholder that looks like real data.</p>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
             <span class="step-dot">1</span>
-            <span>Find where <code>ShowCard</code> renders rating and genre today.</span>
+            <span>Open your <code>ShowCard</code> component and find where it renders rating and genre today.</span>
           </div>
           <div class="task-step">
             <span class="step-dot">2</span>
-            <span>Add a runtime display guarded by an <code>&#64;if</code>.</span>
+            <span>Add a runtime display guarded by an <code>&#64;if</code>, right next to those.</span>
           </div>
           <div class="task-step">
             <span class="step-dot">3</span>
-            <span>Verify a show with runtime <code>0</code> shows no badge at all.</span>
+            <span>Search for a show and verify one with runtime <code>0</code> shows no badge at all — check the Network response if you're not sure which show that is.</span>
           </div>
         </div>
 
         <div class="outcome-check">
-          ✅ <strong>Expected outcome:</strong> You can guard a template field against zero/missing
-          real API data without extra boilerplate.
+          ✅ <strong>Expected outcome:</strong> Every card either shows a real runtime badge or shows
+          none at all — never a badge with a meaningless <code>0</code> in it. You can guard a
+          template field against zero/missing real API data without extra boilerplate.
         </div>
 
         <app-collapsible icon="💡" label="Hint — Let truthiness do the work">
           <p>
             The elegant part of this task is that <code>0</code> is already falsy. In this case,
-            that is exactly what we want: a runtime of zero does <strong>not</strong> mean “instant
-            television,” it means “the API did not give us a meaningful runtime.”
+            that is exactly what we want: a runtime of zero does <strong>not</strong> mean "instant
+            television," it means "the API did not give us a meaningful runtime."
           </p>
           <app-code-block lang="html" [code]="task1Hint" />
         </app-collapsible>
@@ -140,28 +149,32 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <h4>What to build:</h4>
         <p>
-          Under the search box, render the last 5 distinct search terms as clickable “chips.”
+          Under the search box, render the last 5 distinct search terms as clickable "chips."
           Clicking a chip should re-run that search by calling <code>runSearch(term)</code>.
         </p>
         <p style="margin-top: 12px;">
           This task is intentionally half code, half design judgment. A recent-searches feature is
           tiny, but it forces you to ask a very real architecture question: does this state belong
           only to Browse, or is it the start of shared app history that might later matter
-          elsewhere?
+          elsewhere? There isn't a single objectively correct answer — the point is that you can
+          argue for one and defend it.
         </p>
 
         <div class="think-about-it">
           <p class="tai-q">Should the recent-searches list live as a signal inside the Browse component, or move into
           <code>ShowsService</code> as shared state? Make the case for each — there's a real,
           defensible answer on both sides.</p>
-          <p class="tai-a">Keeping it local to Browse is the simpler, YAGNI-correct choice: the list only matters on that one page, so lifting it out adds complexity with no present benefit. Moving it into <code>ShowsService</code> makes sense if you anticipate a second page — like a "Recent Activity" dashboard — that needs the same history; service-level state survives navigation and is accessible app-wide. Both are defensible; the professional move is to start local and lift only when a second genuine consumer appears.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — the case for each side">
+          <p>Keeping it local to Browse is the simpler, YAGNI-correct choice: the list only matters on that one page, so lifting it out adds complexity with no present benefit. Moving it into <code>ShowsService</code> makes sense if you anticipate a second page — like a "Recent Activity" dashboard — that needs the same history; service-level state survives navigation and is accessible app-wide. Both are defensible; the professional move is to start local and lift only when a second genuine consumer appears.</p>
+        </app-collapsible>
 
         <div class="info-box">
-          <strong>Teacher note:</strong> keeping it local to Browse is simpler and scoped correctly
-          if only Browse ever needs it; lifting it into <code>ShowsService</code> makes sense if a
-          future page (like a recent-activity dashboard) needs the same history. This is the classic
-          YAGNI-vs.-future-proofing argument, and professional teams have it constantly.
+          <strong>Design note — two valid choices:</strong> keeping it local to Browse is simpler and
+          scoped correctly if only Browse ever needs it; lifting it into <code>ShowsService</code>
+          makes sense if a future page (like a recent-activity dashboard) needs the same history. This
+          is the classic YAGNI-vs.-future-proofing tradeoff, and professional teams debate it
+          constantly — there's rarely a universally "right" answer, only a well-reasoned one.
         </div>
 
         <div class="task-steps">
@@ -180,8 +193,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">
-          ✅ <strong>Expected outcome:</strong> You can maintain a bounded, deduped recent-items
-          list in a signal and re-trigger an action from a rendered chip.
+          ✅ <strong>Expected outcome:</strong> Search for 6 different shows. You should see exactly
+          5 chips, most-recent first, with no duplicates. Click any chip and confirm it re-runs that
+          exact search. You can maintain a bounded, deduped recent-items list in a signal and
+          re-trigger an action from a rendered chip.
         </div>
 
         <app-collapsible icon="💡" label="Hint — Update one list, not five separate flags">
@@ -227,22 +242,28 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p style="margin-top: 12px;">
           There is intentionally less hand-holding here because this task is the capstone. You have
           already seen typing, adapting, subscribing, and rendering in the build-along — now you
-          prove you can repeat that pattern on a fresh endpoint without waiting for the instructor to
-          script every line first.
+          prove you can repeat that pattern on a fresh endpoint without a worked example already in
+          front of you. That's the actual skill this whole day has been building toward: given a new
+          endpoint and no instructions, can you follow the same four-step pattern on your own?
         </p>
 
         <div class="think-about-it">
           <p class="tai-q">Would you make the episode call inside the existing <code>byId()</code> subscribe, or as a
           second independent call? Both are acceptable today — what tradeoff are you making either
           way?</p>
-          <p class="tai-a">Nesting the episode call inside the <code>byId()</code> subscribe guarantees the show ID is available before you request episodes, but it creates a "subscribe inside subscribe" pattern that becomes messy to read and impossible to cancel cleanly. A second independent call is simpler to write but fires unconditionally and can't easily wait on the first result. Both work today; Day 15's <code>switchMap</code> teaches the clean way to chain dependent HTTP calls without nesting.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — the tradeoff either way">
+          <p>Nesting the episode call inside the <code>byId()</code> subscribe guarantees the show ID is available before you request episodes, but it creates a "subscribe inside subscribe" pattern that becomes messy to read and impossible to cancel cleanly. A second independent call is simpler to write but fires unconditionally and can't easily wait on the first result. Both work today; Day 15's <code>switchMap</code> teaches the clean way to chain dependent HTTP calls without nesting.</p>
+        </app-collapsible>
 
         <div class="warning-box">
-          <strong>Explicit pitfall callout:</strong> you'll likely nest this subscribe inside your
-          existing <code>byId()</code> subscribe. That's expected and fine for today — Day 15/16 is
-          where you learn the cleaner way to chain dependent HTTP calls. For now, shipping the full
-          vertical slice matters more than perfect RxJS elegance.
+          <strong>You'll probably nest a subscribe here, and that's fine:</strong> if you make the
+          episode call from inside your existing <code>byId()</code> subscribe callback, you'll end
+          up with a subscribe nested inside another subscribe. That's expected and okay for today —
+          Day 15 is where you'll learn the cleaner way to chain dependent HTTP calls. For now,
+          shipping the full vertical slice matters more than perfect RxJS elegance. Feeling slightly
+          uncomfortable with the nesting is actually a good sign — it means you'll appreciate the fix
+          when it arrives.
         </div>
 
         <div class="task-steps">
@@ -265,16 +286,18 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">
-          ✅ <strong>Expected outcome:</strong> You can independently model, fetch, and render data
-          from a brand-new API endpoint without an adapter, applying everything from today's
-          build-along on your own.
+          ✅ <strong>Expected outcome:</strong> A show's detail page shows a real episode and season
+          count that matches what's actually on TVMaze for that show (spot-check one show against
+          the raw JSON in your browser). You can independently model, fetch, and render data from a
+          brand-new API endpoint without an adapter, applying everything from today's build-along on
+          your own.
         </div>
 
         <app-collapsible icon="💡" label="Hint — Count directly from the episode array">
           <p>
             Because this endpoint already returns exactly the one-off data shape you need, there is
-            no need to reconcile it into the app-wide <code>Show</code> model. Think “derive a tiny
-            UI fact from the raw array,” not “invent a second adapter just because adapters exist.”
+            no need to reconcile it into the app-wide <code>Show</code> model. Think "derive a tiny
+            UI fact from the raw array," not "invent a second adapter just because adapters exist."
           </p>
           <p style="margin-top: 12px;">
             For today, a nested subscribe is okay. Count episodes with
@@ -286,7 +309,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 3">
           <p>
-            This answer shows one complete “full stack” path: minimal interface, service method,
+            This answer shows one complete "full stack" path: minimal interface, service method,
             nested subscribe in <code>ShowDetail</code>, and a tiny template render.
           </p>
           <h4>Episode interface:</h4>
@@ -318,7 +341,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>Show</code> model.
         </p>
         <p style="margin-top: 12px;">
-          This is a very realistic integration bug. If watchlist persistence or any UI still assumes
+          This is a very realistic integration bug, and it's worth doing even if it feels tedious —
+          this exact category of bug (a shared type changes shape, and some far-off file quietly
+          still assumes the old one) is one of the most common real-world sources of "it worked
+          yesterday" regressions. If watchlist persistence or any UI still assumes
           the old Day 9 shape <code>&#123; id, title, genre, rating, posterUrl &#125;</code>,
           while the Day 13 adapter now produces
           <code>&#123; id, name, genre, rating, imageUrl, summary, runtime &#125;</code>,
@@ -330,13 +356,15 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p class="tai-q">Is renaming a shared model's fields mid-course a good practice, or should the adapter have
           kept the old field names (<code>title</code>/<code>posterUrl</code>) to avoid this churn
           entirely?</p>
-          <p class="tai-a">Neither answer is universally right. Renaming to match the real API's vocabulary (<code>name</code>, <code>imageUrl</code>) keeps the codebase honest and prevents a growing mismatch between what the API means and what our app calls things — a real long-term maintenance win. Keeping the old names avoids a short-term ripple through components, tests, and persisted data. Professional teams typically pay the rename cost once to keep names honest forever, accepting the one-time churn as cheaper than compounding confusion over many months.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — there's no universally right side here">
+          <p>Neither answer is universally right. Renaming to match the real API's vocabulary (<code>name</code>, <code>imageUrl</code>) keeps the codebase honest and prevents a growing mismatch between what the API means and what our app calls things — a real long-term maintenance win. Keeping the old names avoids a short-term ripple through components, tests, and persisted data. Professional teams typically pay the rename cost once to keep names honest forever, accepting the one-time churn as cheaper than compounding confusion over many months.</p>
+        </app-collapsible>
 
         <div class="info-box">
           <strong>Real-world framing:</strong> there is no single perfect answer here. Teams debate
-          “pay the rename cost now and keep names honest forever” versus “preserve the old names and
-          avoid a ripple through the codebase” all the time.
+          "pay the rename cost now and keep names honest forever" versus "preserve the old names and
+          avoid a ripple through the codebase" all the time.
         </div>
 
         <div class="task-steps">
@@ -359,8 +387,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">
-          ✅ <strong>Expected outcome:</strong> You can locate and repair a realistic ripple effect
-          from a shared model shape changing mid-project.
+          ✅ <strong>Expected outcome:</strong> Add a show to your watchlist, reload the page, and
+          confirm the title and poster still render correctly — not <code>undefined</code>. You can
+          locate and repair a realistic ripple effect from a shared model shape changing mid-project.
         </div>
 
         <app-collapsible icon="💡" label="Hint — Search for the old field names first">
@@ -392,7 +421,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <li><span class="checkbox">✅</span> Browse's live search still works with real-data reps added (runtime, recent searches)</li>
           <li><span class="checkbox">✅</span> Detail page shows a real episode count from a second live endpoint</li>
           <li><span class="checkbox">✅</span> Watchlist persistence survives the real-data shape, with any drift fixed</li>
-          <li><span class="checkbox">✅</span> Student can explain the API-shape-vs.-app-shape tradeoff in their own words</li>
+          <li><span class="checkbox">✅</span> You can explain the API-shape-vs.-app-shape tradeoff in your own words</li>
         </ul>
       </section>
 

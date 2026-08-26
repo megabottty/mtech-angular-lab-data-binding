@@ -14,7 +14,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <span class="act-label lab-label">🛠️ Student Lab</span>
         <h1>Your Turn — Make BingeBoard Resilient</h1>
         <p class="subtitle">
-          55 minutes. 4 tasks. Extend today's error handling and <code>httpResource</code> work on
+          About 60–70 minutes. 4 tasks. Extend today's error handling and <code>httpResource</code> work on
           your own, then polish the experience until BingeBoard feels resilient instead of lucky.
         </p>
       </div>
@@ -23,7 +23,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <h3>🎯 Starting Point</h3>
         <p>
           Copy the working Act 3 code (Browse with error/retry, ShowDetail on
-          <code>httpResource</code>) into your project before starting.
+          <code>httpResource</code>) into your project before starting. If either of those isn't
+          working yet, finish Act 3 first — this lab builds directly on top of both.
         </p>
       </div>
 
@@ -39,7 +40,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             <strong>Why It Matters:</strong>
             Production apps distinguish failure types, avoid nested-subscribe tangles, and invest
             in perceived performance — and production engineers read evolving framework docs as a
-            routine skill.
+            routine skill, not a last resort.
           </li>
           <li>
             <strong>Build Steps:</strong>
@@ -48,7 +49,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </li>
           <li>
             <strong>Expected Outcome:</strong>
-            Students can build resilient, honest data-fetching UIs and can independently research a
+            You can build resilient, honest data-fetching UIs and can independently research a
             framework feature from official docs.
           </li>
         </ul>
@@ -57,6 +58,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <section class="selfguided-panel">
         <p><strong>You are here:</strong> Student Lab (Day 14 capstone)</p>
         <p><strong>Next step:</strong> Review the Checkpoint below.</p>
+        <p><strong>Time:</strong> Tasks 1–2 are about 15–20 minutes each. Task 3 is closer to 15. Task 4 is a stretch — no code, just reading and three sentences — do it if you have time left over.</p>
       </section>
 
       <app-lesson-step
@@ -78,22 +80,26 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           built in Act 1 and Act 2.
         </p>
         <p style="margin-top: 12px;">
-          This is a subtle but very professional upgrade. A <code>404</code> means the request
-          succeeded technically and the server answered honestly: the record is missing. That is a
-          different story from <code>status: 0</code> offline mode or a generic server failure, so
-          your template should branch on the actual status code instead of flattening everything into
-          one lazy error box.
+          This is a subtle but very professional upgrade, and it's a direct continuation of the error
+          taxonomy from Act 1 — you're applying the same 0/4xx/5xx thinking, just against
+          <code>httpResource</code> instead of <code>subscribe()</code>. A <code>404</code> means the
+          request succeeded technically and the server answered honestly: the record is missing. That
+          is a different story from <code>status: 0</code> offline mode or a generic server failure,
+          so your template should branch on the actual status code instead of flattening everything
+          into one lazy error box.
         </p>
 
         <div class="warning-box">
-          <strong>Do not flatten the story:</strong> “missing show” and “could not reach the show
-          database” are different truths, so the screen should sound different too.
+          <strong>Do not flatten the story:</strong> "missing show" and "could not reach the show
+          database" are different truths, so the screen should sound different too.
         </div>
 
         <div class="think-about-it">
           <p class="tai-q">If the id is valid syntax but the show truly does not exist, why is that a different message from airplane-mode failure?</p>
-          <p class="tai-a">A <code>404</code> means the server was reachable and confidently replied "this id does not exist" — retrying will never change that answer, so the correct response is a message like "Show not found" with a link back to Browse. Airplane-mode failure (<code>status: 0</code>) means the request never reached the server at all, so the user should check their connection and then retry — because once online, the same request could succeed. The root cause, the recovery action, and the emotional tone of the message should all differ between these two categories.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — why these two failures need different messages">
+          <p>A <code>404</code> means the server was reachable and confidently replied "this id does not exist" — retrying will never change that answer, so the correct response is a message like "Show not found" with a link back to Browse. Airplane-mode failure (<code>status: 0</code>) means the request never reached the server at all, so the user should check their connection and then retry — because once online, the same request could succeed. The root cause, the recovery action, and the emotional tone of the message should all differ between these two categories.</p>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -106,13 +112,15 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </div>
           <div class="task-step">
             <span class="step-dot">3</span>
-            <span>Branch the template so <code>status === 404</code> shows the “doesn't exist” message and Browse link, while everything else falls back to the generic retry state from Act 2.</span>
+            <span>Branch the template so <code>status === 404</code> shows the "doesn't exist" message and Browse link, while everything else falls back to the generic retry state from Act 2.</span>
           </div>
         </div>
 
         <div class="outcome-check">
-          ✅ <strong>Expected outcome:</strong> student can distinguish a specific 4xx status from a
-          generic failure and give each a distinct, honest user-facing message.
+          ✅ <strong>Expected outcome:</strong> Visit <code>/day13/act4</code> pattern with a bogus id
+          (e.g. show id <code>999999999</code>) and see the specific "doesn't exist" message with a
+          working link back to Browse — not the generic retry box. You can distinguish a specific
+          4xx status from a generic failure and give each a distinct, honest user-facing message.
         </div>
 
         <app-collapsible icon="💡" label="Hint — Inspect the actual runtime error first">
@@ -125,7 +133,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </p>
           <p style="margin-top: 12px;">
             If strict typing complains, cast pragmatically. This is one of those moments where
-            “check the real runtime object” beats pretending the most generic type annotation tells
+            "check the real runtime object" beats pretending the most generic type annotation tells
             the whole story.
           </p>
           <app-code-block lang="html" [code]="task1Hint" />
@@ -160,22 +168,25 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           separate section.
         </p>
         <p style="margin-top: 12px;">
-          This task is the direct contrast to Day 13's intentional nested-subscribe pain. Today the
-          win is not just fewer lines — it is cleaner ownership: the show request owns the show UI,
-          the episodes request owns the episodes UI, and neither one needs to hide inside the other
-          just because both depend on the same route id.
+          This task is the direct payoff for the discomfort Day 13's lab deliberately left you with.
+          Today the win is not just fewer lines — it is cleaner ownership: the show request owns the
+          show UI, the episodes request owns the episodes UI, and neither one needs to hide inside
+          the other just because both depend on the same route id.
         </p>
 
         <div class="info-box">
           <strong>Day 13 contrast:</strong> two GET requests that depend on the same signal do not
           have to be sequentially nested. Let both resources describe their own URL recipe and
-          Angular can fire both requests in parallel.
+          Angular can fire both requests in parallel — this is the concrete resolution to the
+          nested-subscribe discomfort from yesterday's lab.
         </div>
 
         <div class="think-about-it">
           <p class="tai-q">If the show loads successfully but the episodes call fails, should the entire page die — or should one section stay useful while the other asks for a retry?</p>
-          <p class="tai-a">Only the episodes section should show an error; the show section should remain fully visible and useful. Because the two resources are independent — each with its own <code>isLoading()</code>, <code>error()</code>, and <code>value()</code> — a failure in one has no reason to tear down the other. Showing the show's title, poster, and summary while the episodes section displays "Could not load episodes — Retry" gives the user the maximum amount of correct information even when one of the two requests fails.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — why one failure shouldn't sink the whole page">
+          <p>Only the episodes section should show an error; the show section should remain fully visible and useful. Because the two resources are independent — each with its own <code>isLoading()</code>, <code>error()</code>, and <code>value()</code> — a failure in one has no reason to tear down the other. Showing the show's title, poster, and summary while the episodes section displays "Could not load episodes — Retry" gives the user the maximum amount of correct information even when one of the two requests fails.</p>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -193,9 +204,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">
-          ✅ <strong>Expected outcome:</strong> student can wire up two independent, signal-keyed
-          resources on one component and explain why this eliminates the nested-subscribe problem
-          from yesterday.
+          ✅ <strong>Expected outcome:</strong> Open the Network tab, load a detail page, and see the
+          show request and the episodes request fire at essentially the same time — not one after
+          the other. You can wire up two independent, signal-keyed resources on one component and
+          explain why this eliminates the nested-subscribe problem from yesterday.
         </div>
 
         <app-collapsible icon="💡" label="Hint — Same id signal, second resource">
@@ -235,13 +247,15 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>
           Replace plain <code>Loading…</code> text on Browse's card grid with gray shimmer skeleton
           placeholder cards — pure CSS animation plus template branching, no new dependencies. This
-          is a UX-polish task, but say the product truth out loud: it makes the app feel expensive.
+          is a UX-polish task, but the product truth is worth saying plainly: it makes the app feel
+          more expensive than it is.
         </p>
         <p style="margin-top: 12px;">
           Skeleton screens do not reduce the actual network time. What they improve is perceived
           performance: the layout appears stable immediately, the user sees what kind of content is
           coming, and the wait feels intentional instead of empty. That matters just as much as raw
-          speed in real product work.
+          speed in real product work — it's a genuinely different lever than making the request
+          itself faster.
         </p>
 
         <div class="info-box">
@@ -252,8 +266,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <div class="think-about-it">
           <p class="tai-q">Why can the same one-second wait feel slower with plain "Loading…" text than with a grid of skeleton cards that already matches the final layout?</p>
-          <p class="tai-a">Plain text gives the eye nothing to anchor on — the page is blank, and the brain experiences that blank as uncertainty about whether anything is coming at all. Skeleton cards that match the real card dimensions show the user exactly what kind of content is about to arrive and where it will land, so the brain perceives the wait as intentional progress rather than emptiness. This is perceived performance: the objective network time is identical, but layout stability and visual continuity make the subjective experience feel faster and more trustworthy.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — why identical wait times feel different">
+          <p>Plain text gives the eye nothing to anchor on — the page is blank, and the brain experiences that blank as uncertainty about whether anything is coming at all. Skeleton cards that match the real card dimensions show the user exactly what kind of content is about to arrive and where it will land, so the brain perceives the wait as intentional progress rather than emptiness. This is perceived performance: the objective network time is identical, but layout stability and visual continuity make the subjective experience feel faster and more trustworthy.</p>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -271,8 +287,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">
-          ✅ <strong>Expected outcome:</strong> student can build a CSS-only loading skeleton that
-          matches real content's layout dimensions.
+          ✅ <strong>Expected outcome:</strong> Search for a show and watch shimmering placeholder
+          cards appear instead of plain text, then get replaced by real cards in the exact same
+          positions with no visible jump. You can build a CSS-only loading skeleton that matches
+          real content's layout dimensions.
         </div>
 
         <app-collapsible icon="💡" label="Hint — Match the real card footprint">
@@ -309,7 +327,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <h4>What to build:</h4>
         <p>
           This task is intentionally <strong>not</strong> a coding task. Read Angular's docs page on
-          HTTP interceptors and write exactly three sentences describing one thing a single
+          <a href="https://angular.dev/guide/http/interceptors" target="_blank" rel="noopener">HTTP interceptors</a>
+          and write exactly three sentences describing one thing a single
           interceptor could centralize for BingeBoard — like logging every request, attaching auth
           headers uniformly, or enforcing one shared retry policy for flaky requests.
         </p>
@@ -317,24 +336,28 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           Treat doc-reading as a graded skill here, not filler. Production Angular engineers read
           framework docs constantly as APIs evolve, and this whole day proves why: even
           <code>httpResource</code> is still experimental as of Angular 21, so staying current means
-          reading, not just copying old snippets forever.
+          reading, not just copying old snippets forever. This is arguably the most transferable
+          skill in the entire day — it works on any framework, in any language, for the rest of your
+          career.
         </p>
 
         <div class="info-box">
-          <strong>Foreshadow:</strong> we wire a real interceptor on Day 21. Today's win is learning
-          how to read the docs well enough to explain the shape and the use case before the build-
+          <strong>Foreshadow:</strong> a real interceptor gets wired up on Day 21. Today's win is learning
+          how to read the docs well enough to explain the shape and the use case before a build-
           along does it for you.
         </div>
 
         <div class="think-about-it">
           <p class="tai-q">Why is reading official docs a real engineering skill instead of "cheating" compared to writing code from memory?</p>
-          <p class="tai-a">Framework APIs evolve constantly — <code>httpResource</code> is experimental in Angular 21 today and its signature could change by Angular 22. A developer who only codes from memory is locked to a snapshot of the API from however long ago they learned it. Reading docs is how you find out what changed, what is now deprecated, what the framework team recommends instead, and what edge-case caveats apply that no tutorial covered. The engineers who stay current and avoid subtle breakage are the ones who treat official documentation as a primary source, not a last resort.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — why docs beat memory">
+          <p>Framework APIs evolve constantly — <code>httpResource</code> is experimental in Angular 21 today and its signature could change by Angular 22. A developer who only codes from memory is locked to a snapshot of the API from however long ago they learned it. Reading docs is how you find out what changed, what is now deprecated, what the framework team recommends instead, and what edge-case caveats apply that no tutorial covered. The engineers who stay current and avoid subtle breakage are the ones who treat official documentation as a primary source, not a last resort.</p>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
             <span class="step-dot">1</span>
-            <span>Open the Angular docs' Interceptors page.</span>
+            <span>Open the Angular docs' Interceptors page (linked above).</span>
           </div>
           <div class="task-step">
             <span class="step-dot">2</span>
@@ -347,9 +370,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">
-          ✅ <strong>Expected outcome:</strong> student has read real framework documentation and can
-          explain, in their own words, what a functional interceptor is for and one concrete use
-          case for BingeBoard.
+          ✅ <strong>Expected outcome:</strong> You've read real framework documentation and can
+          explain, in your own words, what a functional interceptor is for and one concrete use
+          case for BingeBoard — in exactly three sentences, no more.
         </div>
 
         <app-collapsible icon="💡" label="Hint — Functional interceptor shape">
@@ -362,14 +385,14 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 4">
           <p>
-            There is no single “correct” summary here, but this is the depth and specificity I want
-            to hear.
+            There is no single "correct" summary here, but this is the depth and specificity worth
+            aiming for.
           </p>
           <p>
             A functional interceptor could attach the same auth header to every BingeBoard request
             before it leaves the app. Centralizing that in one interceptor is better than repeating
             header code in every service method, because one change updates every request at once.
-            Day 21 is where we actually wire one up, but today the point is recognizing the pattern
+            Day 21 is where you'll actually wire one up, but today the point is recognizing the pattern
             from the docs and explaining why it exists.
           </p>
         </app-collapsible>
@@ -385,7 +408,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <li><span class="checkbox">✅</span> Browse and Detail both survive offline mode with actionable errors and retry</li>
           <li><span class="checkbox">✅</span> Detail runs on <code>httpResource</code> with a distinct, graceful <code>404</code> state</li>
           <li><span class="checkbox">✅</span> Episodes load as their own independent resource</li>
-          <li><span class="checkbox">✅</span> Student can give the elevator-pitch answer: <code>resource for reactive GETs; client calls for actions; handle 0/4xx/5xx differently</code></li>
+          <li><span class="checkbox">✅</span> You can give the elevator-pitch answer: <code>resource for reactive GETs; client calls for actions; handle 0/4xx/5xx differently</code></li>
         </ul>
       </section>
 
