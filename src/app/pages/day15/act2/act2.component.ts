@@ -32,15 +32,23 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <section class="selfguided-panel">
         <p><strong>You are here:</strong> Act 2 — Operators in the Wild</p>
         <p><strong>Next step:</strong> Act 3 — building a live ticker and top-rated list that put these ideas to work.</p>
+        <p><strong>Time:</strong> About 30 minutes.</p>
       </section>
+
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong> RxJS's
+        <a href="https://rxjs.dev/guide/operators" target="_blank" rel="noopener">operators guide</a>
+        and Angular's <a href="https://angular.dev/api/common/AsyncPipe" target="_blank" rel="noopener"><code>AsyncPipe</code></a>
+        reference.
+      </div>
 
       <!-- ─── Step 1: map on real work ─── -->
       <app-lesson-step stepId="d15-act2-map-real-work" [stepNumber]="1" title="Yesterday's Magic, Today's Vocabulary">
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>
           You have been looking at this line since Day 13 and it has been doing real work for BingeBoard ever since.
-          Now that you understand what <code>.pipe()</code> is and what RxJS operators are, let us read it together
-          slowly and name every part out loud.
+          Now that you understand what <code>.pipe()</code> is and what RxJS operators are, read it slowly
+          and name every part in your own words before moving on.
         </p>
         <p>
           Here is the exact <code>search()</code> method from <code>ShowsService</code>, unchanged from Day 13:
@@ -73,9 +81,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           Two jobs, two <code>map</code>s, each at a completely different layer.
         </p>
         <div class="think-about-it">
-          <p class="tai-q">How would you explain, to someone who has never seen this line before, why there are two <code>.map(...)</code> calls stacked here and what each one is doing?</p>
-          <p class="tai-a">The outer <code>map</code> is the RxJS stream operator: it tells Angular "when the HTTP Observable fires its one emission — an array from TVMaze — run this transformation function on that emitted value before anyone downstream receives it." The inner <code>map</code> is the JavaScript Array method: once the stream operator hands us that array, we iterate over it synchronously and convert each raw <code>TvMazeSearchResult</code> wrapper into BingeBoard's own <code>Show</code> shape using the <code>toShow</code> adapter. The outer one operates at the stream level (what the Observable emits), the inner one operates at the data level (each item inside what was emitted) — completely different jobs that happen to share the same four-letter name.</p>
+          <p class="tai-q">Write your own explanation first: why are there two <code>.map(...)</code> calls stacked here, and what is each one doing?</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — the two maps, named">
+          <p>The outer <code>map</code> is the RxJS stream operator: it tells Angular "when the HTTP Observable fires its one emission — an array from TVMaze — run this transformation function on that emitted value before anyone downstream receives it." The inner <code>map</code> is the JavaScript Array method: once the stream operator hands us that array, we iterate over it synchronously and convert each raw <code>TvMazeSearchResult</code> wrapper into BingeBoard's own <code>Show</code> shape using the <code>toShow</code> adapter. The outer one operates at the stream level (what the Observable emits), the inner one operates at the data level (each item inside what was emitted) — completely different jobs that happen to share the same four-letter name.</p>
+        </app-collapsible>
         <div class="info-box">
           <strong>Good news:</strong> this two-layer pattern is extremely common in real Angular codebases. Once you see it clearly once, you will never confuse the two <code>map</code>s again. The presence of <code>.pipe()</code> is always your signal that you are in RxJS operator territory.
         </div>
@@ -90,7 +100,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             The compact one-liner is just these three steps written inline.
           </p>
         </app-collapsible>
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can point at a line containing <code>.pipe(map(results =&gt; results.map(...)))</code> and explain out loud — with distinct labels — what the outer <code>map</code> does versus what the inner <code>map</code> does.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Find <code>.pipe(map(results =&gt; results.map(...)))</code> in your own <code>ShowsService</code> and, out loud or in a comment, label which <code>map</code> is which. You can explain — with distinct labels — what the outer <code>map</code> does versus what the inner <code>map</code> does.</div>
       </app-lesson-step>
 
       <!-- ─── Step 2: async pipe ─── -->
@@ -124,8 +134,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </p>
         <div class="think-about-it">
           <p class="tai-q">If <code>| async</code> already prevents memory leaks automatically — just like <code>toSignal</code> does — why does this lesson recommend <code>toSignal</code> and <code>httpResource</code> for new code instead?</p>
-          <p class="tai-a">The leak prevention is similar, but the tradeoffs differ in important ways. First, <code>| async</code> only works inside templates — you cannot build a <code>computed()</code> signal on top of the value, or read the current result from TypeScript code outside the template. Second, there is a subtle re-subscription bug: if you write <code>*ngIf="search('office') | async as shows"</code> inline (calling the function in the template expression instead of storing it in a field), Angular re-subscribes every time change detection runs, firing a fresh HTTP request on every cycle. Third, <code>toSignal</code> integrates with the rest of a signals-based component — you can derive computeds, combine values, and read them synchronously — whereas <code>async</code> pipe values live only in the template's local binding scope. These are real technical tradeoffs, not a "async pipe is broken" story.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — the real tradeoffs, not 'async pipe is broken'">
+          <p>The leak prevention is similar, but the tradeoffs differ in important ways. First, <code>| async</code> only works inside templates — you cannot build a <code>computed()</code> signal on top of the value, or read the current result from TypeScript code outside the template. Second, there is a subtle re-subscription bug: if you write <code>*ngIf="search('office') | async as shows"</code> inline (calling the function in the template expression instead of storing it in a field), Angular re-subscribes every time change detection runs, firing a fresh HTTP request on every cycle. Third, <code>toSignal</code> integrates with the rest of a signals-based component — you can derive computeds, combine values, and read them synchronously — whereas <code>async</code> pipe values live only in the template's local binding scope. These are real technical tradeoffs, not a "async pipe is broken" story.</p>
+        </app-collapsible>
         <div class="warning-box">
           <strong>The inline-expression trap:</strong> always store the Observable in a class field
           (<code>shows$ = this.showsSvc.search('office')</code>), then bind that field in the template.
@@ -140,14 +152,14 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             this block." It is Angular's built-in null-guarding + local-variable pattern for Observables in templates.
           </p>
         </app-collapsible>
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can read a template using <code>| async</code>, explain the three things it does (subscribe, re-render, unsubscribe), and explain why <code>toSignal</code> is preferred in new signals-based components.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Wire up the <code>shows$ | async</code> snippet above in a scratch component and confirm it renders and re-renders correctly. You can read a template using <code>| async</code>, explain the three things it does (subscribe, re-render, unsubscribe), and explain why <code>toSignal</code> is preferred in new signals-based components.</div>
       </app-lesson-step>
 
       <!-- ─── Step 3: Signals vs. Observables ─── -->
       <app-lesson-step stepId="d15-act2-signals-vs-observables" [stepNumber]="3" title="Signals vs. Observables — Different Axes, Not Better/Worse">
         <p><span class="effort-tag effort-challenge">Effort: Challenge</span></p>
         <p>
-          Students reliably ask this question, and it deserves a precise, head-on answer:
+          This is the question everyone eventually asks, and it deserves a precise, head-on answer:
           <em>"Why do Observables exist at all if signals are better?"</em>
           The honest answer is that signals are not universally better — they solve fundamentally different problems.
         </p>
@@ -173,8 +185,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-code-block lang="typescript" [code]="signalsVsObservablesCode" />
         <div class="think-about-it">
           <p class="tai-q">Give one example of something that must be modeled as a stream of events over time, and explain why a signal alone could not represent it as naturally.</p>
-          <p class="tai-a">Keystrokes in a search box are a canonical example. Each keystroke is a discrete event that fires at a moment in time. With an Observable, you can use operators like <code>debounceTime(300)</code> to wait for the user to pause, <code>distinctUntilChanged()</code> to skip re-firing for the same value, and <code>switchMap()</code> to cancel the previous HTTP request when a new term arrives — a sequence of coordinated time-based logic. A signal can only hold "the current value of the input field." It cannot naturally represent "the last three keystrokes that arrived within 300 ms" or "cancel any in-flight search when a new keystroke arrives" — those are temporal relationships between events, which is exactly what Observables model.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — the canonical example">
+          <p>Keystrokes in a search box are a canonical example. Each keystroke is a discrete event that fires at a moment in time. With an Observable, you can use operators like <code>debounceTime(300)</code> to wait for the user to pause, <code>distinctUntilChanged()</code> to skip re-firing for the same value, and <code>switchMap()</code> to cancel the previous HTTP request when a new term arrives — a sequence of coordinated time-based logic. A signal can only hold "the current value of the input field." It cannot naturally represent "the last three keystrokes that arrived within 300 ms" or "cancel any in-flight search when a new keystroke arrives" — those are temporal relationships between events, which is exactly what Observables model.</p>
+        </app-collapsible>
         <div class="info-box">
           <strong>The framing to internalize:</strong> "not better/worse — different axes."
           Signals are a synchronous state container. Observables are an asynchronous event sequence.
@@ -196,7 +210,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             Observables own the "time-based coordination," and the interop utilities bridge them.
           </p>
         </app-collapsible>
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can state the precise difference between signals (state) and Observables (events over time), give a concrete example of each, and explain why "toSignal" is a bridge, not a replacement.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Pick one signal and one Observable already in BingeBoard and say out loud which axis each one is on — state, or events over time. You can state the precise difference between signals (state) and Observables (events over time), give a concrete example of each, and explain why "toSignal" is a bridge, not a replacement.</div>
       </app-lesson-step>
 
       <div class="nav-footer">

@@ -102,6 +102,7 @@ const DAY_GROUPS: DayGroup[] = [
     label: '🌊 Day 15 — RxJS I',
     prefix: '/day15',
     items: [
+      { path: '/day15/start', label: '🎬 Starting Point' },
       { path: '/day15/act1', label: '🌊 Act 1 — Stream Mental Model' },
       { path: '/day15/act2', label: '🔀 Act 2 — Operators in the Wild' },
       { path: '/day15/act3', label: '🧭 Act 3 — Router Streams & Debug It' },

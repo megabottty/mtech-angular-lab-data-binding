@@ -22,7 +22,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <section class="lesson-framework">
         <h3>Lesson Map</h3>
         <ul>
-          <li><strong>Learning Goal:</strong> Understand that <code>ActivatedRoute.paramMap</code> is a real <code>Observable&lt;ParamMap&gt;</code> that <code>withComponentInputBinding()</code> wraps — and diagnose the "racing timers" subscription leak before students copy that pattern anywhere.</li>
+          <li><strong>Learning Goal:</strong> Understand that <code>ActivatedRoute.paramMap</code> is a real <code>Observable&lt;ParamMap&gt;</code> that <code>withComponentInputBinding()</code> wraps — and diagnose the "racing timers" subscription leak before you copy that pattern anywhere.</li>
           <li><strong>Why It Matters:</strong> Stacked subscriptions are one of the most expensive bug classes in production Angular apps — websocket handlers, analytics pings, and live tickers all suffer from the same pattern. Recognising it early is worth more than memorising operator names.</li>
           <li><strong>Build Steps:</strong> Read the router-param stream with <code>paramMap</code> + <code>toSignal</code> → inspect what Day 9's input binding is sugar for → diagnose a multi-visit subscription leak → fix it with a field-initializer <code>toSignal</code> → note today's operator surface and the <code>$</code> suffix convention.</li>
           <li><strong>Expected Outcome:</strong> You can trace a route param all the way from the URL to a signal, explain why a field-initializer subscription can't stack the way an <code>ngOnInit</code> subscription can, and articulate when you'd ever reach past input binding to <code>paramMap</code> directly.</li>
@@ -32,7 +32,14 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <section class="selfguided-panel">
         <p><strong>You are here:</strong> Act 3 (Router Streams &amp; Debug It)</p>
         <p><strong>Next step:</strong> Student Lab — bring RxJS streams into BingeBoard on your own.</p>
+        <p><strong>Time:</strong> About 25–30 minutes. Don't rush the racing-timers bug — tracing it yourself is most of the value.</p>
       </section>
+
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong> Angular's
+        <a href="https://angular.dev/api/router/ActivatedRoute" target="_blank" rel="noopener"><code>ActivatedRoute</code></a>
+        reference, specifically the <code>paramMap</code> property.
+      </div>
 
       <!-- Step 1: Router params as a stream -->
       <app-lesson-step stepId="d15-act3-router-stream" [stepNumber]="1" title="Router Params as a Stream — A Taste, No Drill">
@@ -56,24 +63,26 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
         <div class="think-about-it">
           <p class="tai-q">If <code>withComponentInputBinding()</code> already gives us the <code>id</code> as a plain input, why would we ever reach for <code>ActivatedRoute.paramMap</code> directly in new code?</p>
-          <p class="tai-a">Mostly you wouldn't — for simple route params, input binding is the modern default and is easier to test and reason about. The one case where <code>paramMap</code> is genuinely more powerful is when you need to react to the same parameter <em>changing</em> on a component instance that stays mounted across navigations: input binding delivers the resolved value but doesn't tell you whether it just changed or stayed the same, whereas <code>paramMap</code> as a stream lets you run side effects (like cancelling an in-flight request) on each new emission. You'd also reach for it when maintaining or reading an older codebase — pre-Angular-17 code that predates component input binding — where injecting <code>ActivatedRoute</code> and subscribing to <code>paramMap</code> was the canonical, correct approach.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — the one case where paramMap still wins">
+          <p>Mostly you wouldn't — for simple route params, input binding is the modern default and is easier to test and reason about. The one case where <code>paramMap</code> is genuinely more powerful is when you need to react to the same parameter <em>changing</em> on a component instance that stays mounted across navigations: input binding delivers the resolved value but doesn't tell you whether it just changed or stayed the same, whereas <code>paramMap</code> as a stream lets you run side effects (like cancelling an in-flight request) on each new emission. You'd also reach for it when maintaining or reading an older codebase — pre-Angular-17 code that predates component input binding — where injecting <code>ActivatedRoute</code> and subscribing to <code>paramMap</code> was the canonical, correct approach.</p>
+        </app-collapsible>
         <app-collapsible icon="🧩" label="Deep Dive — What is ParamMap, exactly?">
           <p><code>ParamMap</code> is an Angular interface that wraps the URL's parameter segment into a typed object with a <code>.get(key)</code> method (returns <code>string | null</code>) and a <code>.getAll(key)</code> method (returns <code>string[]</code> for multi-value params). It's immutable — each navigation emits a brand-new snapshot instead of mutating the previous one — which is why it plays perfectly with RxJS: each emission is a new, safe value you can map over without worrying about accidental mutation.</p>
           <p style="margin-top: 12px;">The stream emits its first <code>ParamMap</code> synchronously on subscription (at field-initializer time when used with <code>toSignal</code>), so <code>toSignal</code> can give the signal a real initial value right away rather than returning <code>undefined</code> for the first render.</p>
         </app-collapsible>
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can trace the chain from URL segment → <code>paramMap</code> Observable → <code>.pipe(map(...))</code> → <code>toSignal</code> → readable signal, and explain that Day 9's <code>input.required</code> binding is sugar over this exact mechanism.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Wire up the <code>paramMap</code> snippet above on your own Detail page and confirm <code>id()</code> updates as you navigate between shows. You can trace the chain from URL segment → <code>paramMap</code> Observable → <code>.pipe(map(...))</code> → <code>toSignal</code> → readable signal, and explain that Day 9's <code>input.required</code> binding is sugar over this exact mechanism.</div>
       </app-lesson-step>
 
       <!-- Step 2: The racing-timers debug -->
       <app-lesson-step stepId="d15-act3-debug-racing-timers" [stepNumber]="2" title="Bug — Racing Timers (The Subscription Leak That Costs Real Money)">
         <p><span class="effort-tag effort-challenge">Effort: Challenge</span></p>
         <p>
-          A student is building the <code>Stats</code> page — the one from Day 9's warm-up.
-          They want to show a live "seconds on this page" counter, so they start an <code>interval(1000)</code> inside <code>ngOnInit</code>.
+          You're building the <code>Stats</code> page — the one from Day 9's warm-up.
+          You want to show a live "seconds on this page" counter, so you start an <code>interval(1000)</code> inside <code>ngOnInit</code>.
           It works on the first visit. On the second visit it still works.
-          By the third visit, the displayed number is jumping erratically — sometimes it increments by one, sometimes it skips, sometimes it ticks backwards relative to what they expect.
-          They add a <code>console.log</code> and are confused: why are there three separate count sequences firing at the same time?
+          By the third visit, the displayed number is jumping erratically — sometimes it increments by one, sometimes it skips, sometimes it ticks backwards relative to what you expect.
+          You add a <code>console.log</code> and are confused: why are there three separate count sequences firing at the same time?
         </p>
         <h4 style="margin-top: 16px;">The buggy code</h4>
         <app-code-block lang="typescript" [code]="buggyTimerCode" />
@@ -89,10 +98,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           Real companies have shipped hotfixes for this pattern. Meeting it here, in class, where it's cheap, is the whole point.
         </div>
         <h4 style="margin-top: 16px;">The diagnosis checklist</h4>
-        <p>Students should work through this in order:</p>
+        <p>Work through this in order:</p>
         <ol style="margin-left: 20px; margin-top: 8px; line-height: 1.8;">
           <li><strong>WHY does it happen?</strong> — Each <code>ngOnInit</code> call starts a NEW subscription. The old subscriptions were never torn down. After three navigations, three independent timers each hold a closure over their own <code>n</code> variable and the <em>same</em> signal reference, and all three fire every second with different values.</li>
-          <li><strong>SHOW the fix:</strong> rewrite to a field-initializer <code>toSignal</code> (see below).</li>
+          <li><strong>Rewrite it:</strong> convert to a field-initializer <code>toSignal</code> (see below).</li>
           <li><strong>EXPLAIN why the field-initializer version can't stack the same way</strong> (the key conceptual win — see below).</li>
         </ol>
         <h4 style="margin-top: 16px;">The fix</h4>
@@ -106,8 +115,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
         <div class="think-about-it">
           <p class="tai-q">Could this same bug happen with <code>ngOnDestroy</code> correctly calling <code>sub.unsubscribe()</code> — just with a small delay before teardown?</p>
-          <p class="tai-a">No. If <code>ngOnDestroy</code> correctly calls <code>sub.unsubscribe()</code> on the subscription object stored in a class field, the bug is fully fixed — there's no "delay" ambiguity, because Angular calls <code>ngOnDestroy</code> synchronously during the component-destruction phase, before the route finishes activating the next instance. The bug isn't inherently about <code>ngOnInit</code> or <code>ngOnDestroy</code> — it's about having a subscription with no matching teardown. The practical reason <code>toSignal</code> is preferred isn't that <code>ngOnDestroy</code> can't be made correct (it can), it's that <code>toSignal</code> makes forgetting the teardown <em>impossible by construction</em>, whereas manual <code>ngOnDestroy</code> correctness depends entirely on the developer remembering to track the subscription in a field and remember to call <code>unsubscribe()</code> on it.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — no, and here's the actual boundary">
+          <p>No. If <code>ngOnDestroy</code> correctly calls <code>sub.unsubscribe()</code> on the subscription object stored in a class field, the bug is fully fixed — there's no "delay" ambiguity, because Angular calls <code>ngOnDestroy</code> synchronously during the component-destruction phase, before the route finishes activating the next instance. The bug isn't inherently about <code>ngOnInit</code> or <code>ngOnDestroy</code> — it's about having a subscription with no matching teardown. The practical reason <code>toSignal</code> is preferred isn't that <code>ngOnDestroy</code> can't be made correct (it can), it's that <code>toSignal</code> makes forgetting the teardown <em>impossible by construction</em>, whereas manual <code>ngOnDestroy</code> correctness depends entirely on the developer remembering to track the subscription in a field and remember to call <code>unsubscribe()</code> on it.</p>
+        </app-collapsible>
         <app-collapsible icon="✅" label="Show Answer — Full before-and-after comparison">
           <p><strong>Before (buggy):</strong> a new subscription per <code>ngOnInit</code> call, never cleaned up.</p>
           <app-code-block lang="typescript" [code]="buggyTimerCode" />
@@ -116,7 +127,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p style="margin-top: 12px;"><strong>Also correct (but manual):</strong> store the subscription, unsubscribe in <code>ngOnDestroy</code>. Works, but requires you to remember the teardown every time.</p>
           <app-code-block lang="typescript" [code]="manualUnsubCode" />
         </app-collapsible>
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain why multiple <code>ngOnInit</code>-based subscriptions stack up across navigations, write the <code>toSignal</code> field-initializer fix, and articulate why that fix makes the leak impossible by construction rather than just making it correct by discipline.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Reproduce the racing-timers bug in your own Stats page (navigate away and back 3 times), then rewrite it as a field-initializer <code>toSignal</code> and confirm the count stops racing. You can explain why multiple <code>ngOnInit</code>-based subscriptions stack up across navigations, and articulate why the fix makes the leak impossible by construction rather than just making it correct by discipline.</div>
       </app-lesson-step>
 
       <!-- Step 3: Operator scope note -->
@@ -136,8 +147,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </p>
         <div class="think-about-it">
           <p class="tai-q">Does naming a variable with a trailing <code>$</code> change how TypeScript or Angular treats it?</p>
-          <p class="tai-a">No — it's purely a human-readability convention. TypeScript has no special handling for identifiers ending in <code>$</code>; it treats <code>seconds$</code> exactly the same as <code>seconds</code> at the type-system and compiler level. Angular's template compiler and change-detection engine are equally unaware of it. The <code>$</code> suffix is a strong community convention borrowed from RxJS's own documentation style — a signal to human readers that the variable holds an Observable — and nothing more.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — it's convention only">
+          <p>No — it's purely a human-readability convention. TypeScript has no special handling for identifiers ending in <code>$</code>; it treats <code>seconds$</code> exactly the same as <code>seconds</code> at the type-system and compiler level. Angular's template compiler and change-detection engine are equally unaware of it. The <code>$</code> suffix is a strong community convention borrowed from RxJS's own documentation style — a signal to human readers that the variable holds an Observable — and nothing more.</p>
+        </app-collapsible>
         <app-collapsible icon="🧩" label="Deep Dive — When is the $ suffix still worth using?">
           <p>In a codebase that mixes plain values, signals, and Observables in the same class, the <code>$</code> suffix provides real value: at a glance you know <code>search$</code> needs to be subscribed to or piped before it does anything, whereas <code>results</code> or <code>results$</code>-less is probably already a resolved value or signal. Some teams adopt it as a lint rule for Observable fields precisely because it prevents "oops, I forgot to subscribe" mistakes. Others drop it entirely and rely on TypeScript's type inference to make the distinction obvious. Neither is wrong — the important thing is that your team picks one convention and applies it consistently.</p>
         </app-collapsible>

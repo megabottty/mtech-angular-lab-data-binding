@@ -20,7 +20,7 @@ describe('ShellLayoutComponent — day accordion', () => {
         ]),
         {
           provide: AuthService,
-          useValue: { isLoggedIn: false, uid: null, displayName: 'Guest', photoUrl: null }
+          useValue: { isLoggedIn: false, uid: null, displayName: 'Guest', photoUrl: null, error: signal(null) }
         },
         {
           provide: ProgressService,
@@ -47,7 +47,7 @@ describe('ShellLayoutComponent — day accordion', () => {
     expect(component.dayGroups.find(d => d.id === 'day9')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day13')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day14')?.items.length).toBe(4);
-    expect(component.dayGroups.find(d => d.id === 'day15')?.items.length).toBe(4);
+    expect(component.dayGroups.find(d => d.id === 'day15')?.items.length).toBe(5);
   });
 
   it('auto-expands only the day group matching the initial route', async () => {

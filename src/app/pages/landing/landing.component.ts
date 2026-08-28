@@ -235,6 +235,15 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
       <h2 class="day-heading">🌊 Day 15 — RxJS I: Streams, Operators &amp; Living with Signals</h2>
       <p class="day-subheading">Observables were there all along. Today we open the box: streams, operators, subscriptions, and the toSignal bridge.</p>
       <div class="act-cards">
+        <div class="act-card" routerLink="/day15/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone-and-run starter, or copy the end-of-Day-14 files yourself</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
         <div class="act-card" routerLink="/day15/act1">
           <div class="act-icon">🌊</div>
           <div class="act-info">

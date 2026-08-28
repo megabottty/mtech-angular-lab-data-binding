@@ -17,16 +17,26 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Signals hold a current value. Observables model values that arrive over time — and understanding the difference changes how you build everything.</p>
       </div>
 
+      <div class="info-box">
+        <strong>Before you start:</strong> this act assumes Day 14's BingeBoard is fully working — real HTTP search and error handling on Browse, and a Detail page built on <code>httpResource</code> with a graceful 404. If that isn't running yet, visit the <a routerLink="/day15/start">Day 15 Starting Point</a> first — it gets you a working copy in minutes, either by cloning a runnable starter or copying the files directly.
+      </div>
+
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong> Angular's docs on
+        <a href="https://angular.dev/ecosystem/rxjs-interop" target="_blank" rel="noopener">RxJS interop</a> —
+        the section on <code>toSignal</code> pairs directly with Step 3 below.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <div class="info-box">
-        <strong>Warm-up — the mystery from Day 13:</strong> remember when we wrote
+        <strong>Warm-up — the loose thread from Day 13:</strong> back then you wrote
         <code>this.http.get&lt;TvMazeSearchResult[]&gt;(...).pipe(map(results =&gt; results.map(r =&gt; toShow(r.show))))</code>
-        and you asked "what is <code>.pipe(map(...))</code>?" We owed you a full explanation.
+        with only a passing explanation of what <code>.pipe(map(...))</code> actually does.
         Today the box opens. Observables have been present in BingeBoard all along without ceremony —
         every <code>HttpClient</code> call returns one, <code>httpResource</code> wraps one internally,
         and Angular's own router fires one for every URL change. You have been using streams without
-        knowing it. Now you will see exactly what they are and why they behave the way they do.
+        realizing it. Now you will see exactly what they are and why they behave the way they do.
       </div>
 
       <section class="lesson-framework">
@@ -42,6 +52,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <section class="selfguided-panel">
         <p><strong>You are here:</strong> Act 1 (The Stream Mental Model)</p>
         <p><strong>Next step:</strong> Act 2 (Operators — Transforming Streams)</p>
+        <p><strong>Time:</strong> About 30–35 minutes, including the live leak demo — don't rush past actually watching the console keep ticking.</p>
       </section>
 
       <!-- Step 1 -->
@@ -107,8 +118,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </p>
 
         <div class="think-about-it">
-          <p class="tai-q">Why does nothing print to the console until <code>.subscribe()</code> is called?</p>
-          <p class="tai-a">
+          <p class="tai-q">Try it yourself first: why does nothing print to the console until <code>.subscribe()</code> is called?</p>
+        </div>
+        <app-collapsible icon="✅" label="Show Answer — why nothing runs until subscribe()">
+          <p>
             Observables are <em>lazy</em> (or "cold") by default. The pipeline you build with
             <code>.pipe(filter(...), map(...))</code> is purely a <em>description</em> of a
             computation — a blueprint, not a running machine. No timers start, no HTTP requests
@@ -120,7 +133,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             subscriber at the end, the entire HttpClient pipeline was just a blueprint sitting in
             memory.
           </p>
-        </div>
+        </app-collapsible>
 
         <app-collapsible icon="🧩" label="Deep Dive — What does 'cold' Observable really mean?">
           <p>
@@ -141,7 +154,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </p>
         </app-collapsible>
 
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain the difference between a Signal (synchronous current value) and an Observable (values over time), read a marble diagram, and explain why Observables do nothing until <code>.subscribe()</code> is called.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Paste the <code>evenSeconds$</code> snippet into your own console (or a scratch component) and confirm nothing logs until the <code>.subscribe()</code> line runs. You can explain the difference between a Signal (synchronous current value) and an Observable (values over time), read a marble diagram, and explain why Observables do nothing until <code>.subscribe()</code> is called.</div>
       </app-lesson-step>
 
       <!-- Step 2 -->
@@ -197,8 +210,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </p>
 
         <div class="think-about-it">
-          <p class="tai-q">What actually "leaks" when you forget to unsubscribe — is it a memory leak in the traditional sense?</p>
-          <p class="tai-a">
+          <p class="tai-q">Before opening the answer: what actually "leaks" when you forget to unsubscribe — is it a memory leak in the traditional sense?</p>
+        </div>
+        <app-collapsible icon="✅" label="Show Answer — what actually leaks">
+          <p>
             Yes, and it is also an effect leak. When you subscribe to an Observable without
             unsubscribing, the Observable's internal subscriber list keeps a live reference to
             your callback closure. That closure captured the component instance (via <code>this</code>
@@ -209,11 +224,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             With repeated navigation the number of simultaneous background subscriptions grows
             unboundedly, and each one is invisible to Angular's own change-detection system.
           </p>
-        </div>
+        </app-collapsible>
 
         <div class="warning-box">Forgetting to unsubscribe is silently catastrophic. The app builds, tests pass, and the leak only manifests in production under real navigation patterns.</div>
 
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can reproduce the navigation-leak bug, explain why it occurs at the reference-chain level, and apply the manual <code>ngOnDestroy</code> + <code>unsubscribe()</code> fix correctly.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Add the leaky ticker to a real page, navigate away, and watch the console keep logging. Then add the <code>ngOnDestroy</code> + <code>unsubscribe()</code> fix and confirm the log stops the instant you navigate away. You can explain why the leak happens at the reference-chain level and apply the manual fix correctly.</div>
       </app-lesson-step>
 
       <!-- Step 3 -->
@@ -270,7 +285,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <div class="think-about-it">
           <p class="tai-q">If <code>toSignal</code> already prevents leaks automatically, why would you ever still reach for <code>takeUntilDestroyed()</code> + raw <code>.subscribe()</code>?</p>
-          <p class="tai-a">
+        </div>
+        <app-collapsible icon="✅" label="Show Answer — when a signal isn't the right shape">
+          <p>
             Because <code>toSignal</code> models <em>state</em> — it answers "what is the latest value
             of this stream right now?" But not every subscription is about reading a value in a
             template. When each emission should fire an imperative side effect — calling a service
@@ -281,7 +298,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             guarantee cleanup, because the subscription is not going through <code>toSignal</code>'s
             automatic <code>DestroyRef</code> wiring.
           </p>
-        </div>
+        </app-collapsible>
 
         <app-collapsible icon="💡" label="Hint — Which one do I reach for first?">
           <p>
@@ -301,7 +318,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           the expressiveness of RxJS with the simplicity of Angular's reactive primitives.
         </div>
 
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can apply <code>toSignal</code> to convert an Observable into a Signal with automatic cleanup, and use <code>takeUntilDestroyed()</code> when a raw subscription is still the right tool.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Replace your leaky ticker with the <code>toSignal</code> field-initializer version and confirm navigating away stops the ticker with no <code>ngOnDestroy</code> written. You can apply <code>toSignal</code> to convert an Observable into a Signal with automatic cleanup, and use <code>takeUntilDestroyed()</code> when a raw subscription is still the right tool.</div>
       </app-lesson-step>
 
       <div class="nav-footer">

@@ -22,10 +22,12 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <div class="lab-intro">
         <h3>🎯 Starting Point</h3>
         <p>
-          Copy the working Act 3 code (Stats page with lazy guard, ShowsService with
-          <code>search()</code>, Browse with four-state template) into your project before
-          starting. You will add to <code>Stats</code>, <code>ShowsService</code>, and the
-          <code>Header</code> component across these four tasks.
+          Get the end-of-Day-14 BingeBoard running before starting — Stats page with lazy guard,
+          <code>ShowsService</code> with <code>search()</code>, Browse with four-state template.
+          Visit the <a routerLink="/day15/start">Day 15 Starting Point</a> if you haven't already:
+          it gets you a working copy in minutes, either by cloning a runnable starter or copying
+          the files directly. You will add to <code>Stats</code>, <code>ShowsService</code>, and
+          <code>Browse</code> across these four tasks.
         </p>
       </div>
 
@@ -49,7 +51,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </li>
           <li>
             <strong>Expected Outcome:</strong>
-            Students can bridge Observables into signals, compose operators inside
+            You can bridge Observables into signals, compose operators inside
             <code>.pipe()</code>, identify and fix a real subscription leak two different ways,
             and wire a DOM event stream safely with automatic teardown.
           </li>
@@ -59,16 +61,16 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <section class="selfguided-panel">
         <p><strong>You are here:</strong> Student Lab (Day 15 capstone)</p>
         <p><strong>Next step:</strong> Review the Checkpoint below.</p>
+        <p><strong>Time:</strong> About 55 minutes. Tasks 1–2 are the core; Task 3 is the conceptual heart of the day — budget real time for it. Task 4 is a stretch.</p>
       </section>
 
-      <!-- ─── TASK 1 ─────────────────────────────────────────────────── -->
       <app-lesson-step
         stepId="d15-lab-ticker"
         [stepNumber]="'Task 1'"
         title="'Now Watching' Ticker"
       >
         <div class="task-meta">
-          <span class="difficulty easy">🟢 Easy</span>
+          <span class="difficulty easy">🟡 Easy</span>
           <span class="concepts">Concepts: <code>interval()</code>, <code>toSignal</code>, <code>computed()</code>, component lifecycle.</span>
         </div>
 
@@ -82,7 +84,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           so <code>minutesEquivalent = seconds / 60</code>).
         </p>
         <p style="margin-top: 10px;">
-          This is the simplest possible live-stream-to-signal bridge, and it shows students exactly
+          This is the simplest possible live-stream-to-signal bridge, and it shows you exactly
           how reactive derived state chains: <code>interval</code> emits → <code>toSignal</code>
           holds the latest tick as a signal → <code>computed</code> derives a second value from it
           → both update in the template automatically with zero manual subscription management.
@@ -91,14 +93,16 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="think-about-it">
           <p class="tai-q">Navigate away from Stats and back — the ticker resets to 0 instead of
           continuing where it left off. Why?</p>
-          <p class="tai-a">Navigating away destroys the <code>Stats</code> component instance —
+        </div>
+        <app-collapsible icon="✅" label="Show Answer — why it resets instead of resuming">
+          <p>Navigating away destroys the <code>Stats</code> component instance —
           Angular unmounts it from the DOM and tears down all of its state, including the
           <code>toSignal</code>-created subscription to <code>interval(1000)</code>. Navigating
           back creates a <em>brand new</em> <code>Stats</code> instance with a brand new field
           initializer that starts the interval fresh from 0. This is expected component lifecycle
           behaviour, not a bug — if you want persistence across navigations you would need to move
           the state into a service that lives outside the component tree.</p>
-        </div>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -128,7 +132,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> The Stats page shows a
-        counter that increments once per second; navigating away and back resets it to 0.
+        counter that increments once per second; navigating away and back resets it to 0. You can
+        bridge a live Observable into a signal with a field-initializer <code>toSignal</code> and
+        derive a <code>computed()</code> from it.
         </div>
 
         <app-collapsible icon="💡" label="Hint — field initializer + toSignal">
@@ -149,7 +155,6 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
       </app-lesson-step>
 
-      <!-- ─── TASK 2 ─────────────────────────────────────────────────── -->
       <app-lesson-step
         stepId="d15-lab-top-rated"
         [stepNumber]="'Task 2'"
@@ -178,16 +183,18 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>.pipe()</code> here is composability and chainability on the stream itself: you can
           add retry logic, error handling, or debouncing in the same pipe later without touching
           the caller. That is the real operator practice lesson — and yes, calling
-          <code>.filter().map()</code> on the array after subscribing would also work. The
-          instructor brief says to say so honestly, so: both approaches work; using
-          <code>.pipe()</code> is a better habit for anything you intend to extend.
+          <code>.filter().map()</code> on the array after subscribing would also work — being
+          honest about that: both approaches work, but using <code>.pipe()</code> is a better
+          habit for anything you intend to extend.
         </p>
 
         <div class="think-about-it">
           <p class="tai-q">Could you have solved this with the array's own <code>.filter()</code>
           and <code>.map()</code> inside the component instead of inside <code>.pipe()</code> in
           the service? What is actually different?</p>
-          <p class="tai-a">Yes — you could subscribe to <code>search()</code> in the component,
+        </div>
+        <app-collapsible icon="✅" label="Show Answer — same output, different ownership">
+          <p>Yes — you could subscribe to <code>search()</code> in the component,
           receive the <code>Show[]</code> array, and call <code>.filter().map()</code> on it there.
           The result would be identical on screen. The real difference is ownership and
           composability: putting the transformation inside a <code>.pipe()</code> in the service
@@ -196,7 +203,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           the same pipe later, close to the data source, without touching any component. That
           architectural discipline — keep transformation logic in the service — is what
           <code>.pipe()</code> is really teaching here.</p>
-        </div>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -218,7 +225,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Stats renders a
         "Top Rated Shows" list that only includes shows with rating ≥ 8, showing name and rating
-        side by side.
+        side by side. You can compose a stream transformation with <code>.pipe(map(...))</code>
+        and bridge the result into a template with <code>toSignal</code>.
         </div>
 
         <app-collapsible icon="💡" label="Hint — service method shape">
@@ -238,20 +246,19 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
       </app-lesson-step>
 
-      <!-- ─── TASK 3 ─────────────────────────────────────────────────── -->
       <app-lesson-step
         stepId="d15-lab-leak-hunt"
         [stepNumber]="'Task 3'"
         title="Leak Hunt"
       >
         <div class="task-meta">
-          <span class="difficulty hard">🔴 Challenge</span>
+          <span class="difficulty hard">🔴 Hard</span>
           <span class="concepts">Concepts: subscription lifecycle, memory leaks, <code>ngOnDestroy</code>, <code>takeUntilDestroyed()</code>, async pipe.</span>
         </div>
 
         <h4>What to build:</h4>
         <p>
-          Your instructor hands you a <code>LeakyComponent</code> with three subscriptions
+          Below is a <code>LeakyComponent</code> with three subscriptions
           side-by-side. One of them leaks. Your job: identify the leaky one, prove it with console
           logging, then fix it two different ways.
         </p>
@@ -268,7 +275,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="think-about-it">
           <p class="tai-q">Why don't Subscription A (async pipe) and Subscription B
           (<code>toSignal</code>) leak, but Subscription C does?</p>
-          <p class="tai-a">The async pipe and <code>toSignal</code> both have automatic teardown
+        </div>
+        <app-collapsible icon="✅" label="Show Answer — why only C leaks">
+          <p>The async pipe and <code>toSignal</code> both have automatic teardown
           built in as a first-class feature: the async pipe unsubscribes when Angular destroys the
           component that hosts it, and <code>toSignal</code> internally uses
           <code>takeUntilDestroyed()</code> to complete the source Observable when the injection
@@ -277,7 +286,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           and the callback keeps firing forever, even after Angular has torn down the component and
           removed it from the screen. Every navigation cycle adds one more ghost subscriber that
           never gets cleaned up, which is the definition of a memory and side-effect leak.</p>
-        </div>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -304,7 +313,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> With either fix, the
         console log fires exactly once per navigation back to the page, no matter how many times
-        you cycle.
+        you cycle. You can identify a leaking bare <code>.subscribe()</code> on sight and fix it
+        with either manual <code>ngOnDestroy</code> teardown or <code>takeUntilDestroyed()</code>.
         </div>
 
         <app-collapsible icon="💡" label="Hint — two fix approaches">
@@ -330,14 +340,13 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
       </app-lesson-step>
 
-      <!-- ─── TASK 4 (STRETCH) ────────────────────────────────────────── -->
       <app-lesson-step
         stepId="d15-lab-stretch-keydown"
         [stepNumber]="'Task 4 (Stretch)'"
         title="Keyboard Shortcut — Press / to Search"
       >
         <div class="task-meta">
-          <span class="difficulty hard">🔴 Challenge</span>
+          <span class="difficulty hard">🔴 Hard</span>
           <span class="concepts">Concepts: <code>fromEvent()</code>, <code>filter()</code>, <code>takeUntilDestroyed()</code>, imperative DOM effects, <code>viewChild</code>.</span>
         </div>
 
@@ -360,7 +369,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p class="tai-q">Why guard this <code>subscribe</code> with
           <code>takeUntilDestroyed()</code> instead of converting it to a signal with
           <code>toSignal</code> like the ticker in Task 1?</p>
-          <p class="tai-a">Signals model <em>state you read</em> — a value that changes over time
+        </div>
+        <app-collapsible icon="✅" label="Show Answer — a value vs. an action">
+          <p>Signals model <em>state you read</em> — a value that changes over time
           and that other computed values or the template can derive from. This keyboard handler is
           not a value at all; it is an imperative side effect: "call <code>preventDefault()</code>
           and call <code>focus()</code> on a DOM node." There is no state to expose. Forcing it
@@ -369,7 +380,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           The right model is: use <code>toSignal</code> when you want to read a stream's current
           value reactively; use <code>subscribe</code> + <code>takeUntilDestroyed()</code> when
           you need to perform a one-off action in response to each emission.</p>
-        </div>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -400,7 +411,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Pressing <code>/</code>
         from anywhere on Browse focuses the search input; pressing it while the input is already
         focused just moves the cursor (or does nothing visually harmful); no ghost listeners
-        accumulate across navigations.
+        accumulate across navigations. You can turn a DOM event into a lifecycle-safe stream with
+        <code>fromEvent</code> and <code>takeUntilDestroyed()</code>.
         </div>
 
         <app-collapsible icon="💡" label="Hint — fromEvent pipeline skeleton">
@@ -424,7 +436,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
       </app-lesson-step>
 
-      <!-- ─── CHECKPOINT ─────────────────────────────────────────────── -->
+      <div class="nav-footer">
+        <a routerLink="/day15/act3" class="btn-secondary">← Act 3: Router Streams &amp; Debug It</a>
+      </div>
+
       <section class="lesson-framework checkpoint-card">
         <h3>Checkpoint</h3>
         <ul class="task-checklist">

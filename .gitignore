@@ -5,6 +5,9 @@
 
 # Node
 /node_modules
+starters/**/node_modules
+starters/**/dist
+starters/**/.angular/cache
 
 # IDEs and editors
 /.idea

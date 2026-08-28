@@ -71,8 +71,14 @@ src/app/
 ├── layout/               shell-layout (sidebar, topbar, progress bar)
 └── pages/
     ├── landing/          Home page
-    ├── lesson/act1-5/    All 5 lesson pages
+    ├── lesson/act1-5/    Day 5 — data binding
+    ├── day9/ .. day15/   Later teaching days (acts + student lab per day)
     └── dashboard/        Teacher dashboard
+
+starters/
+└── bingeboard-dayN/      Runnable, self-contained BingeBoard project holding the
+                          exact end-of-prior-day state (own package.json — npm
+                          install && npm start), surfaced via that day's /dayN/start page
 ```
 
 ---
