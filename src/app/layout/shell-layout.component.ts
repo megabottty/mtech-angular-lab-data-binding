@@ -191,6 +191,9 @@ const DAY_GROUPS: DayGroup[] = [
             } @else {
               <button class="btn-signin" (click)="signIn()">Sign in with Google</button>
             }
+            @if (authService.error(); as authError) {
+              <div class="warning-box auth-error">{{ authError }}</div>
+            }
           </div>
         </header>
 
@@ -306,8 +309,14 @@ const DAY_GROUPS: DayGroup[] = [
     }
     .progress-label { font-size: 12px; color: #858585; white-space: nowrap; }
 
-    .topbar-right { margin-left: auto; }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
     .user-info { display: flex; align-items: center; gap: 10px; }
+    .auth-error {
+      margin: 0;
+      padding: 6px 12px;
+      font-size: 12px;
+      max-width: 280px;
+    }
     .avatar { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #4fc3f7; }
     .user-name { font-size: 13px; color: #cccccc; }
     .btn-signout {
@@ -408,10 +417,21 @@ export class ShellLayoutComponent {
   });
 
   async signIn() {
-    await this.authService.signInWithGoogle();
+    // AuthService already records the failure in authService.error() for the
+    // template to show — catch here too so a failed sign-in doesn't also
+    // surface as an unhandled promise rejection in the console.
+    try {
+      await this.authService.signInWithGoogle();
+    } catch {
+      // handled via authService.error()
+    }
   }
 
   async signOut() {
-    await this.authService.signOut();
+    try {
+      await this.authService.signOut();
+    } catch {
+      // handled via authService.error()
+    }
   }
 }
