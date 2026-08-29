@@ -9,15 +9,14 @@ rules_version = '2';
 //     read every doc, for the /dashboard page's unfiltered collection query.
 //   - Everyone else (including signed-out requests) is denied.
 //
-// TODO: replace TEACHER_UID below with the real teacher Google UID — find it
-// in Firebase Console -> Authentication -> Users -> your row -> "User UID".
-// It must match environment.prod.ts's teacherUid exactly (rules can't read
-// the app's environment files, so this value is duplicated here on purpose).
+// TEACHER_UID must match environment.prod.ts's teacherUid exactly (rules
+// can't read the app's environment files, so this value is duplicated here
+// on purpose).
 service cloud.firestore {
   match /databases/{database}/documents {
     match /progress/{uid} {
       allow read: if request.auth != null
-        && (request.auth.uid == uid || request.auth.uid == "TEACHER_UID");
+        && (request.auth.uid == uid || request.auth.uid == "7Ppbrl45CFWd8UhDO9cWVlkZFyC2");
 
       allow create, update: if request.auth != null
         && request.auth.uid == uid
