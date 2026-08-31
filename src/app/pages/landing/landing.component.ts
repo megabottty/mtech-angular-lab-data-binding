@@ -472,6 +472,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
           <span class="act-arrow">→</span>
         </div>
       </div>
+
+      <h2 class="day-heading">🔍 Day 20 — Firebase III: Queries, Ordering, and a First Look at Security Rules</h2>
+      <p class="day-subheading">Stop downloading whole collections just to throw most of it away — ask Firestore a narrow question instead, and read the rules that will eventually lock this app down.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day20/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone-and-run starter, or copy the end-of-Day-19 files yourself</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day20/act1">
+          <div class="act-icon">🔍</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Queries — Filtering and Sorting on the Server</div>
+            <div class="act-desc">Seed real review data, feel why "stream and filter" breaks at scale, build a real query</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day20/act2">
+          <div class="act-icon">🧭</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">The Index Moment, and Query vs. Computed</div>
+            <div class="act-desc">Trigger a real composite-index error on purpose, then build a query-vs-computed decision framework</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day20/act3">
+          <div class="act-icon">🔐</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Security Rules — Read Before You Write, and Debug It</div>
+            <div class="act-desc">Read your test-mode rule and tomorrow's destination rule, then fix a stale-query bug and a type-caught bug</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day20/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">Top-Rated Toggles, Curated Featured Shows, and a Count Badge</div>
+            <div class="act-desc">A reactive top-rated filter, a curated featured-shows query, a count-only badge, and stretch pagination</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
     </div>
   `,
   styles: [`

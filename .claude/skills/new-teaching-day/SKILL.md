@@ -77,8 +77,23 @@ Steps:
    checklist.
 5. **Verify it for real** — `cd` in, `npm install`, `npm run build`. Fix
    errors before writing a single lesson page; the starter is the
-   foundation everything else assumes works.
-6. `rm -f package-lock.json` after the install (never commit it — students
+   foundation everything else assumes works. Run this `npm install` with
+   `node_modules/` actually absent — `npx ng build` will silently resolve
+   the root repo's Angular CLI/deps from a parent `node_modules` even when
+   the starter's own install failed, so a build that "succeeds" right
+   after a failed install is not real verification.
+6. **If `npm install` fails on an ERESOLVE peer-dependency conflict**
+   (e.g. `@angular/fire` peer-declaring an older Angular major than this
+   repo's current one — a real, recurring lag on that library's release
+   cadence, hit first on Day 19/20): add a `.npmrc` with
+   `legacy-peer-deps=true` to the starter folder rather than pinning the
+   starter to an older Angular version or telling students to pass a flag
+   by hand. Note it briefly in the starter's README so it isn't a mystery
+   file. Check whether the *previous* day's starter has the same
+   unfixed conflict — it likely does, since starters are copied forward —
+   and backport the same one-line fix there too; it's a pure bugfix, not
+   a content change.
+7. `rm -f package-lock.json` after the install (never commit it — students
    run their own `npm i`).
 
 ## 2. The `/dayN/start` page

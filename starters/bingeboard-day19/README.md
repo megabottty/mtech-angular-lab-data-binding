@@ -11,6 +11,11 @@ nothing more than `npm install && npm start`. Not today.
 npm install
 ```
 
+(The `.npmrc` in this folder sets `legacy-peer-deps=true` — `@angular/fire`'s
+latest stable release still peer-declares Angular 20, one version behind
+this project's Angular 21. That's a version-lag issue on the library's side,
+not a real incompatibility; the flag just tells npm not to block on it.)
+
 **Then, before `npm start`:** open `src/environments/environment.ts` and
 paste in your own Firebase project's config from Day 18 (Firebase Console
 → Project Settings → Your apps → Web app). The placeholder values that

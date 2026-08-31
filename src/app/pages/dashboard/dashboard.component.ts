@@ -40,7 +40,11 @@ const ALL_STEPS = [
   'd19-act1-service-contract', 'd19-act1-crud-verbs', 'd19-act1-document-shape',
   'd19-act2-read-computed', 'd19-act2-add-create', 'd19-act2-remove-delete',
   'd19-act3-update-setnote', 'd19-act3-prove-contract', 'd19-act3-debug-three-bugs',
-  'd19-lab-watched-toggle', 'd19-lab-reviews-solo', 'd19-lab-added-when', 'd19-lab-stretch-optimistic-ux'
+  'd19-lab-watched-toggle', 'd19-lab-reviews-solo', 'd19-lab-added-when', 'd19-lab-stretch-optimistic-ux',
+  'd20-act1-why-query', 'd20-act1-seed-reviews', 'd20-act1-reviews-for-show',
+  'd20-act2-index-error', 'd20-act2-query-vs-computed',
+  'd20-act3-read-test-mode-rule', 'd20-act3-destination-rule', 'd20-act3-debug-bug1', 'd20-act3-debug-bug2',
+  'd20-lab-top-rated-toggle', 'd20-lab-featured-curated', 'd20-lab-count-badge', 'd20-lab-stretch-pagination'
 ];
 
 @Component({

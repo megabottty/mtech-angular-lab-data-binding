@@ -45,7 +45,11 @@ const ALL_STEPS = [
   'd19-act1-service-contract', 'd19-act1-crud-verbs', 'd19-act1-document-shape',
   'd19-act2-read-computed', 'd19-act2-add-create', 'd19-act2-remove-delete',
   'd19-act3-update-setnote', 'd19-act3-prove-contract', 'd19-act3-debug-three-bugs',
-  'd19-lab-watched-toggle', 'd19-lab-reviews-solo', 'd19-lab-added-when', 'd19-lab-stretch-optimistic-ux'
+  'd19-lab-watched-toggle', 'd19-lab-reviews-solo', 'd19-lab-added-when', 'd19-lab-stretch-optimistic-ux',
+  'd20-act1-why-query', 'd20-act1-seed-reviews', 'd20-act1-reviews-for-show',
+  'd20-act2-index-error', 'd20-act2-query-vs-computed',
+  'd20-act3-read-test-mode-rule', 'd20-act3-destination-rule', 'd20-act3-debug-bug1', 'd20-act3-debug-bug2',
+  'd20-lab-top-rated-toggle', 'd20-lab-featured-curated', 'd20-lab-count-badge', 'd20-lab-stretch-pagination'
 ];
 
 interface DayNavItem {
@@ -169,6 +173,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day19/act2', label: '🔧 Act 2 — Create, Read, Delete' },
       { path: '/day19/act3', label: '✅ Act 3 — Update & Debug It' },
       { path: '/day19/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day20',
+    label: '🔍 Day 20 — Firebase III',
+    prefix: '/day20',
+    items: [
+      { path: '/day20/start', label: '🎬 Starting Point' },
+      { path: '/day20/act1', label: '🔍 Act 1 — Queries: Filtering & Sorting' },
+      { path: '/day20/act2', label: '🧭 Act 2 — The Index Moment & Query vs. Computed' },
+      { path: '/day20/act3', label: '🔐 Act 3 — Security Rules & Debug It' },
+      { path: '/day20/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];
