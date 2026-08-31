@@ -331,6 +331,47 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
           <span class="act-arrow">→</span>
         </div>
       </div>
+
+      <h2 class="day-heading">🎨 Day 17 — Pipes + The Great Refactor Lab</h2>
+      <p class="day-subheading">A half-lecture day: built-in and custom pipes, fast — then the last breather before five days of Firebase, spent making your own BingeBoard feel finished.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day17/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone-and-run starter, or copy the end-of-Day-16 files yourself</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day17/act1">
+          <div class="act-icon">🎨</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Pipes on Real Data</div>
+            <div class="act-desc">Built-in pipes, arguments, chaining, and why purity is cheap</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day17/act2">
+          <div class="act-icon">🧪</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Writing Your Own Pipe</div>
+            <div class="act-desc">A custom runtime pipe, the four-tool taxonomy, and a three-bug debug it</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day17/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">The Great Refactor Lab</div>
+            <div class="act-desc">Pipes in anger, debt paydown, a polish sprint, and a pivot-decision stretch</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
     </div>
   `,
   styles: [`

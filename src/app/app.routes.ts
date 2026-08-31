@@ -158,6 +158,26 @@ export const routes: Routes = [
           import('./pages/day16/lab/lab.component').then(m => m.Day16LabComponent)
       },
       {
+        path: 'day17/start',
+        loadComponent: () =>
+          import('./pages/day17/start/start.component').then(m => m.Day17StartComponent)
+      },
+      {
+        path: 'day17/act1',
+        loadComponent: () =>
+          import('./pages/day17/act1/act1.component').then(m => m.Act1Component)
+      },
+      {
+        path: 'day17/act2',
+        loadComponent: () =>
+          import('./pages/day17/act2/act2.component').then(m => m.Act2Component)
+      },
+      {
+        path: 'day17/lab',
+        loadComponent: () =>
+          import('./pages/day17/lab/lab.component').then(m => m.Day17LabComponent)
+      },
+      {
         path: 'dashboard',
         canActivate: [teacherGuard],
         loadComponent: () =>

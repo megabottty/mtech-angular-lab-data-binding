@@ -29,7 +29,10 @@ const ALL_STEPS = [
   'd16-act1-naive-search', 'd16-act1-race-condition', 'd16-act1-switchmap-insight',
   'd16-act2-subject-debounce', 'd16-act2-switchmap-catcherror', 'd16-act2-verify-cleanup',
   'd16-act3-operator-family', 'd16-act3-route-params-switchmap', 'd16-act3-debug-nested-subscribe',
-  'd16-lab-min-viable-query', 'd16-lab-suggest-a-show', 'd16-lab-loading-audit', 'd16-lab-stretch-exhaustmap'
+  'd16-lab-min-viable-query', 'd16-lab-suggest-a-show', 'd16-lab-loading-audit', 'd16-lab-stretch-exhaustmap',
+  'd17-act1-pipes-you-already-used', 'd17-act1-builtin-sweep', 'd17-act1-purity',
+  'd17-act2-custom-runtime-pipe', 'd17-act2-taxonomy', 'd17-act2-debug-shout-pipe',
+  'd17-lab-tier1-pipes-in-anger', 'd17-lab-tier2-debt-paydown', 'd17-lab-tier3-polish-sprint', 'd17-lab-tier4-stretch-highlight'
 ];
 
 @Component({

@@ -1,0 +1,22 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+
+# Node
+/node_modules
+package-lock.json
+
+# IDEs and editors
+/.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Misc
+/.angular/cache
+.sass-cache/
+npm-debug.log
+
+# System Files
+.DS_Store
+Thumbs.db
