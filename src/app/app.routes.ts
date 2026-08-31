@@ -178,6 +178,56 @@ export const routes: Routes = [
           import('./pages/day17/lab/lab.component').then(m => m.Day17LabComponent)
       },
       {
+        path: 'day18/start',
+        loadComponent: () =>
+          import('./pages/day18/start/start.component').then(m => m.Day18StartComponent)
+      },
+      {
+        path: 'day18/act1',
+        loadComponent: () =>
+          import('./pages/day18/act1/act1.component').then(m => m.Act1Component)
+      },
+      {
+        path: 'day18/act2',
+        loadComponent: () =>
+          import('./pages/day18/act2/act2.component').then(m => m.Act2Component)
+      },
+      {
+        path: 'day18/act3',
+        loadComponent: () =>
+          import('./pages/day18/act3/act3.component').then(m => m.Act3Component)
+      },
+      {
+        path: 'day18/lab',
+        loadComponent: () =>
+          import('./pages/day18/lab/lab.component').then(m => m.Day18LabComponent)
+      },
+      {
+        path: 'day19/start',
+        loadComponent: () =>
+          import('./pages/day19/start/start.component').then(m => m.Day19StartComponent)
+      },
+      {
+        path: 'day19/act1',
+        loadComponent: () =>
+          import('./pages/day19/act1/act1.component').then(m => m.Act1Component)
+      },
+      {
+        path: 'day19/act2',
+        loadComponent: () =>
+          import('./pages/day19/act2/act2.component').then(m => m.Act2Component)
+      },
+      {
+        path: 'day19/act3',
+        loadComponent: () =>
+          import('./pages/day19/act3/act3.component').then(m => m.Act3Component)
+      },
+      {
+        path: 'day19/lab',
+        loadComponent: () =>
+          import('./pages/day19/lab/lab.component').then(m => m.Day19LabComponent)
+      },
+      {
         path: 'dashboard',
         canActivate: [teacherGuard],
         loadComponent: () =>

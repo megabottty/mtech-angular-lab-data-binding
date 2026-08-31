@@ -32,7 +32,15 @@ const ALL_STEPS = [
   'd16-lab-min-viable-query', 'd16-lab-suggest-a-show', 'd16-lab-loading-audit', 'd16-lab-stretch-exhaustmap',
   'd17-act1-pipes-you-already-used', 'd17-act1-builtin-sweep', 'd17-act1-purity',
   'd17-act2-custom-runtime-pipe', 'd17-act2-taxonomy', 'd17-act2-debug-shout-pipe',
-  'd17-lab-tier1-pipes-in-anger', 'd17-lab-tier2-debt-paydown', 'd17-lab-tier3-polish-sprint', 'd17-lab-tier4-stretch-highlight'
+  'd17-lab-tier1-pipes-in-anger', 'd17-lab-tier2-debt-paydown', 'd17-lab-tier3-polish-sprint', 'd17-lab-tier4-stretch-highlight',
+  'd18-act1-baas-tradeoff', 'd18-act1-create-project', 'd18-act1-seed-console',
+  'd18-act2-install-wire', 'd18-act2-featured-service', 'd18-act2-render-home',
+  'd18-act3-realtime-demo', 'd18-act3-debug-three-bugs',
+  'd18-lab-console-fluency', 'd18-lab-announcements-solo', 'd18-lab-sorted-display', 'd18-lab-stretch-realtime-indicator',
+  'd19-act1-service-contract', 'd19-act1-crud-verbs', 'd19-act1-document-shape',
+  'd19-act2-read-computed', 'd19-act2-add-create', 'd19-act2-remove-delete',
+  'd19-act3-update-setnote', 'd19-act3-prove-contract', 'd19-act3-debug-three-bugs',
+  'd19-lab-watched-toggle', 'd19-lab-reviews-solo', 'd19-lab-added-when', 'd19-lab-stretch-optimistic-ux'
 ];
 
 @Component({

@@ -372,6 +372,106 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
           <span class="act-arrow">→</span>
         </div>
       </div>
+
+      <h2 class="day-heading">☁️ Day 18 — Firebase I: A Real Database</h2>
+      <p class="day-subheading">A real cloud database, without writing a server. Create your own Firebase project, wire AngularFire, and watch realtime sync happen with your own eyes.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day18/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone-and-run starter, or copy the end-of-Day-17 files yourself</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day18/act1">
+          <div class="act-icon">☁️</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Firebase, the Console, and Your Own Project</div>
+            <div class="act-desc">The backend-as-a-service tradeoff, and hand-seeding your first collection</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day18/act2">
+          <div class="act-icon">🔌</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Wiring AngularFire and Reading a Collection Live</div>
+            <div class="act-desc">collection(), collectionData(), toSignal(), and rendering it on Home</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day18/act3">
+          <div class="act-icon">⚡</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">The Realtime Moment, and Debug It</div>
+            <div class="act-desc">Watch your app update itself live, then find three classic mistakes</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day18/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">A Second Collection, Solo</div>
+            <div class="act-desc">Console fluency, a full solo rep with announcements, sorting, and a realtime flash</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
+      <h2 class="day-heading">🔧 Day 19 — Firebase II: Full CRUD</h2>
+      <p class="day-subheading">The watchlist goes to the cloud — same public surface, entirely new internals. Create, Update, and Delete complete what Day 18 started.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day19/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone-and-run starter, or copy the end-of-Day-18 files yourself</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day19/act1">
+          <div class="act-icon">📋</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">The Contract, and the Document Shape</div>
+            <div class="act-desc">Read WatchlistService's public surface, then design WatchlistDoc up front</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day19/act2">
+          <div class="act-icon">🔧</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Rebuilding WatchlistService: Create, Read, Delete</div>
+            <div class="act-desc">addDoc, a live signal mapped back to Show, and doc()-addressed deletion</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day19/act3">
+          <div class="act-icon">✅</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Update, Proving the Contract, and Debug It</div>
+            <div class="act-desc">updateDoc, a two-browser-windows realtime demo, and three classic bugs</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day19/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">Watched Toggles, and Reviews Built Solo</div>
+            <div class="act-desc">A watched toggle, a Firestore-backed reviews feature from scratch, and optimistic UX</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
     </div>
   `,
   styles: [`

@@ -36,6 +36,19 @@ they're each things that silently broke before being caught.
 If any of this is missing or ambiguous, ask before generating content —
 guessing at pedagogical structure produces work that has to be redone.
 
+**When a day introduces an external per-student dependency** (Firebase,
+or any future service each student sets up under their own account/
+credentials): that day's own starter needs **no wiring for it at all** —
+per the rule below, a starter represents the state *before* that day's
+Acts run, and installing/configuring the dependency is precisely what
+those Acts teach. The *next* day's starter is the one affected: it's the
+first that can't ship real working data out of the box (every student's
+credentials are different), and needs a placeholder-config pattern
+(mirroring this repo's own `src/environments/environment.example.ts`)
+plus explicit "fill in your own values" instructions in its `/dayN/start`
+page, instead of the fully-live clone-and-run experience every prior
+starter gave for free.
+
 ## 1. The starter project: `starters/bingeboard-dayN/`
 
 **Rule:** `starters/bingeboard-dayN/` = a copy of
