@@ -30,7 +30,11 @@ const ALL_STEPS = [
   'd15-act1-stream-model', 'd15-act1-leak-demo', 'd15-act1-tosignal-fix',
   'd15-act2-map-real-work', 'd15-act2-async-pipe', 'd15-act2-signals-vs-observables',
   'd15-act3-router-stream', 'd15-act3-debug-racing-timers', 'd15-act3-operator-scope-note',
-  'd15-lab-ticker', 'd15-lab-top-rated', 'd15-lab-leak-hunt', 'd15-lab-stretch-keydown'
+  'd15-lab-ticker', 'd15-lab-top-rated', 'd15-lab-leak-hunt', 'd15-lab-stretch-keydown',
+  'd16-act1-naive-search', 'd16-act1-race-condition', 'd16-act1-switchmap-insight',
+  'd16-act2-subject-debounce', 'd16-act2-switchmap-catcherror', 'd16-act2-verify-cleanup',
+  'd16-act3-operator-family', 'd16-act3-route-params-switchmap', 'd16-act3-debug-nested-subscribe',
+  'd16-lab-min-viable-query', 'd16-lab-suggest-a-show', 'd16-lab-loading-audit', 'd16-lab-stretch-exhaustmap'
 ];
 
 interface DayNavItem {
@@ -107,6 +111,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day15/act2', label: '🔀 Act 2 — Operators in the Wild' },
       { path: '/day15/act3', label: '🧭 Act 3 — Router Streams & Debug It' },
       { path: '/day15/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day16',
+    label: '🏁 Day 16 — RxJS II',
+    prefix: '/day16',
+    items: [
+      { path: '/day16/start', label: '🎬 Starting Point' },
+      { path: '/day16/act1', label: '🏁 Act 1 — The Race Condition' },
+      { path: '/day16/act2', label: '🎯 Act 2 — Building the Typeahead' },
+      { path: '/day16/act3', label: '🗺️ Act 3 — Operator Family & Closing the Loop' },
+      { path: '/day16/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];

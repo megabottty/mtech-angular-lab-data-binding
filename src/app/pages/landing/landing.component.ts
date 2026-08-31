@@ -281,6 +281,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
           <span class="act-arrow">→</span>
         </div>
       </div>
+
+      <h2 class="day-heading">🏁 Day 16 — RxJS II: switchMap &amp; the Live Search Every App Needs</h2>
+      <p class="day-subheading">Every keystroke fires a request, and requests don't always finish in order. Today: the race condition, the canonical typeahead, and the operator family that fixes it.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day16/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone-and-run starter, or copy the end-of-Day-15 files yourself</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day16/act1">
+          <div class="act-icon">🏁</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">The Race Condition</div>
+            <div class="act-desc">Reproduce the classic search-as-you-type bug, then meet switchMap</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day16/act2">
+          <div class="act-icon">🎯</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Building the Typeahead</div>
+            <div class="act-desc">Subject, debounceTime, distinctUntilChanged, and the catchError trap</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day16/act3">
+          <div class="act-icon">🗺️</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Operator Family &amp; Closing the Loop</div>
+            <div class="act-desc">switchMap vs. concatMap/mergeMap/exhaustMap, and the nested-subscribe fix</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day16/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">4 Hands-On Tasks</div>
+            <div class="act-desc">Minimum query length, a solo rebuild, a loading audit, an exhaustMap guard</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
