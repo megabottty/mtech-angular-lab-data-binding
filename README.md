@@ -72,13 +72,14 @@ src/app/
 └── pages/
     ├── landing/          Home page
     ├── lesson/act1-5/    Day 5 — data binding
-    ├── day9/ .. day15/   Later teaching days (acts + student lab per day)
+    ├── day9/, day13/ .. day20/   Later teaching days (acts + student lab per day)
     └── dashboard/        Teacher dashboard
 
 starters/
 └── bingeboard-dayN/      Runnable, self-contained BingeBoard project holding the
                           exact end-of-prior-day state (own package.json — npm
-                          install && npm start), surfaced via that day's /dayN/start page
+                          install && npm start), surfaced via that day's /dayN/start
+                          page. One per teaching day from Day 15 onward.
 ```
 
 ---
