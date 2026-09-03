@@ -56,7 +56,11 @@ const ALL_STEPS = [
   'd2-act1-warmup', 'd2-act1-three-bindings', 'd2-act1-property-binding',
   'd2-act2-event-binding', 'd2-act2-class-style-binding',
   'd2-act3-other-events', 'd2-act3-debug-it',
-  'd2-lab-hype-meter', 'd2-lab-reset', 'd2-lab-second-card'
+  'd2-lab-hype-meter', 'd2-lab-reset', 'd2-lab-second-card',
+  'd3-act1-warmup', 'd3-act1-problem', 'd3-act1-convert-signals',
+  'd3-act2-template-parens', 'd3-act2-computed-readonly', 'd3-act2-effect',
+  'd3-act3-linked-signal', 'd3-act3-debug-it',
+  'd3-lab-binge-level', 'd3-lab-budget', 'd3-lab-persistence-stretch'
 ];
 
 @Component({

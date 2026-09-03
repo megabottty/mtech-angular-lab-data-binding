@@ -133,6 +133,47 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">📶 Day 3 — Signals</h2>
+      <p class="day-subheading">Convert the show card to signal() and computed() — store the minimum, derive the rest.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day3/act1">
+          <div class="act-icon">📶</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Converting to Signals</div>
+            <div class="act-desc">Why plain properties can't scale, and rewriting watched state</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day3/act2">
+          <div class="act-icon">🔒</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Reading Signals &amp; computed</div>
+            <div class="act-desc">Parentheses in templates, read-only formulas, and effect</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day3/act3">
+          <div class="act-icon">🔄</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">linkedSignal &amp; Debug It</div>
+            <div class="act-desc">Resettable state, plus two classic signals bugs</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day3/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">3 Hands-On Tasks</div>
+            <div class="act-desc">Binge level, budget, and a persistence teaser — on your own!</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">📘 Day 5 — Control Flow &amp; Two-Way Binding</h2>
       <div class="act-cards">
         <div class="act-card" routerLink="/lesson/1">
