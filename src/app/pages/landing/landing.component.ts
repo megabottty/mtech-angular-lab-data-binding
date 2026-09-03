@@ -42,6 +42,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">🚀 Day 1 — Introduction to Angular</h2>
+      <p class="day-subheading">Scaffold a brand-new Angular app from scratch — the Job Tracker — and meet components, interpolation, and your first git commit.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day1/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Setup Checklist</div>
+            <div class="act-desc">Node, the Angular CLI, and what to expect today</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day1/act1">
+          <div class="act-icon">🧩</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">What Angular Is</div>
+            <div class="act-desc">Scaffold Job Tracker and tour the generated project</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day1/act2">
+          <div class="act-icon">✍️</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Interpolation &amp; Your First Component</div>
+            <div class="act-desc">Render dynamic text, generate and use a Header component</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day1/act3">
+          <div class="act-icon">📝</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Git &amp; Debug It</div>
+            <div class="act-desc">Your first commit, then two bugs to find on your own</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day1/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">3 Hands-On Tasks</div>
+            <div class="act-desc">Footer, greeting, and a conditional message — on your own!</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">📘 Day 5 — Control Flow &amp; Two-Way Binding</h2>
       <div class="act-cards">
         <div class="act-card" routerLink="/lesson/1">
@@ -520,6 +570,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
             <div class="act-desc">A reactive top-rated filter, a curated featured-shows query, a count-only badge, and stretch pagination</div>
           </div>
           <span class="act-arrow">→</span>
+        </div>
+
+        <h2 class="day-heading">🔐 Day 21 — Firebase IV: Auth, Real Users, Private Watchlists, Locked Doors</h2>
+        <p class="day-subheading">Give BingeBoard real identity, make every watchlist private, and replace test mode with server-enforced Firestore ownership rules.</p>
+        <div class="act-cards">
+          <div class="act-card" routerLink="/day21/start">
+            <div class="act-icon">🎬</div>
+            <div class="act-info">
+              <div class="act-num">Starting Point</div>
+              <div class="act-name">Get BingeBoard Running</div>
+              <div class="act-desc">The end-of-Day-20 project, ready for Google auth and private data</div>
+            </div>
+            <span class="act-arrow">→</span>
+          </div>
+          <div class="act-card" routerLink="/day21/act1">
+            <div class="act-icon">🔐</div>
+            <div class="act-info">
+              <div class="act-num">Act 1</div>
+              <div class="act-name">Auth: Real Users</div>
+              <div class="act-desc">Google sign-in, a user signal, and a header that follows auth state</div>
+            </div>
+            <span class="act-arrow">→</span>
+          </div>
+          <div class="act-card" routerLink="/day21/act2">
+            <div class="act-icon">👤</div>
+            <div class="act-info">
+              <div class="act-num">Act 2</div>
+              <div class="act-name">Private Watchlists and Guards</div>
+              <div class="act-desc">Owner IDs, per-user streams, and protected navigation</div>
+            </div>
+            <span class="act-arrow">→</span>
+          </div>
+          <div class="act-card" routerLink="/day21/act3">
+            <div class="act-icon">🛂</div>
+            <div class="act-info">
+              <div class="act-num">Act 3</div>
+              <div class="act-name">Locked Doors and Debug It</div>
+              <div class="act-desc">Firestore rules enforce the boundary Angular guards cannot</div>
+            </div>
+            <span class="act-arrow">→</span>
+          </div>
+          <div class="act-card lab" routerLink="/day21/lab">
+            <div class="act-icon">🛠️</div>
+            <div class="act-info">
+              <div class="act-num">Student Lab</div>
+              <div class="act-name">Authors, Nudges, and Return URLs</div>
+              <div class="act-desc">Own reviews, make the sign-in path kind, and preserve where people were going</div>
+            </div>
+            <span class="act-arrow">→</span>
+          </div>
         </div>
       </div>
     </div>

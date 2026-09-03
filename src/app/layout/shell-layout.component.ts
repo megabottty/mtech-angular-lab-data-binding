@@ -49,7 +49,15 @@ const ALL_STEPS = [
   'd20-act1-why-query', 'd20-act1-seed-reviews', 'd20-act1-reviews-for-show',
   'd20-act2-index-error', 'd20-act2-query-vs-computed',
   'd20-act3-read-test-mode-rule', 'd20-act3-destination-rule', 'd20-act3-debug-bug1', 'd20-act3-debug-bug2',
-  'd20-lab-top-rated-toggle', 'd20-lab-featured-curated', 'd20-lab-count-badge', 'd20-lab-stretch-pagination'
+  'd20-lab-top-rated-toggle', 'd20-lab-featured-curated', 'd20-lab-count-badge', 'd20-lab-stretch-pagination',
+  'd21-act1-provider', 'd21-act1-auth-service', 'd21-act1-header-state',
+  'd21-act2-owner-id', 'd21-act2-user-query', 'd21-act2-auth-guard',
+  'd21-act3-rules', 'd21-act3-error-ux', 'd21-act3-debug',
+  'd21-lab-review-author', 'd21-lab-signin-nudge', 'd21-lab-return-url', 'd21-lab-profile-stretch',
+  'd1-act1-why-angular', 'd1-act1-scaffold', 'd1-act1-project-tour',
+  'd1-act2-interpolation', 'd1-act2-generate-component', 'd1-act2-use-component',
+  'd1-act3-git-commit', 'd1-act3-debug-it',
+  'd1-lab-footer', 'd1-lab-greeting', 'd1-lab-conditional'
 ];
 
 interface DayNavItem {
@@ -69,6 +77,18 @@ interface DayGroup {
 // Add a new entry here for each future teaching day — the sidebar accordion
 // renders itself from this list, no template changes needed.
 const DAY_GROUPS: DayGroup[] = [
+  {
+    id: 'day1',
+    label: '🚀 Day 1 — Intro to Angular',
+    prefix: '/day1',
+    items: [
+      { path: '/day1/start', label: '🎬 Starting Point' },
+      { path: '/day1/act1', label: '🧩 Act 1 — What Angular Is' },
+      { path: '/day1/act2', label: '✍️ Act 2 — Interpolation & Your First Component' },
+      { path: '/day1/act3', label: '📝 Act 3 — Git & Debug It' },
+      { path: '/day1/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
   {
     id: 'day5',
     label: '📘 Day 5 — Data Binding',
@@ -185,6 +205,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day20/act2', label: '🧭 Act 2 — The Index Moment & Query vs. Computed' },
       { path: '/day20/act3', label: '🔐 Act 3 — Security Rules & Debug It' },
       { path: '/day20/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day21',
+    label: '🔐 Day 21 — Firebase IV: Auth',
+    prefix: '/day21',
+    items: [
+      { path: '/day21/start', label: '🎬 Starting Point' },
+      { path: '/day21/act1', label: '🔐 Act 1 — Auth: Real Users' },
+      { path: '/day21/act2', label: '👤 Act 2 — Private Watchlists & Guards' },
+      { path: '/day21/act3', label: '🛂 Act 3 — Locked Doors & Debug It' },
+      { path: '/day21/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];

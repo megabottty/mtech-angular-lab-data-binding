@@ -13,6 +13,31 @@ export const routes: Routes = [
           import('./pages/landing/landing.component').then(m => m.LandingComponent)
       },
       {
+        path: 'day1/start',
+        loadComponent: () =>
+          import('./pages/day1/start/start.component').then(m => m.Day1StartComponent)
+      },
+      {
+        path: 'day1/act1',
+        loadComponent: () =>
+          import('./pages/day1/act1/act1.component').then(m => m.Act1Component)
+      },
+      {
+        path: 'day1/act2',
+        loadComponent: () =>
+          import('./pages/day1/act2/act2.component').then(m => m.Act2Component)
+      },
+      {
+        path: 'day1/act3',
+        loadComponent: () =>
+          import('./pages/day1/act3/act3.component').then(m => m.Act3Component)
+      },
+      {
+        path: 'day1/lab',
+        loadComponent: () =>
+          import('./pages/day1/lab/lab.component').then(m => m.Day1LabComponent)
+      },
+      {
         path: 'lesson/1',
         loadComponent: () =>
           import('./pages/lesson/act1/act1.component').then(m => m.Act1Component)
@@ -251,6 +276,31 @@ export const routes: Routes = [
         path: 'day20/lab',
         loadComponent: () =>
           import('./pages/day20/lab/lab.component').then(m => m.Day20LabComponent)
+      },
+      {
+        path: 'day21/start',
+        loadComponent: () =>
+          import('./pages/day21/start/start.component').then(m => m.Day21StartComponent)
+      },
+      {
+        path: 'day21/act1',
+        loadComponent: () =>
+          import('./pages/day21/act1/act1.component').then(m => m.Act1Component)
+      },
+      {
+        path: 'day21/act2',
+        loadComponent: () =>
+          import('./pages/day21/act2/act2.component').then(m => m.Act2Component)
+      },
+      {
+        path: 'day21/act3',
+        loadComponent: () =>
+          import('./pages/day21/act3/act3.component').then(m => m.Act3Component)
+      },
+      {
+        path: 'day21/lab',
+        loadComponent: () =>
+          import('./pages/day21/lab/lab.component').then(m => m.Day21LabComponent)
       },
       {
         path: 'dashboard',
