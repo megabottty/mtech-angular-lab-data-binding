@@ -52,7 +52,11 @@ const ALL_STEPS = [
   'd1-act1-why-angular', 'd1-act1-scaffold', 'd1-act1-project-tour',
   'd1-act2-interpolation', 'd1-act2-generate-component', 'd1-act2-use-component',
   'd1-act3-git-commit', 'd1-act3-debug-it',
-  'd1-lab-footer', 'd1-lab-greeting', 'd1-lab-conditional'
+  'd1-lab-footer', 'd1-lab-greeting', 'd1-lab-conditional',
+  'd2-act1-warmup', 'd2-act1-three-bindings', 'd2-act1-property-binding',
+  'd2-act2-event-binding', 'd2-act2-class-style-binding',
+  'd2-act3-other-events', 'd2-act3-debug-it',
+  'd2-lab-hype-meter', 'd2-lab-reset', 'd2-lab-second-card'
 ];
 
 @Component({

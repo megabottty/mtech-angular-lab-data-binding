@@ -57,7 +57,11 @@ const ALL_STEPS = [
   'd1-act1-why-angular', 'd1-act1-scaffold', 'd1-act1-project-tour',
   'd1-act2-interpolation', 'd1-act2-generate-component', 'd1-act2-use-component',
   'd1-act3-git-commit', 'd1-act3-debug-it',
-  'd1-lab-footer', 'd1-lab-greeting', 'd1-lab-conditional'
+  'd1-lab-footer', 'd1-lab-greeting', 'd1-lab-conditional',
+  'd2-act1-warmup', 'd2-act1-three-bindings', 'd2-act1-property-binding',
+  'd2-act2-event-binding', 'd2-act2-class-style-binding',
+  'd2-act3-other-events', 'd2-act3-debug-it',
+  'd2-lab-hype-meter', 'd2-lab-reset', 'd2-lab-second-card'
 ];
 
 interface DayNavItem {
@@ -87,6 +91,17 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day1/act2', label: '✍️ Act 2 — Interpolation & Your First Component' },
       { path: '/day1/act3', label: '📝 Act 3 — Git & Debug It' },
       { path: '/day1/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day2',
+    label: '📦 Day 2 — Templates & Bindings',
+    prefix: '/day2',
+    items: [
+      { path: '/day2/act1', label: '📦 Act 1 — The Three Bindings' },
+      { path: '/day2/act2', label: '👆 Act 2 — Reacting to Events' },
+      { path: '/day2/act3', label: '🎯 Act 3 — More Events & Debug It' },
+      { path: '/day2/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   },
   {

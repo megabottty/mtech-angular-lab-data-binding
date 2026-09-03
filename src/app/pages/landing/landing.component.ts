@@ -92,6 +92,47 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">📦 Day 2 — Templates &amp; Bindings</h2>
+      <p class="day-subheading">BingeBoard starts here: property binding, event binding, and class/style bindings on a real show card.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day2/act1">
+          <div class="act-icon">📦</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">The Three Bindings</div>
+            <div class="act-desc">Scaffold BingeBoard and bind a poster with [src]</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day2/act2">
+          <div class="act-icon">👆</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Reacting to Events</div>
+            <div class="act-desc">(click) handlers, class and style bindings</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day2/act3">
+          <div class="act-icon">🎯</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">More Events &amp; Debug It</div>
+            <div class="act-desc">Any DOM event works, plus three classic binding bugs</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day2/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">3 Hands-On Tasks</div>
+            <div class="act-desc">Hype meter, reset button, and a second card — on your own!</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">📘 Day 5 — Control Flow &amp; Two-Way Binding</h2>
       <div class="act-cards">
         <div class="act-card" routerLink="/lesson/1">
