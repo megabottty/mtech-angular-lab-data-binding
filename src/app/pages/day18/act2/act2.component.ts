@@ -221,14 +221,15 @@ export class FeaturedService {
 // { idField: 'id' }       -- copies each document's real Firestore id onto
 //                           the object -- you'll need real ids to update/delete.`;
 
-  renderHomeCode = `<app-panel title="Shows of the week">
+  renderHomeCode = `<section class="featured-panel">
+  <h2>Shows of the week</h2>
   @for (s of featuredSvc.featured(); track s.id) {
-    <article class="card">
+    <article class="featured-card">
       <h3>{{ s.name }}</h3>
       <p>{{ s.blurb }}</p>
     </article>
   } @empty {
-    <p>Nothing featured yet.</p>
+    <p class="muted">Nothing featured yet.</p>
   }
-</app-panel>`;
+</section>`;
 }
