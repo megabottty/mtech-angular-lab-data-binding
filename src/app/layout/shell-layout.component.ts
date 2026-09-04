@@ -137,18 +137,6 @@ const DAY_GROUPS: DayGroup[] = [
     ]
   },
   {
-    id: 'day5',
-    label: '📘 Day 5 — Data Binding',
-    prefix: '/lesson',
-    items: [
-      { path: '/lesson/1', label: '🔁 Act 1 — @for & track' },
-      { path: '/lesson/2', label: '🚦 Act 2 — @if & @switch' },
-      { path: '/lesson/3', label: '📡 Act 3 — [(ngModel)]' },
-      { path: '/lesson/4', label: '⚡ Act 4 — computed()' },
-      { path: '/lesson/5', label: '🛠️ Student Lab', isLab: true }
-    ]
-  },
-  {
     id: 'day9',
     label: '🧭 Day 9 — Routing',
     prefix: '/day9',

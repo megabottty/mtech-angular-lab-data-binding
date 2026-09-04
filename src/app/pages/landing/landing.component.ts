@@ -233,55 +233,6 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
-      <h2 class="day-heading">📘 Day 5 — Control Flow &amp; Two-Way Binding</h2>
-      <div class="act-cards">
-        <div class="act-card" routerLink="/lesson/1">
-          <div class="act-icon">🔁</div>
-          <div class="act-info">
-            <div class="act-num">Act 1</div>
-            <div class="act-name">&#64;for &amp; track</div>
-            <div class="act-desc">Display lists without writing HTML 100 times</div>
-          </div>
-          <span class="act-arrow">→</span>
-        </div>
-        <div class="act-card" routerLink="/lesson/2">
-          <div class="act-icon">🚦</div>
-          <div class="act-info">
-            <div class="act-num">Act 2</div>
-            <div class="act-name">&#64;if &amp; &#64;switch</div>
-            <div class="act-desc">Show elements only when conditions are met</div>
-          </div>
-          <span class="act-arrow">→</span>
-        </div>
-        <div class="act-card" routerLink="/lesson/3">
-          <div class="act-icon">📡</div>
-          <div class="act-info">
-            <div class="act-num">Act 3</div>
-            <div class="act-name">[(ngModel)]</div>
-            <div class="act-desc">Two-way communication between HTML and JavaScript</div>
-          </div>
-          <span class="act-arrow">→</span>
-        </div>
-        <div class="act-card" routerLink="/lesson/4">
-          <div class="act-icon">⚡</div>
-          <div class="act-info">
-            <div class="act-num">Act 4</div>
-            <div class="act-name">computed()</div>
-            <div class="act-desc">Auto-calculated values that update themselves</div>
-          </div>
-          <span class="act-arrow">→</span>
-        </div>
-        <div class="act-card lab" routerLink="/lesson/5">
-          <div class="act-icon">🛠️</div>
-          <div class="act-info">
-            <div class="act-num">Student Lab</div>
-            <div class="act-name">3 Hands-On Tasks</div>
-            <div class="act-desc">Build the full TV show filter — on your own!</div>
-          </div>
-          <span class="act-arrow">→</span>
-        </div>
-      </div>
-
       <h2 class="day-heading">🧭 Day 9 — Routing II: Params, Navigation, Guards &amp; Lazy Loading</h2>
       <p class="day-subheading">Continuing BingeBoard: deep-link to a show, navigate from code, protect a route, and stop shipping code nobody asked for.</p>
       <div class="act-cards">
