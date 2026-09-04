@@ -91,6 +91,12 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           the editor, read the template.
         </div>
 
+        <p>The fix — both bugs corrected:</p>
+
+        <app-code-block lang="typescript" [code]="fixedTaglineCode" />
+
+        <app-code-block lang="html" [code]="fixedTaglineUsageCode" />
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> The tagline renders correctly, and you can name which tool caught each of the two bugs — the console for one, the editor for the other.</div>
       </app-lesson-step>
 
@@ -139,4 +145,23 @@ export class Tagline {
 
   brokenTaglineUsageCode = `<!-- app.html -->
 <app-tagline />`;
+
+  fixedTaglineCode = `// tagline.ts
+@Component({
+  selector: 'app-tagline',
+  template: '<p>{{ tagLine }}</p>',
+})
+export class Tagline {
+  tagLine = 'Land the role. Track the journey.';
+}`;
+
+  fixedTaglineUsageCode = `// app.ts
+import { Tagline } from './tagline/tagline';
+
+@Component({
+  selector: 'app-root',
+  imports: [Header, Tagline],
+  templateUrl: './app.html',
+})
+export class App { /* ... */ }`;
 }

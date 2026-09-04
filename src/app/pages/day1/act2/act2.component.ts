@@ -99,6 +99,14 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           becomes the custom HTML tag you'll use in templates, and <code>templateUrl</code>/<code>styleUrl</code>
           mean the HTML and CSS live in their own separate files.</p>
 
+        <div class="info-box">
+          <strong>If an old tutorial or an AI answer looks different:</strong> you may see files named
+          <code>header.component.ts</code>, a class called <code>HeaderComponent</code>, or an explicit
+          <code>standalone: true</code> line in the decorator. Same concept, older default naming — current
+          Angular generates the shorter <code>header.ts</code> / <code>Header</code> names, and
+          <code>standalone: true</code> is now implied, so the CLI leaves it out entirely.
+        </div>
+
         <p>Give the header some real content — replace <code>header.html</code>:</p>
 
         <app-code-block lang="html" [code]="headerTemplateCode" />

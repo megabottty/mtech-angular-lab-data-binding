@@ -114,6 +114,13 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p style="margin-top: 12px;">Open <code>http://localhost:4200</code> in your browser.</p>
 
+        <div class="warning-box">
+          <strong>Gotcha:</strong> if you already have another <code>ng serve</code> running in a different
+          terminal tab (from an earlier attempt, say), you'll see <code>Port 4200 is already in use</code>
+          instead of a running app. Press <code>Ctrl+C</code> in that other terminal to stop it, then run
+          <code>ng serve</code> again.
+        </div>
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> A running Angular starter page at <code>localhost:4200</code>, served from your own <code>job-tracker</code> project.</div>
       </app-lesson-step>
 
