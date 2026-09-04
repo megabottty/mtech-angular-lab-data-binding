@@ -41,7 +41,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> render the new signal-backed state in <code>show-card.html</code>:</p>
 
-        <app-code-block lang="html" [code]="templateReadsCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" [code]="templateReadsCode" />
 
         <div class="warning-box">
           <strong>See the failure first:</strong> delete the parentheses from <code>episodesWatched</code> in
@@ -90,7 +90,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> add an effect to the card's constructor:</p>
 
-        <app-code-block lang="typescript" [code]="effectCode" />
+        <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="effectCode" />
 
         <p style="margin-top: 12px;">
           Click "+1 episode" a few times and watch the console log a new line every time. An effect reruns

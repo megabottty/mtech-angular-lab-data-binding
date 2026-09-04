@@ -14,7 +14,17 @@ hljs.registerLanguage('css', css);
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="code-block-wrapper">
+    <div class="code-block-wrapper" [class.variant-before]="variant === 'before'" [class.variant-after]="variant === 'after'">
+      @if (file || variant) {
+        <div class="file-bar">
+          @if (variant) {
+            <span class="variant-badge">{{ variant === 'before' ? 'BEFORE' : 'AFTER' }}</span>
+          }
+          @if (file) {
+            <span class="file-path">📄 {{ file }}</span>
+          }
+        </div>
+      }
       <div class="code-header">
         <span class="lang-label">{{ lang }}</span>
         <button class="copy-btn" (click)="copy()" [class.copied]="copied">
@@ -31,6 +41,31 @@ hljs.registerLanguage('css', css);
       margin: 16px 0;
       border: 1px solid #3e3e42;
     }
+    .code-block-wrapper.variant-before { border-color: #7a5a3a; }
+    .code-block-wrapper.variant-after { border-color: #3a6b52; }
+    .file-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #23232b;
+      padding: 7px 14px;
+      border-bottom: 1px solid #3e3e42;
+    }
+    .file-path {
+      font-size: 12.5px;
+      color: #d7d7d7;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+    }
+    .variant-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+    }
+    .variant-before .variant-badge { background: #4a3524; color: #e0a76a; }
+    .variant-after .variant-badge { background: #23402f; color: #6ed3a5; }
     .code-header {
       display: flex;
       justify-content: space-between;
@@ -75,6 +110,8 @@ hljs.registerLanguage('css', css);
 export class CodeBlockComponent implements AfterViewInit {
   @Input() code = '';
   @Input() lang = 'html';
+  @Input() file = '';
+  @Input() variant: 'before' | 'after' | '' = '';
   @ViewChild('codeEl') codeEl!: ElementRef<HTMLElement>;
 
   copied = false;

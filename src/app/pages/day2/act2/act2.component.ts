@@ -41,9 +41,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> add a button to <code>show-card.html</code> and a matching method in <code>show-card.ts</code>:</p>
 
-        <app-code-block lang="html" [code]="buttonTemplateCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" [code]="buttonTemplateCode" />
 
-        <app-code-block lang="typescript" [code]="toggleMethodCode" />
+        <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="toggleMethodCode" />
 
         <p style="margin-top: 12px;">
           Click it. The label flips instantly. Narrate the loop to yourself: click → Angular calls
@@ -73,13 +73,13 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> watched shows should look different. Bind a CSS class to the boolean:</p>
 
-        <app-code-block lang="html" [code]="classBindingCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" [code]="classBindingCode" />
 
-        <app-code-block lang="css" [code]="cardCssCode" />
+        <app-code-block lang="css" file="src/app/show-card/show-card.css" [code]="cardCssCode" />
 
         <p style="margin-top: 12px;">One style binding for completeness — no separate CSS class needed for this one:</p>
 
-        <app-code-block lang="html" [code]="styleBindingCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" [code]="styleBindingCode" />
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Clicking "Mark as watched" dims the card, adds a green checkmark after the title, and turns the border green — all three driven by the same one boolean.</div>
       </app-lesson-step>
@@ -125,8 +125,7 @@ export class Act2Component {
 
   classBindingCode = `<article class="card" [class.watched]="watched">`;
 
-  cardCssCode = `/* show-card.css */
-.card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; width: 180px; }
+  cardCssCode = `.card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; width: 180px; }
 .card.watched { opacity: 0.55; }
 .card.watched h3::after { content: ' ✓'; color: green; }`;
 

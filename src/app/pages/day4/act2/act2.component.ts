@@ -41,7 +41,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> render a different summary line depending on how many shows are in the list:</p>
 
-        <app-code-block lang="html" [code]="ifElseCode" />
+        <app-code-block lang="html" file="src/app/app.html" [code]="ifElseCode" />
 
         <p style="margin-top: 12px;">
           Only one branch ever renders. Angular evaluates the condition once per render pass and swaps the
@@ -57,7 +57,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> add a genre badge inside each card's loop body:</p>
 
-        <app-code-block lang="html" [code]="switchCode" />
+        <app-code-block lang="html" file="src/app/app.html" [code]="switchCode" />
 
         <p style="margin-top: 12px;">
           <code>&#64;switch</code> is the right tool once you have three or more outcomes to branch on —

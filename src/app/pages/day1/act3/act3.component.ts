@@ -63,9 +63,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>Here's a small, broken component. Your instruction: make the tagline appear on the page.</p>
 
-        <app-code-block lang="typescript" [code]="brokenTaglineCode" />
+        <app-code-block lang="typescript" file="src/app/tagline/tagline.ts" variant="before" [code]="brokenTaglineCode" />
 
-        <app-code-block lang="html" [code]="brokenTaglineUsageCode" />
+        <app-code-block lang="html" file="src/app/app.html" variant="before" [code]="brokenTaglineUsageCode" />
 
         <div class="think-about-it">
           <p class="tai-q">Nothing renders. Open your browser console and your editor. What do you find, in each?</p>
@@ -93,9 +93,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>The fix — both bugs corrected:</p>
 
-        <app-code-block lang="typescript" [code]="fixedTaglineCode" />
+        <app-code-block lang="typescript" file="src/app/tagline/tagline.ts" variant="after" [code]="fixedTaglineCode" />
 
-        <app-code-block lang="html" [code]="fixedTaglineUsageCode" />
+        <app-code-block lang="html" file="src/app/app.html" variant="after" [code]="fixedTaglineUsageCode" />
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> The tagline renders correctly, and you can name which tool caught each of the two bugs — the console for one, the editor for the other.</div>
       </app-lesson-step>
@@ -134,8 +134,7 @@ export class Act3Component {
   gitCommitCommands = `git add .
 git commit -m "Day 1: scaffold Job Tracker, add header component"`;
 
-  brokenTaglineCode = `// tagline.ts
-@Component({
+  brokenTaglineCode = `@Component({
   selector: 'app-tagline',
   template: '<p>{{ tagline }}</p>',
 })
@@ -143,11 +142,9 @@ export class Tagline {
   tagLine = 'Land the role. Track the journey.';
 }`;
 
-  brokenTaglineUsageCode = `<!-- app.html -->
-<app-tagline />`;
+  brokenTaglineUsageCode = `<app-tagline />`;
 
-  fixedTaglineCode = `// tagline.ts
-@Component({
+  fixedTaglineCode = `@Component({
   selector: 'app-tagline',
   template: '<p>{{ tagLine }}</p>',
 })
@@ -155,8 +152,7 @@ export class Tagline {
   tagLine = 'Land the role. Track the journey.';
 }`;
 
-  fixedTaglineUsageCode = `// app.ts
-import { Tagline } from './tagline/tagline';
+  fixedTaglineUsageCode = `import { Tagline } from './tagline/tagline';
 
 @Component({
   selector: 'app-root',

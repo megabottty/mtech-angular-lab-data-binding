@@ -100,15 +100,15 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> create <code>src/app/models/show.ts</code> — your first interface, and your standard home for types:</p>
 
-        <app-code-block lang="typescript" [code]="showInterfaceCode" />
+        <app-code-block lang="typescript" file="src/app/models/show.ts" [code]="showInterfaceCode" />
 
         <p style="margin-top: 12px;">In <code>app.ts</code>, hold the list as a signal:</p>
 
-        <app-code-block lang="typescript" [code]="showsSignalCode" />
+        <app-code-block lang="typescript" file="src/app/app.ts" [code]="showsSignalCode" />
 
         <p style="margin-top: 12px;">Then in <code>app.html</code> (plain markup for now — the reusable card component comes Day 5, and that's fine):</p>
 
-        <app-code-block lang="html" [code]="forLoopCode" />
+        <app-code-block lang="html" file="src/app/app.html" [code]="forLoopCode" />
 
         <p style="margin-top: 12px;">
           <code>track</code> is the moving-crowd rule: when the array changes, Angular needs to know which

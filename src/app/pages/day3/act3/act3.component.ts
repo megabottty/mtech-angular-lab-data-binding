@@ -44,9 +44,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           switch seasons, it should reset to 1.
         </p>
 
-        <app-code-block lang="typescript" [code]="linkedSignalCode" />
+        <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="linkedSignalCode" />
 
-        <app-code-block lang="html" [code]="linkedSignalTemplateCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" [code]="linkedSignalTemplateCode" />
 
         <p style="margin-top: 12px;">
           Skip, skip, skip → E4. Click "next season" → it snaps back to E1. Writable like a signal, resets
@@ -74,9 +74,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>Read this class and template, and predict what's wrong before opening the answer.</p>
 
-        <app-code-block lang="typescript" [code]="buggyClassCode" />
+        <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" variant="before" [code]="buggyClassCode" />
 
-        <app-code-block lang="html" [code]="buggyTemplateCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" variant="before" [code]="buggyTemplateCode" />
 
         <div class="think-about-it">
           <p class="tai-q">There's a bug inside the method, and a separate bug in the template. What's wrong in each?</p>
@@ -98,9 +98,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>The fix — both bugs corrected:</p>
 
-        <app-code-block lang="typescript" [code]="fixedClassCode" />
+        <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" variant="after" [code]="fixedClassCode" />
 
-        <app-code-block lang="html" [code]="fixedTemplateCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" variant="after" [code]="fixedTemplateCode" />
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can state the rule "store the minimum, derive the rest" and point to exactly where this snippet violated it.</div>
       </app-lesson-step>

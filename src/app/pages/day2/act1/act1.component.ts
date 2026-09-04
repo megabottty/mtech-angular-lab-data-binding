@@ -107,11 +107,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> model the show's data in <code>show-card.ts</code>:</p>
 
-        <app-code-block lang="typescript" [code]="modelCode" />
+        <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="modelCode" />
 
         <p style="margin-top: 12px;">Then bind the poster image and the rating in <code>show-card.html</code>:</p>
 
-        <app-code-block lang="html" [code]="propertyBindingCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" [code]="propertyBindingCode" />
 
         <div class="warning-box">
           <strong>See the failure first:</strong> write <code>src="imageUrl"</code> with no brackets and

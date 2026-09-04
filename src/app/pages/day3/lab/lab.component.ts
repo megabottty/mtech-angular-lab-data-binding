@@ -62,7 +62,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Clicking "+1 episode" repeatedly walks the label through all four stages at the right thresholds, with the branching logic living entirely in the class.</div>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 1">
-          <app-code-block lang="typescript" [code]="bingeLevelAnswer" />
+          <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="bingeLevelAnswer" />
         </app-collapsible>
       </app-lesson-step>
 
@@ -89,9 +89,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Watching enough episodes to exceed 300 minutes flips the card into its over-budget style automatically, with no manually-tracked boolean.</div>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 2">
-          <app-code-block lang="typescript" [code]="budgetAnswer" />
-          <app-code-block lang="html" [code]="budgetTemplateAnswer" />
-          <app-code-block lang="css" [code]="budgetStyleAnswer" />
+          <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="budgetAnswer" />
+          <app-code-block lang="html" file="src/app/show-card/show-card.html" [code]="budgetTemplateAnswer" />
+          <app-code-block lang="css" file="src/app/show-card/show-card.css" [code]="budgetStyleAnswer" />
         </app-collapsible>
       </app-lesson-step>
 
@@ -110,12 +110,12 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           it doesn't compute a value, and nothing else should ever read from it.
         </p>
 
-        <app-code-block lang="typescript" [code]="persistenceHintCode" />
+        <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="persistenceHintCode" />
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Refreshing the page keeps your episode count instead of resetting it to zero, and the persistence logic lives entirely in one effect.</div>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 3">
-          <app-code-block lang="typescript" [code]="persistenceFullAnswer" />
+          <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="persistenceFullAnswer" />
         </app-collapsible>
       </app-lesson-step>
 

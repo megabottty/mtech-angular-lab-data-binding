@@ -109,7 +109,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> rewrite <code>show-card.ts</code> so watched state lives in signals, with a computed formula deriving minutes and hours:</p>
 
-        <app-code-block lang="typescript" [code]="convertedCardCode" />
+        <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="convertedCardCode" />
 
         <p style="margin-top: 12px;">Three verbs, worth writing down:</p>
         <ul>

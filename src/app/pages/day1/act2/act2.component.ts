@@ -51,11 +51,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> delete everything in <code>app.html</code> and replace it with:</p>
 
-        <app-code-block lang="html" [code]="firstTemplateCode" />
+        <app-code-block lang="html" file="src/app/app.html" [code]="firstTemplateCode" />
 
         <p style="margin-top: 12px;">In <code>app.ts</code>, update the class:</p>
 
-        <app-code-block lang="typescript" [code]="firstClassCode" />
+        <app-code-block lang="typescript" file="src/app/app.ts" [code]="firstClassCode" />
 
         <p style="margin-top: 12px;">
           The browser updates live. This is <strong>interpolation</strong>: <code>{{ "{{ }}" }}</code>
@@ -64,9 +64,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>Now prove that "in sync" claim — extend the class:</p>
 
-        <app-code-block lang="typescript" [code]="provingSyncClassCode" />
+        <app-code-block lang="typescript" file="src/app/app.ts" [code]="provingSyncClassCode" />
 
-        <app-code-block lang="html" [code]="provingSyncTemplateCode" />
+        <app-code-block lang="html" file="src/app/app.html" [code]="provingSyncTemplateCode" />
 
         <div class="think-about-it">
           <p class="tai-q">Interpolation rendered <code>{{ "{{ 3 + 2 }}" }}</code> as <code>5</code>. What does that tell you about what's allowed between the double curly braces?</p>
@@ -109,7 +109,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>Give the header some real content — replace <code>header.html</code>:</p>
 
-        <app-code-block lang="html" [code]="headerTemplateCode" />
+        <app-code-block lang="html" file="src/app/header/header.html" [code]="headerTemplateCode" />
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> A <code>Header</code> component class exists, with its own template showing a title and a small nav row — not used anywhere yet.</div>
       </app-lesson-step>
@@ -120,11 +120,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> in <code>app.ts</code>, import <code>Header</code> and add it to the <code>imports</code> array:</p>
 
-        <app-code-block lang="typescript" [code]="wireHeaderCode" />
+        <app-code-block lang="typescript" file="src/app/app.ts" [code]="wireHeaderCode" />
 
         <p style="margin-top: 12px;">Then use it in <code>app.html</code>:</p>
 
-        <app-code-block lang="html" [code]="useHeaderTemplateCode" />
+        <app-code-block lang="html" file="src/app/app.html" [code]="useHeaderTemplateCode" />
 
         <div class="info-box">
           <strong>Read this slowly and let it sink in:</strong> to use a component in a template, you import its class

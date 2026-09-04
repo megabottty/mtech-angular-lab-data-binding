@@ -63,11 +63,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Picking a genre narrows the list on its own, typing in the search box narrows it further, and the two filters stay combined no matter which you change first.</div>
 
         <app-collapsible icon="💡" label="Hint — Task 1">
-          <app-code-block lang="typescript" [code]="genreFilterHintCode" />
+          <app-code-block lang="typescript" file="src/app/app.ts" [code]="genreFilterHintCode" />
         </app-collapsible>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 1">
-          <app-code-block lang="typescript" [code]="genreFilterAnswerCode" />
+          <app-code-block lang="typescript" file="src/app/app.ts" [code]="genreFilterAnswerCode" />
         </app-collapsible>
       </app-lesson-step>
 
@@ -93,11 +93,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> A show rated 6.5 shows the caution badge, a show rated 9.5 shows the banger badge, and a show rated 8.0 shows neither.</div>
 
         <app-collapsible icon="💡" label="Hint — Task 2">
-          <app-code-block lang="typescript" [code]="ratingsGuardHintCode" />
+          <app-code-block lang="typescript" file="src/app/app.html" [code]="ratingsGuardHintCode" />
         </app-collapsible>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 2">
-          <app-code-block lang="typescript" [code]="ratingsGuardAnswerCode" />
+          <app-code-block lang="typescript" file="src/app/app.html" [code]="ratingsGuardAnswerCode" />
         </app-collapsible>
       </app-lesson-step>
 
@@ -123,11 +123,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Filtering down to zero results shows a "Clear filters" button, and clicking it restores the full list and resets the search box and select to their defaults.</div>
 
         <app-collapsible icon="💡" label="Hint — Task 3">
-          <app-code-block lang="typescript" [code]="resultCountHintCode" />
+          <app-code-block lang="typescript" file="src/app/app.ts" [code]="resultCountHintCode" />
         </app-collapsible>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 3">
-          <app-code-block lang="typescript" [code]="resultCountAnswerCode" />
+          <app-code-block lang="typescript" file="src/app/app.html" [code]="resultCountAnswerCode" />
         </app-collapsible>
       </app-lesson-step>
 
@@ -145,13 +145,13 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </p>
 
         <app-collapsible icon="💡" label="Hint — Task 4">
-          <app-code-block lang="typescript" [code]="sortHintCode" />
+          <app-code-block lang="typescript" file="src/app/app.ts" [code]="sortHintCode" />
         </app-collapsible>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Switching the sort dropdown reorders the currently-filtered list live, without resetting the search text or genre selection.</div>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 4">
-          <app-code-block lang="typescript" [code]="sortAnswerCode" />
+          <app-code-block lang="typescript" file="src/app/app.ts" [code]="sortAnswerCode" />
         </app-collapsible>
       </app-lesson-step>
 

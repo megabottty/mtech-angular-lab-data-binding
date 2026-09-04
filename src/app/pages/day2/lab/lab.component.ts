@@ -64,7 +64,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Clicking 🔥 five times visibly changes the card's appearance, driven entirely by comparing <code>hype</code> to <code>5</code> in the template.</div>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 1">
-          <app-code-block lang="typescript" [code]="hypeMeterAnswerCode" />
+          <app-code-block lang="typescript" file="src/app/show-card/show-card.ts" [code]="hypeMeterAnswerCode" />
         </app-collapsible>
       </app-lesson-step>
 
@@ -95,7 +95,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> The reset button is grayed out and unclickable at 0 hype, and becomes clickable the moment hype is 1 or more.</div>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 2">
-          <app-code-block lang="typescript" [code]="resetAnswerCode" />
+          <app-code-block lang="typescript" file="src/app/show-card/show-card.html" [code]="resetAnswerCode" />
         </app-collapsible>
       </app-lesson-step>
 
@@ -131,7 +131,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Two show cards on the page, each toggling and counting hype completely independently of the other.</div>
 
         <app-collapsible icon="✅" label="Show Full Answer — Task 3">
-          <app-code-block lang="typescript" [code]="secondCardAnswerCode" />
+          <app-code-block lang="typescript" file="src/app/app.html" [code]="secondCardAnswerCode" />
         </app-collapsible>
       </app-lesson-step>
 
@@ -223,8 +223,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
   `]
 })
 export class Day2LabComponent {
-  hypeMeterAnswerCode = `// show-card.ts
-export class ShowCard {
+  hypeMeterAnswerCode = `export class ShowCard {
   hype = 0;
 }
 
@@ -243,7 +242,6 @@ export class ShowCard {
   Reset hype
 </button>`;
 
-  secondCardAnswerCode = `<!-- app.html -->
-<app-show-card />
+  secondCardAnswerCode = `<app-show-card />
 <app-show-card />`;
 }

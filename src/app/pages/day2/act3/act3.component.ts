@@ -41,7 +41,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p><strong>Do this:</strong> add a quick "hype clicks" counter using a different event:</p>
 
-        <app-code-block lang="html" [code]="hypeDemoCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" [code]="hypeDemoCode" />
 
         <p style="margin-top: 12px;">
           Double-click it a few times and watch the number climb. Any DOM event works the same way —
@@ -58,7 +58,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>Three snippets, three bugs. Read each one and predict what's wrong before opening the answer.</p>
 
-        <app-code-block lang="html" [code]="buggyTemplateCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" variant="before" [code]="buggyTemplateCode" />
 
         <div class="think-about-it">
           <p class="tai-q">Each line looks almost right. What's actually broken in each of the three?</p>
@@ -89,7 +89,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>The fix — all three bugs corrected:</p>
 
-        <app-code-block lang="html" [code]="fixedTemplateCode" />
+        <app-code-block lang="html" file="src/app/show-card/show-card.html" variant="after" [code]="fixedTemplateCode" />
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can name all three bugs from memory, and explain why none of them crash the app.</div>
       </app-lesson-step>

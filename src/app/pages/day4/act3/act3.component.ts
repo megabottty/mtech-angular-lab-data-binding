@@ -44,9 +44,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           — it's needed for <code>ngModel</code> to work at all. Then:
         </p>
 
-        <app-code-block lang="typescript" [code]="filterStateCode" />
+        <app-code-block lang="typescript" file="src/app/app.ts" [code]="filterStateCode" />
 
-        <app-code-block lang="html" [code]="filterTemplateCode" />
+        <app-code-block lang="html" file="src/app/app.html" [code]="filterTemplateCode" />
 
         <p style="margin-top: 12px;">
           Change your <code>&#64;for</code> loop to iterate <code>filteredShows()</code> instead of
@@ -78,7 +78,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>Recognition-level only today — a short demo, not a deep dive:</p>
 
-        <app-code-block lang="html" [code]="deferCode" />
+        <app-code-block lang="html" file="src/app/app.html" [code]="deferCode" />
 
         <p style="margin-top: 12px;">
           The code for <code>&lt;app-stats-panel&gt;</code> isn't even downloaded until it's needed —
@@ -95,7 +95,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>Three classic bugs. Read the actual compiler messages out loud to yourself — Angular's control-flow errors are good, and reading errors is the skill.</p>
 
-        <app-code-block lang="html" [code]="debugCode" />
+        <app-code-block lang="html" file="src/app/app.html" variant="before" [code]="debugCode" />
 
         <div class="think-about-it">
           <p class="tai-q">Each line above is broken in a different way. What's wrong with each one?</p>
@@ -120,7 +120,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <p>The fix — all three bugs corrected:</p>
 
-        <app-code-block lang="html" [code]="fixedDebugCode" />
+        <app-code-block lang="html" file="src/app/app.html" variant="after" [code]="fixedDebugCode" />
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can name all three bugs without running the code, just from reading the snippet.</div>
       </app-lesson-step>
