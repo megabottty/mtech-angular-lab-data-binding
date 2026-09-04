@@ -87,6 +87,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           the meaning completely — and none of them throw an error, so read templates carefully.
         </div>
 
+        <p>The fix — all three bugs corrected:</p>
+
+        <app-code-block lang="html" [code]="fixedTemplateCode" />
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can name all three bugs from memory, and explain why none of them crash the app.</div>
       </app-lesson-step>
 
@@ -126,4 +130,8 @@ export class Act3Component {
   buggyTemplateCode = `<img [src]="{{ imageUrl }}" />
 <button (click)="toggleWatched">Toggle</button>
 <p [hidden]="'watched'">Spoilers below…</p>`;
+
+  fixedTemplateCode = `<img [src]="imageUrl" />
+<button (click)="toggleWatched()">Toggle</button>
+<p [hidden]="watched">Spoilers below…</p>`;
 }
