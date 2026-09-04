@@ -61,6 +61,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> The footer renders on the page showing the current year, computed from <code>Date</code> — not typed in as a literal number.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 1">
+          <app-code-block lang="typescript" [code]="footerAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 2 -->
@@ -78,6 +82,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </p>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> The header shows a personalized greeting, and the name only ever appears once — as a class property, not duplicated in the template text.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 2">
+          <app-code-block lang="typescript" [code]="greetingAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 3 -->
@@ -110,6 +118,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Toggling <code>hasApplications</code> between <code>true</code> and <code>false</code> changes the rendered message immediately, with no other code changes.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 3">
+          <app-code-block lang="typescript" [code]="conditionalAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <div class="nav-footer">
@@ -203,4 +215,50 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 })
 export class Day1LabComponent {
   ternaryHint = `hasApplications = false;`;
+
+  footerAnswerCode = `// footer.ts
+export class Footer {
+  appName = 'Job Tracker';
+  year = new Date().getFullYear();
+}
+
+// footer.html
+<footer>
+  <p>{{ appName }} &copy; {{ year }}</p>
+</footer>
+
+// app.ts
+import { Footer } from './footer/footer';
+
+@Component({
+  selector: 'app-root',
+  imports: [Header, Footer],
+  templateUrl: './app.html'
+})
+export class App {}
+
+// app.html
+<app-header />
+<!-- ...page content... -->
+<app-footer />`;
+
+  greetingAnswerCode = `// header.ts
+export class Header {
+  userName = 'Ada';
+}
+
+// header.html
+<h1>Welcome back, {{ userName }}.</h1>`;
+
+  conditionalAnswerCode = `// app.ts
+export class App {
+  hasApplications = false;
+}
+
+// app.html
+<p>
+  {{ hasApplications
+      ? 'You have applications in progress — keep going!'
+      : "No applications yet. Let's change that." }}
+</p>`;
 }

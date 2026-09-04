@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CodeBlockComponent } from '../../../shared/components/code-block/code-block.component';
 import { CollapsibleComponent } from '../../../shared/components/collapsible/collapsible.component';
 import { LessonStepComponent } from '../../../shared/components/lesson-step/lesson-step.component';
 
 @Component({
   selector: 'app-day2-lab',
   standalone: true,
-  imports: [RouterLink, CollapsibleComponent, LessonStepComponent],
+  imports: [RouterLink, CodeBlockComponent, CollapsibleComponent, LessonStepComponent],
   template: `
     <div class="lesson-content">
       <div class="page-header">
@@ -61,6 +62,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Clicking 🔥 five times visibly changes the card's appearance, driven entirely by comparing <code>hype</code> to <code>5</code> in the template.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 1">
+          <app-code-block lang="typescript" [code]="hypeMeterAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 2 -->
@@ -88,6 +93,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> The reset button is grayed out and unclickable at 0 hype, and becomes clickable the moment hype is 1 or more.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 2">
+          <app-code-block lang="typescript" [code]="resetAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 3 -->
@@ -120,6 +129,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Two show cards on the page, each toggling and counting hype completely independently of the other.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 3">
+          <app-code-block lang="typescript" [code]="secondCardAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <div class="nav-footer">
@@ -209,4 +222,28 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
     }
   `]
 })
-export class Day2LabComponent {}
+export class Day2LabComponent {
+  hypeMeterAnswerCode = `// show-card.ts
+export class ShowCard {
+  hype = 0;
+}
+
+// show-card.html
+<article class="card" [class.hot]="hype >= 5">
+  <button (click)="hype = hype + 1">🔥 {{ hype }}</button>
+</article>
+
+/* show-card.css */
+.card.hot {
+  border-color: #f44747;
+  box-shadow: 0 0 12px rgba(244, 71, 71, 0.6);
+}`;
+
+  resetAnswerCode = `<button (click)="hype = 0" [disabled]="hype === 0">
+  Reset hype
+</button>`;
+
+  secondCardAnswerCode = `<!-- app.html -->
+<app-show-card />
+<app-show-card />`;
+}
