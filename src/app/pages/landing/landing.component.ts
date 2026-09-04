@@ -186,6 +186,15 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
       <h2 class="day-heading">🔁 Day 4 — Control Flow &amp; Two-Way Binding</h2>
       <p class="day-subheading">Render a real, filterable list of shows with &#64;for, &#64;if, &#64;switch, and [(ngModel)].</p>
       <div class="act-cards">
+        <div class="act-card" routerLink="/day4/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone the end-of-Day-3 project, or copy the files by hand</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
         <div class="act-card" routerLink="/day4/act1">
           <div class="act-icon">🔁</div>
           <div class="act-info">

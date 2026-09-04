@@ -22,6 +22,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <code>ShowCard</code> with signal-based state (<code>watched</code>,
         <code>episodesWatched</code> as signals; <code>minutesWatched</code>, <code>hours</code> as
         computeds). Run <code>ng serve</code> now and confirm your card still renders and toggles.
+        Don't have that state handy? <a routerLink="/day4/start">Grab the Day 4 starting point</a> first.
       </div>
 
       <app-mental-model-card [models]="models" />

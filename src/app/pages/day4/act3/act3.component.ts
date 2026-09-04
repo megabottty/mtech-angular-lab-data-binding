@@ -118,6 +118,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </p>
         </app-collapsible>
 
+        <p>The fix — all three bugs corrected:</p>
+
+        <app-code-block lang="html" [code]="fixedDebugCode" />
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can name all three bugs without running the code, just from reading the snippet.</div>
       </app-lesson-step>
 
@@ -172,4 +176,14 @@ filteredShows = computed(() =>
   <p>Empty!</p>
 }
 <input [(ngModel)]="searchTerm" />       <!-- bug 3 -->`;
+
+  fixedDebugCode = `// component imports: [FormsModule, ...]   <!-- fixes bug 3 -->
+
+@for (show of shows(); track show.id) {   <!-- fixes bug 1: shows() -->
+  <p>{{ show.name }}</p>
+}
+@if (shows().length === 0) {              <!-- fixes bug 2: parens around condition -->
+  <p>Empty!</p>
+}
+<input [(ngModel)]="searchTerm" />`;
 }

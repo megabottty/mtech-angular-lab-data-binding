@@ -129,6 +129,7 @@ const DAY_GROUPS: DayGroup[] = [
     label: '🔁 Day 4 — Control Flow & Two-Way Binding',
     prefix: '/day4',
     items: [
+      { path: '/day4/start', label: '🎬 Starting Point' },
       { path: '/day4/act1', label: '🔁 Act 1 — A Real List' },
       { path: '/day4/act2', label: '🚦 Act 2 — Branching' },
       { path: '/day4/act3', label: '🔍 Act 3 — Two-Way Binding & Debug It' },
