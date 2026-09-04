@@ -167,7 +167,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           chain, bridged into a signal with <code>toSignal</code> if a template needs to read it.
         </div>
 
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Find a nested-subscribe pattern in your own project (or write one on purpose to practice on), name both defects out loud, and refactor it into a single <code>switchMap</code> pipe bridged with <code>toSignal</code>.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Find a nested-subscribe pattern in your own project (or write one on purpose to practice on), name both defects in a comment, and refactor it into a single <code>switchMap</code> pipe bridged with <code>toSignal</code>.</div>
       </app-lesson-step>
 
       <div class="info-box">

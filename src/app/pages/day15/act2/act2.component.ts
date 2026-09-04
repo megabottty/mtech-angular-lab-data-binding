@@ -210,7 +210,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
             Observables own the "time-based coordination," and the interop utilities bridge them.
           </p>
         </app-collapsible>
-        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Pick one signal and one Observable already in BingeBoard and say out loud which axis each one is on — state, or events over time. You can state the precise difference between signals (state) and Observables (events over time), give a concrete example of each, and explain why "toSignal" is a bridge, not a replacement.</div>
+        <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Pick one signal and one Observable already in BingeBoard and note which axis each one is on — state, or events over time. You can state the precise difference between signals (state) and Observables (events over time), give a concrete example of each, and explain why "toSignal" is a bridge, not a replacement.</div>
       </app-lesson-step>
 
       <div class="nav-footer">

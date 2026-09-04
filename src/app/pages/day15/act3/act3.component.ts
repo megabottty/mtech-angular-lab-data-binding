@@ -95,7 +95,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </p>
         <div class="warning-box">
           <strong>Stakes, not just trivia:</strong> this exact bug — in production apps — looks like piling websocket message handlers (each page visit adds a new handler, none removed), duplicate analytics events, or runaway polling loops.
-          Real companies have shipped hotfixes for this pattern. Meeting it here, in class, where it's cheap, is the whole point.
+          Real companies have shipped hotfixes for this pattern. Meeting it here, where it's cheap to diagnose, is the whole point.
         </div>
         <h4 style="margin-top: 16px;">The diagnosis checklist</h4>
         <p>Work through this in order:</p>

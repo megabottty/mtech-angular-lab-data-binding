@@ -32,7 +32,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <li><strong>Learning Goal:</strong> Read and translate Firestore security rules syntax, understand what today's test-mode rule actually allows, and see the shape of the <code>request.auth</code>/<code>resource.data</code> rules that will replace it.</li>
           <li><strong>Why It Matters:</strong> Every Firestore project you've built so far has been wide open — anyone with your project's config, not just your app, can read and write every document. That's fine for a classroom project with a 30-day clock on it. It is never fine for anything real.</li>
           <li><strong>Build Steps:</strong> Read the rule you're already living under → read the rule shape that will eventually replace it → fix two realistic bugs in the query code you built in Acts 1-2.</li>
-          <li><strong>Expected Outcome:</strong> You can read a Firestore rules file and say out loud, correctly, what it does and doesn't allow — without needing to deploy anything to find out.</li>
+          <li><strong>Expected Outcome:</strong> You can read a Firestore rules file and state, correctly, what it does and doesn't allow — without needing to deploy anything to find out.</li>
         </ul>
       </section>
 
