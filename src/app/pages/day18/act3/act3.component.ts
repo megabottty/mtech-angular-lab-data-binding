@@ -96,6 +96,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p>Without the <code>FeaturedShow</code> interface (or any type assertion) on the Observable, TypeScript infers something close to <code>any</code> for every field. That means <code>s.name</code>, <code>s.blurb</code>, and a typo like <code>s.nmae</code> are all equally "valid" as far as the compiler is concerned — nothing catches a template typo until you notice the blank space on screen and go hunting for why. Add the interface and the type assertion back (exactly as in Act 2's <code>FeaturedService</code>), then deliberately type <code>s.nmae</code> somewhere in a template on purpose — the payoff is watching the compiler refuse to build until you fix it. That's the entire value proposition of typing your Firestore data: bugs that used to render as silent blank space become compile errors instead.</p>
         </app-collapsible>
 
+        <p style="margin-top: 12px;"><strong>The fix</strong> — all three bugs corrected, back to Act 2's exact pattern:</p>
+
+        <app-code-block lang="typescript" [code]="fixedFeaturedCode" />
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can name all three bugs without opening the collapsibles above, and you've personally watched the real runtime error the missing <code>initialValue</code> produces, not just read a description of it.</div>
       </app-lesson-step>
 
@@ -147,4 +151,19 @@ export class Act3Component {
   buggyTemplateCode = `@for (s of featured(); track s.id) {
   <article class="card"><h3>{{ s.name }}</h3><p>{{ s.blurb }}</p></article>
 }`;
+
+  fixedFeaturedCode = `interface FeaturedShow {
+  id: string;
+  name: string;
+  blurb: string;
+  rating: number;
+}
+
+featured = toSignal(
+  collectionData(
+    collection(this.firestore, 'shows-of-the-week'),
+    { idField: 'id' }
+  ) as Observable<FeaturedShow[]>,
+  { initialValue: [] }
+);`;
 }

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CodeBlockComponent } from '../../../shared/components/code-block/code-block.component';
+import { CollapsibleComponent } from '../../../shared/components/collapsible/collapsible.component';
 import { LessonStepComponent } from '../../../shared/components/lesson-step/lesson-step.component';
 
 @Component({
   selector: 'app-day4-lab',
   standalone: true,
-  imports: [RouterLink, CodeBlockComponent, LessonStepComponent],
+  imports: [RouterLink, CodeBlockComponent, CollapsibleComponent, LessonStepComponent],
   template: `
     <div class="lesson-content">
       <div class="page-header">
@@ -60,6 +61,14 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Picking a genre narrows the list on its own, typing in the search box narrows it further, and the two filters stay combined no matter which you change first.</div>
+
+        <app-collapsible icon="💡" label="Hint — Task 1">
+          <app-code-block lang="typescript" [code]="genreFilterHintCode" />
+        </app-collapsible>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 1">
+          <app-code-block lang="typescript" [code]="genreFilterAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 2 -->
@@ -82,6 +91,14 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> A show rated 6.5 shows the caution badge, a show rated 9.5 shows the banger badge, and a show rated 8.0 shows neither.</div>
+
+        <app-collapsible icon="💡" label="Hint — Task 2">
+          <app-code-block lang="typescript" [code]="ratingsGuardHintCode" />
+        </app-collapsible>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 2">
+          <app-code-block lang="typescript" [code]="ratingsGuardAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 3 -->
@@ -104,6 +121,14 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Filtering down to zero results shows a "Clear filters" button, and clicking it restores the full list and resets the search box and select to their defaults.</div>
+
+        <app-collapsible icon="💡" label="Hint — Task 3">
+          <app-code-block lang="typescript" [code]="resultCountHintCode" />
+        </app-collapsible>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 3">
+          <app-code-block lang="typescript" [code]="resultCountAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 4 -->
@@ -119,9 +144,15 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>filteredShows</code> computed rather than a separate one.
         </p>
 
-        <app-code-block lang="typescript" [code]="sortHintCode" />
+        <app-collapsible icon="💡" label="Hint — Task 4">
+          <app-code-block lang="typescript" [code]="sortHintCode" />
+        </app-collapsible>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Switching the sort dropdown reorders the currently-filtered list live, without resetting the search text or genre selection.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 4">
+          <app-code-block lang="typescript" [code]="sortAnswerCode" />
+        </app-collapsible>
       </app-lesson-step>
 
       <div class="nav-footer">
@@ -210,10 +241,69 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
   `]
 })
 export class Day4LabComponent {
+  genreFilterHintCode = `selectedGenre = signal('All');
+
+filteredShows = computed(() => {
+  // filter by searchTerm(), then by selectedGenre() unless it's 'All'
+});`;
+
+  genreFilterAnswerCode = `genres = computed(() => ['All', ...new Set(this.shows().map(s => s.genre))]);
+selectedGenre = signal('All');
+
+filteredShows = computed(() =>
+  this.shows()
+    .filter(s => s.name.toLowerCase().includes(this.searchTerm().toLowerCase()))
+    .filter(s => this.selectedGenre() === 'All' || s.genre === this.selectedGenre())
+);`;
+
+  ratingsGuardHintCode = `@if (show.rating < 7) {
+  <!-- caution badge -->
+} @else if (show.rating >= 9) {
+  <!-- banger badge -->
+}`;
+
+  ratingsGuardAnswerCode = `@for (show of filteredShows(); track show.id) {
+  <article class="card">
+    <h3>{{ show.name }}</h3>
+    @if (show.rating < 7) {
+      <span class="badge caution">⚠️ Proceed with caution</span>
+    } @else if (show.rating >= 9) {
+      <span class="badge banger">🏆 Certified banger</span>
+    }
+  </article>
+}`;
+
+  resultCountHintCode = `clearFilters() {
+  this.searchTerm.set('');
+  this.selectedGenre.set('All');
+}`;
+
+  resultCountAnswerCode = `<p>Showing {{ filteredShows().length }} of {{ shows().length }} shows</p>
+
+@if (filteredShows().length === 0) {
+  <p>No shows match your filters.</p>
+  <button (click)="clearFilters()">Clear filters</button>
+}`;
+
   sortHintCode = `sortBy = signal<'name' | 'rating'>('name');
 
 filteredShows = computed(() => {
   const list = this.shows().filter(/* search + genre logic */);
+  return [...list].sort((a, b) =>
+    this.sortBy() === 'name'
+      ? a.name.localeCompare(b.name)
+      : b.rating - a.rating
+  );
+});`;
+
+  sortAnswerCode = `sortBy = signal<'name' | 'rating'>('name');
+selectedGenre = signal('All');
+
+filteredShows = computed(() => {
+  const list = this.shows()
+    .filter(s => s.name.toLowerCase().includes(this.searchTerm().toLowerCase()))
+    .filter(s => this.selectedGenre() === 'All' || s.genre === this.selectedGenre());
+
   return [...list].sort((a, b) =>
     this.sortBy() === 'name'
       ? a.name.localeCompare(b.name)

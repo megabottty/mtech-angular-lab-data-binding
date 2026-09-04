@@ -142,6 +142,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <p><code>{{ "{{ review.headline | shout: '!!' }}" }}</code> passes <code>'!!'</code> as a second argument, but <code>transform(v: string)</code> only declares one parameter — TypeScript doesn't error on an extra argument to a template pipe call the way it would on a plain function call, so the <code>'!!'</code> is silently dropped and nothing bad-looking happens; the headline just never gets its exclamation marks. The fix is to actually declare the parameter: <code>transform(v: string, suffix = '')</code>, then use it: <code>return v.toUpperCase() + suffix;</code>. This is the quiet failure mode of pipes worth remembering — a wrong argument count rarely throws, it just does nothing.</p>
         </app-collapsible>
 
+        <p style="margin-top: 12px;"><strong>The fix</strong> — all three bugs corrected in one pipe:</p>
+
+        <app-code-block lang="typescript" [code]="shoutPipeFixedCode" />
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can name all three bugs without opening the collapsibles, and fix the pipe so <code>{{ "{{ review.headline | shout: '!!' }}" }}</code> actually appends the exclamation marks.</div>
       </app-lesson-step>
 
@@ -219,4 +223,13 @@ export class ShoutPipe {
 }`;
 
   shoutPipeUsageCode = `<p>{{ review.headline | shout: '!!' }}</p>`;
+
+  shoutPipeFixedCode = `import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({ name: 'shout' })
+export class ShoutPipe implements PipeTransform {
+  transform(v: string, suffix = '') {
+    return v.toUpperCase() + suffix;
+  }
+}`;
 }

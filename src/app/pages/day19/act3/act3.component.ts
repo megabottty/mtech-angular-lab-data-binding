@@ -163,6 +163,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </p>
         </app-collapsible>
 
+        <p style="margin-top: 12px;"><strong>The fix</strong> — all three bugs corrected, matching Act 2's pattern:</p>
+
+        <app-code-block lang="typescript" [code]="fixedServiceCode" />
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can name all three bugs without opening the collapsibles, and you can explain, specifically, why bug 3's fix is deletion rather than a code change.</div>
       </app-lesson-step>
 
@@ -214,5 +218,22 @@ export class Act3Component {
 async add(show: Show) {
   await addDoc(this.col, show);                                 // bug 2 (subtle)
   this.itemsLocal.update(list => [...list, show]);              // bug 3
+}`;
+
+  fixedServiceCode = `async remove(showId: number) {
+  const entry = this.items().find(d => d.showId === showId);
+  if (!entry) return;
+  await deleteDoc(doc(this.firestore, 'watchlist', entry.docId));   // fix 1: docId, not showId
+}
+
+async add(show: Show) {
+  if (this.has(show.id)) return;
+  await addDoc(this.col, {
+    showId: show.id, name: show.name, genre: show.genre,             // fix 2: explicit shape
+    rating: show.rating, imageUrl: show.imageUrl,
+    runtime: show.runtime ?? 0,
+    addedAt: new Date().toISOString(),
+  });
+  // fix 3: no manual append -- the live Firestore stream delivers this on its own.
 }`;
 }

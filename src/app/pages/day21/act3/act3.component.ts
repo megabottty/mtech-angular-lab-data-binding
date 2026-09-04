@@ -29,6 +29,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <app-lesson-step stepId="d21-act3-debug" [stepNumber]="3" title="Debug It — Stale Names and One Overgrown Rule">
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p><p><strong>Bug one:</strong> a review stores <code>userName</code> once and later keeps showing an old copied value after the profile name changes. Store the author fields as a snapshot only when that historical attribution is intentional; otherwise render the current profile from a user record. <strong>Bug two:</strong> a single broad rule says all authenticated users can read and write every collection.</p><app-code-block lang="typescript" [code]="badRulesCode" />
         <div class="think-about-it"><p class="tai-q">Why is one unified authenticated rule wrong even if every page has a guard?</p></div><app-collapsible icon="✅" label="Show Answer — collections have different permissions"><p>Authentication answers who is asking, not what they should access. A universal rule lets any signed-in account read or alter every watchlist entry and curated collection. Write rules per collection and operation, matching the actual product decision: owner-only watchlists, public review reads with authenticated review creation, and read-only curation.</p></app-collapsible>
+        <p style="margin-top: 12px;"><strong>The fix</strong> — back to per-collection rules, exactly as deployed in Step 1:</p>
+        <app-code-block lang="typescript" [code]="goodRulesCode" />
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Review each collection's purpose and replace broad permissions with specific rules. You can explain why copied author fields and a one-size-fits-all rule both create incorrect behavior.</div>
       </app-lesson-step>
       <div class="nav-footer"><a routerLink="/day21/act2" class="btn-secondary">← Act 2: Private Watchlists and Locked Routes</a><a routerLink="/day21/lab" class="btn-primary">Day 21 Lab →</a></div>
@@ -73,4 +75,20 @@ service cloud.firestore {
 match /{document=**} {
   allow read, write: if request.auth != null;
 }`;
+
+  goodRulesCode = `// Specific: each collection keeps its own rule from earlier in this act.
+match /watchlist/{docId} {
+  allow create: if request.auth != null
+                && request.auth.uid == request.resource.data.ownerId;
+  allow read, update, delete: if request.auth != null
+                              && request.auth.uid == resource.data.ownerId;
+}
+match /reviews/{reviewId} {
+  allow read: if true;
+  allow create: if request.auth != null;
+  allow update, delete: if request.auth != null
+                        && request.auth.uid == resource.data.ownerId;
+}
+match /featured/{docId} { allow read: if true; }
+match /announcements/{docId} { allow read: if true; }`;
 }

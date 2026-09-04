@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CodeBlockComponent } from '../../../shared/components/code-block/code-block.component';
+import { CollapsibleComponent } from '../../../shared/components/collapsible/collapsible.component';
 import { LessonStepComponent } from '../../../shared/components/lesson-step/lesson-step.component';
 
 @Component({
   selector: 'app-day3-lab',
   standalone: true,
-  imports: [RouterLink, CodeBlockComponent, LessonStepComponent],
+  imports: [RouterLink, CodeBlockComponent, CollapsibleComponent, LessonStepComponent],
   template: `
     <div class="lesson-content">
       <div class="page-header">
@@ -59,6 +60,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Clicking "+1 episode" repeatedly walks the label through all four stages at the right thresholds, with the branching logic living entirely in the class.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 1">
+          <app-code-block lang="typescript" [code]="bingeLevelAnswer" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 2 -->
@@ -82,6 +87,12 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Watching enough episodes to exceed 300 minutes flips the card into its over-budget style automatically, with no manually-tracked boolean.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 2">
+          <app-code-block lang="typescript" [code]="budgetAnswer" />
+          <app-code-block lang="html" [code]="budgetTemplateAnswer" />
+          <app-code-block lang="css" [code]="budgetStyleAnswer" />
+        </app-collapsible>
       </app-lesson-step>
 
       <!-- Task 3 -->
@@ -102,6 +113,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-code-block lang="typescript" [code]="persistenceHintCode" />
 
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> Refreshing the page keeps your episode count instead of resetting it to zero, and the persistence logic lives entirely in one effect.</div>
+
+        <app-collapsible icon="✅" label="Show Full Answer — Task 3">
+          <app-code-block lang="typescript" [code]="persistenceFullAnswer" />
+        </app-collapsible>
       </app-lesson-step>
 
       <div class="nav-footer">
@@ -193,6 +208,41 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 })
 export class Day3LabComponent {
   persistenceHintCode = `constructor() {
+  effect(() => {
+    localStorage.setItem('episodesWatched', String(this.episodesWatched()));
+  });
+}`;
+
+  bingeLevelAnswer = `bingeLevel = computed(() => {
+  const n = this.episodesWatched();
+  if (n === 0) return 'Not started';
+  if (n < 5) return 'Casual';
+  if (n < 10) return 'Invested';
+  return 'Send help';
+});`;
+
+  budgetAnswer = `weeklyBudgetMinutes = signal(300);
+
+minutesRemaining = computed(() =>
+  this.weeklyBudgetMinutes() - this.minutesWatched()
+);
+
+isOverBudget = computed(() => this.minutesRemaining() < 0);`;
+
+  budgetTemplateAnswer = `<article class="card" [class.watched]="watched()" [class.over-budget]="isOverBudget()">
+  <p>{{ minutesRemaining() }} minutes left this week</p>
+</article>`;
+
+  budgetStyleAnswer = `.card.over-budget {
+  border-color: #f44747;
+  box-shadow: 0 0 0 2px rgba(244, 71, 71, 0.3);
+}`;
+
+  persistenceFullAnswer = `episodesWatched = signal(
+  Number(localStorage.getItem('episodesWatched') ?? 0)
+);
+
+constructor() {
   effect(() => {
     localStorage.setItem('episodesWatched', String(this.episodesWatched()));
   });
