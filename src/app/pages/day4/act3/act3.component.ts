@@ -62,6 +62,15 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>computed</code> chain does everything else. Zero imperative code.
         </p>
 
+        <div class="warning-box">
+          <strong>Check <code>imports</code> first:</strong> forgetting <code>FormsModule</code> is the
+          single most common way this step fails, and its symptom is misleading — depending on your setup,
+          <code>[(ngModel)]</code> either throws a template error or silently does nothing at all, leaving
+          you convinced the bug is in your signal or your computed. Whenever a directive "isn't working" in
+          a standalone component, check that component's <code>imports</code> array before you debug
+          anything else.
+        </div>
+
         <div class="think-about-it">
           <p class="tai-q">If you typed a value directly into <code>searchTerm.set('bear')</code> from a button instead of the input, what would happen to the box on screen?</p>
         </div>
@@ -98,7 +107,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
       <app-lesson-step stepId="d4-act3-debug-it" [stepNumber]="3" title="Debug It">
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
 
-        <p>Three classic bugs. Read the actual compiler messages out loud to yourself — Angular's control-flow errors are good, and reading errors is the skill.</p>
+        <p>Three classic bugs. Read the actual compiler messages carefully — Angular's control-flow errors are good, and reading errors is the skill.</p>
 
         <app-code-block lang="html" file="src/app/app.html" variant="before" [code]="debugCode" />
 
@@ -156,15 +165,23 @@ export class Act3Component {
     }
   ];
 
-  filterStateCode = `import { FormsModule } from '@angular/forms';
+  filterStateCode = `import { Component, signal, computed } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-searchTerm = signal('');
+@Component({
+  selector: 'app-root',
+  imports: [FormsModule],      // <-- ngModel does nothing without this
+  templateUrl: './app.html',
+})
+export class App {
+  searchTerm = signal('');
 
-filteredShows = computed(() =>
-  this.shows().filter(s =>
-    s.name.toLowerCase().includes(this.searchTerm().toLowerCase())
-  )
-);`;
+  filteredShows = computed(() =>
+    this.shows().filter(s =>
+      s.name.toLowerCase().includes(this.searchTerm().toLowerCase())
+    )
+  );
+}`;
 
   filterTemplateCode = `<input placeholder="Filter shows…" [(ngModel)]="searchTerm" />`;
 

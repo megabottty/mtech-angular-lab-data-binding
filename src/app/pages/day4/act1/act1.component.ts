@@ -111,6 +111,13 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <app-code-block lang="typescript" file="src/app/app.ts" [code]="showsSignalCode" />
 
+        <div class="info-box">
+          <strong>Copy this list, don't retype it.</strong> Those are real TVMaze poster URLs, so the images
+          actually load — typing URLs by hand isn't learning, it's just typos. The eight shows are chosen
+          deliberately: four different genres, one show rated below 7 and two rated 9+, so every branch you
+          build today and in the lab has something real to match against.
+        </div>
+
         <p style="margin-top: 12px;">Then in <code>app.html</code> (plain markup for now — the reusable card component comes Day 5, and that's fine):</p>
 
         <app-code-block lang="html" file="src/app/app.html" [code]="forLoopCode" />
@@ -128,6 +135,53 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <code>shows</code> to an empty array and the "No shows yet" message appears automatically, with
           no manual length check.
         </p>
+
+        <app-collapsible icon="📜" label="What about *ngFor and *ngIf? I keep finding those online">
+          <p>
+            <code>*ngFor</code>, <code>*ngIf</code>, and <code>*ngSwitch</code> are the <strong>legacy
+            directive syntax</strong>. They still work, and most tutorials written before 2024 use them, so
+            you will absolutely run into them. But <code>&#64;for</code>/<code>&#64;if</code>/<code>&#64;switch</code>
+            are the modern built-in control flow: they're faster, they don't require importing
+            <code>CommonModule</code>, and they're what new Angular code is written in.
+          </p>
+          <p style="margin-top: 8px;">
+            When you find old code, translate it rather than adopting it. The mapping is direct:
+          </p>
+          <ul>
+            <li><code>*ngFor="let s of shows"</code> → <code>&#64;for (s of shows(); track s.id) &#123; ... &#125;</code></li>
+            <li><code>*ngIf="ready"</code> → <code>&#64;if (ready) &#123; ... &#125;</code></li>
+            <li><code>*ngIf="ready; else other"</code> → <code>&#64;if (ready) &#123; ... &#125; &#64;else &#123; ... &#125;</code></li>
+          </ul>
+          <p style="margin-top: 8px;">
+            The biggest practical difference: <code>&#64;for</code> <em>requires</em> <code>track</code>,
+            while <code>*ngFor</code> made it optional via <code>trackBy</code>. That's a deliberate upgrade,
+            for the reason described just below.
+          </p>
+        </app-collapsible>
+
+        <app-collapsible icon="⚠️" label="Common mistake — track show instead of track show.id">
+          <p>
+            Writing <code>track show</code> compiles and often appears to work, so it's easy to adopt by
+            accident. It tracks by <strong>object identity</strong> — the item's place in memory — rather
+            than by a stable id. That's fine while the array holds the exact same object references, but it
+            breaks the moment the objects are replaced rather than mutated: reloading from an API, mapping
+            over the list, or spreading into new objects all produce brand-new references for
+            logically-identical shows. Angular then sees an entirely different crowd and rebuilds every DOM
+            node, losing scroll position, focus, and animation state.
+          </p>
+          <p style="margin-top: 8px;">
+            Reach for <code>track show.id</code> whenever your data has a stable unique id — which is almost
+            always. Track by index only for lists that are never reordered or filtered.
+          </p>
+        </app-collapsible>
+
+        <div class="warning-box">
+          <strong>Signals and arrays:</strong> <code>this.shows().push(newShow)</code> will <em>not</em>
+          update the page. That reads the array out of the signal and mutates it in place, so the signal
+          itself never changes and nothing gets notified. Always replace the value instead:
+          <code>this.shows.update(list =&gt; [...list, newShow])</code>. This trips up nearly everyone once,
+          and it matters constantly once your lists start changing at runtime.
+        </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> Your page renders one card per show in the array, and setting the array to <code>[]</code> shows the empty-state message instead of a blank page.</div>
       </app-lesson-step>
@@ -182,10 +236,14 @@ progressPercent = computed(() =>
 import { Show } from './models/show';
 
 shows = signal<Show[]>([
-  { id: 1, name: 'Severance',   genre: 'Drama',    rating: 8.7, imageUrl: '…' },
-  { id: 2, name: 'The Bear',    genre: 'Drama',    rating: 8.6, imageUrl: '…' },
-  { id: 3, name: 'Bluey',       genre: 'Kids',     rating: 9.5, imageUrl: '…' },
-  { id: 4, name: 'Slow Horses', genre: 'Thriller', rating: 8.2, imageUrl: '…' },
+  { id: 1, name: 'Severance',     genre: 'Drama',   rating: 8.7, imageUrl: 'https://static.tvmaze.com/uploads/images/medium_portrait/548/1371406.jpg' },
+  { id: 2, name: 'The Bear',      genre: 'Drama',   rating: 8.6, imageUrl: 'https://static.tvmaze.com/uploads/images/medium_portrait/629/1574642.jpg' },
+  { id: 3, name: 'Bluey',         genre: 'Kids',    rating: 9.5, imageUrl: 'https://static.tvmaze.com/uploads/images/medium_portrait/512/1281879.jpg' },
+  { id: 4, name: 'Slow Horses',   genre: 'Thriller', rating: 8.2, imageUrl: 'https://static.tvmaze.com/uploads/images/medium_portrait/637/1593462.jpg' },
+  { id: 5, name: 'The Last of Us', genre: 'Thriller', rating: 8.9, imageUrl: 'https://static.tvmaze.com/uploads/images/medium_portrait/563/1409008.jpg' },
+  { id: 6, name: 'Shogun',        genre: 'Drama',   rating: 9.1, imageUrl: 'https://static.tvmaze.com/uploads/images/medium_portrait/506/1265637.jpg' },
+  { id: 7, name: 'Ted Lasso',     genre: 'Comedy',  rating: 8.4, imageUrl: 'https://static.tvmaze.com/uploads/images/medium_portrait/634/1585930.jpg' },
+  { id: 8, name: 'Emily in Paris',genre: 'Comedy',  rating: 6.9, imageUrl: 'https://static.tvmaze.com/uploads/images/medium_portrait/604/1510920.jpg' },
 ]);`;
 
   forLoopCode = `@for (show of shows(); track show.id) {
