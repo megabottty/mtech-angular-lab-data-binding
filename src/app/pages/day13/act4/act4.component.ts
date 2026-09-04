@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">From local lookup to a real network call — plus safely rendering someone else's HTML.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/routing/read-route-state" target="_blank" rel="noopener">Routing → Read route state</a> — you are combining route params with HTTP here, so both halves matter.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

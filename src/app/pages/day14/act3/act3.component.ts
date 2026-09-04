@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Three bugs worth meeting here, where they're cheap, before you meet them in production.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/http/making-requests" target="_blank" rel="noopener">HTTP → Making requests</a> — plus the <a href="https://rxjs.dev/api/operators/retry" target="_blank" rel="noopener">retry operator</a> docs for Step 1.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

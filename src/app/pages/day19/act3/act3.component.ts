@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">The fourth verb, a two-browser-windows demo that earns real applause, and three bugs built from this exact day's own confusions.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://firebase.google.com/docs/firestore/manage-data/add-data" target="_blank" rel="noopener">Firestore → Add and update data</a> — the <code>updateDoc</code> vs <code>setDoc</code> distinction matters in Step 1.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

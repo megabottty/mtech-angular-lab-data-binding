@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">You can't visit /stats until you've added a show. Guards protect routes before they ever render.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/routing/route-guards" target="_blank" rel="noopener">Routing → Route guards</a> — read the functional-guard examples before writing your own.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

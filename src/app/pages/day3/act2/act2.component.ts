@@ -86,6 +86,16 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </p>
         </app-collapsible>
 
+        <div class="warning-box">
+          <strong>The mirror-image mistake:</strong> the rule above is about writing <em>to</em> a computed.
+          The other half of the rule is that you must never write to a signal <em>from inside</em> a
+          computed's body — no <code>.set()</code>, no <code>.update()</code>, no side effects of any kind.
+          Computeds must be pure: given the same inputs, they return the same value and change nothing else.
+          A computed that quietly updates other state is unpredictable, because Angular decides when (and
+          whether) to recalculate it. If you need something to happen when a value changes, that's an
+          <code>effect</code> — which is Step 3.
+        </div>
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You've seen the compiler reject a direct write to a computed, and confirmed clicking "+1 episode" updates both derived values with no manual sync code.</div>
       </app-lesson-step>
 

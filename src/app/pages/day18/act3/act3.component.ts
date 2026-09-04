@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Watch your own app update itself with no refresh — then find the three ways this exact pattern quietly breaks.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://firebase.google.com/docs/firestore/query-data/listen" target="_blank" rel="noopener">Firestore → Listen to realtime updates</a> — this is the mechanism behind the realtime moment in Step 1.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

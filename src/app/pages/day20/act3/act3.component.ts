@@ -24,6 +24,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         as it is right now.
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://firebase.google.com/docs/firestore/security/get-started" target="_blank" rel="noopener">Firestore → Security rules</a> — read this before writing rules — the syntax is small but unforgiving.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

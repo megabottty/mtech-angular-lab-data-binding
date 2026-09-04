@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Why should a user browsing shows also download code for pages they may never visit?</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/routing/common-router-tasks" target="_blank" rel="noopener">Routing → Common router tasks</a> — the lazy-loading section shows the <code>loadComponent</code> form you use here.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

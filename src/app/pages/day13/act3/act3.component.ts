@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Loading, results, and empty states — the three-state pattern every production UI needs.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/http/making-requests" target="_blank" rel="noopener">HTTP → Making requests</a> — re-read the subscribe section — the timing trap in Step 3 lives there.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

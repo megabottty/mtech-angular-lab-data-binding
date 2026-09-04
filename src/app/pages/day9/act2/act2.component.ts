@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Sometimes no link was clicked — code decides where the user goes next.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/routing/navigate-to-routes" target="_blank" rel="noopener">Routing → Navigate to routes</a> — covers both <code>routerLink</code> and the programmatic <code>Router</code> API.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

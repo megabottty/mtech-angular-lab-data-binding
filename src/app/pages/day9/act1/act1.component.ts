@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Every show needs its own page. We write ONE route with a parameter, not one route per show.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/routing/read-route-state" target="_blank" rel="noopener">Routing → Read route state</a> — the component input binding section is exactly what Step 2 sets up.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <div class="info-box">

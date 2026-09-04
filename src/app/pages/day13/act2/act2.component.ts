@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">The API's shape is never your app's shape — write the adapter once, use Show everywhere else.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/http/making-requests" target="_blank" rel="noopener">HTTP → Making requests</a> — the typed-response section explains the generic you add in Step 1.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

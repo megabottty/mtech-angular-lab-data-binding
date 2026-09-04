@@ -105,6 +105,32 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </p>
         </app-collapsible>
 
+        <app-collapsible icon="🤔" label="But why not just use plain variables like yesterday?">
+          <p>
+            Honest answer: for a tiny demo like yesterday's card, you won't see a visible difference. The
+            payoff is three things you can't get from plain properties:
+          </p>
+          <ul>
+            <li><strong>Derived state becomes automatic.</strong> A <code>computed</code> can never drift out of sync with what it's derived from, because it isn't stored — it's recalculated.</li>
+            <li><strong>It scales to the whole framework.</strong> Signals show up in forms, routing, and HTTP. Learning them now means the rest of the course reads naturally instead of feeling like a new API each time.</li>
+            <li><strong>Angular can skip unnecessary work.</strong> It updates exactly the parts of the page that read the signal you changed, instead of rechecking everything on every event.</li>
+          </ul>
+          <p style="margin-top: 8px;">
+            You're learning the way the framework is designed to be used, not a stylistic preference.
+          </p>
+        </app-collapsible>
+
+        <app-collapsible icon="🤔" label="I found a tutorial using BehaviorSubject instead. Which is right?">
+          <p>
+            Both are real, but they're from different eras. <code>BehaviorSubject</code> (from RxJS) is the
+            pre-signals way to hold state in Angular, and you'll still find it in a lot of older tutorials and
+            existing codebases. Signals are the modern answer for <em>state</em>, and they're what this course
+            uses. RxJS isn't going away though — it's genuinely better at <em>events over time</em>, and you'll
+            meet it properly on Day 15, where that strength is the whole point. For now: if a tutorial reaches
+            for <code>BehaviorSubject</code> to store a value, mentally translate it to <code>signal()</code>.
+          </p>
+        </app-collapsible>
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain, in your own words, why storing "total minutes" separately from "watched episodes" is a bug waiting to happen.</div>
       </app-lesson-step>
 
