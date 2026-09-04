@@ -136,6 +136,15 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
       <h2 class="day-heading">📶 Day 3 — Signals</h2>
       <p class="day-subheading">Convert the show card to signal() and computed() — store the minimum, derive the rest.</p>
       <div class="act-cards">
+        <div class="act-card" routerLink="/day3/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone the end-of-Day-2 project, or copy the files by hand</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
         <div class="act-card" routerLink="/day3/act1">
           <div class="act-icon">📶</div>
           <div class="act-info">

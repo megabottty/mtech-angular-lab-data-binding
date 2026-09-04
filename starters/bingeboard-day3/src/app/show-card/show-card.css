@@ -1,0 +1,20 @@
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 180px;
+}
+
+.card.watched {
+  opacity: 0.55;
+}
+
+.card.watched h3::after {
+  content: ' ✓';
+  color: green;
+}
+
+.card.hot {
+  border-color: #f44747;
+  box-shadow: 0 0 12px rgba(244, 71, 71, 0.6);
+}

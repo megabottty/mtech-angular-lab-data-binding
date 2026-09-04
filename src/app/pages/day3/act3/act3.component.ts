@@ -96,6 +96,12 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </p>
         </app-collapsible>
 
+        <p>The fix — both bugs corrected:</p>
+
+        <app-code-block lang="typescript" [code]="fixedClassCode" />
+
+        <app-code-block lang="html" [code]="fixedTemplateCode" />
+
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can state the rule "store the minimum, derive the rest" and point to exactly where this snippet violated it.</div>
       </app-lesson-step>
 
@@ -149,4 +155,13 @@ watchEpisode() {
 }`;
 
   buggyTemplateCode = `<p>{{ episodes }} eps, {{ minutes() }} min</p>  <!-- bug 2 -->`;
+
+  fixedClassCode = `episodes = signal(0);
+minutes = computed(() => this.episodes() * 50);
+
+watchEpisode() {
+  this.episodes.update(n => n + 1);
+}`;
+
+  fixedTemplateCode = `<p>{{ episodes() }} eps, {{ minutes() }} min</p>`;
 }

@@ -58,6 +58,11 @@ export const routes: Routes = [
           import('./pages/day2/lab/lab.component').then(m => m.Day2LabComponent)
       },
       {
+        path: 'day3/start',
+        loadComponent: () =>
+          import('./pages/day3/start/start.component').then(m => m.Day3StartComponent)
+      },
+      {
         path: 'day3/act1',
         loadComponent: () =>
           import('./pages/day3/act1/act1.component').then(m => m.Act1Component)

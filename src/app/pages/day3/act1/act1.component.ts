@@ -22,7 +22,8 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <code>ShowCard</code> component with plain properties (<code>title</code>, <code>imageUrl</code>,
         <code>rating</code>, <code>watched</code>, <code>hype</code>) and working <code>[src]</code>,
         <code>(click)</code>, and <code>[class.x]</code> bindings. Run <code>ng serve</code> now and confirm
-        your card still renders and toggles. Everything below builds on top of that code.
+        your card still renders and toggles. Everything below builds on top of that code. Don't have that
+        state handy? <a routerLink="/day3/start">Grab the Day 3 starting point</a> first.
       </div>
 
       <app-mental-model-card [models]="models" />

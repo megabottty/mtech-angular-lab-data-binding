@@ -45,7 +45,7 @@ describe('ShellLayoutComponent — day accordion', () => {
     expect(component.dayGroups.map(d => d.id)).toEqual(['day1', 'day2', 'day3', 'day4', 'day5', 'day9', 'day13', 'day14', 'day15', 'day16', 'day17', 'day18', 'day19', 'day20', 'day21']);
     expect(component.dayGroups.find(d => d.id === 'day1')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day2')?.items.length).toBe(4);
-    expect(component.dayGroups.find(d => d.id === 'day3')?.items.length).toBe(4);
+    expect(component.dayGroups.find(d => d.id === 'day3')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day4')?.items.length).toBe(4);
     expect(component.dayGroups.find(d => d.id === 'day5')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day9')?.items.length).toBe(5);

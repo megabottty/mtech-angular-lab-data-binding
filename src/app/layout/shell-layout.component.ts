@@ -117,6 +117,7 @@ const DAY_GROUPS: DayGroup[] = [
     label: '📶 Day 3 — Signals',
     prefix: '/day3',
     items: [
+      { path: '/day3/start', label: '🎬 Starting Point' },
       { path: '/day3/act1', label: '📶 Act 1 — Converting to Signals' },
       { path: '/day3/act2', label: '🔒 Act 2 — Reading Signals & computed' },
       { path: '/day3/act3', label: '🔄 Act 3 — linkedSignal & Debug It' },
