@@ -43,8 +43,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p>Hardcoding <code>/show/1</code>, <code>/show/2</code>, and so on sounds fine until the list grows. The detail page shape stays the same; only the id changes.</p>
         <div class="think-about-it">
           <p class="tai-q">If we have 100 shows, do we write 100 routes?</p>
-          <p class="tai-a">No. You define one parameterized route like <code>/show/:id</code> and Angular matches any URL that fits that shape — <code>/show/1</code>, <code>/show/42</code>, and <code>/show/99</code> all hit the same route. The <code>:id</code> segment is a placeholder the router extracts and passes to the component, so one route definition handles the entire catalog regardless of its size.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — one route, any number of shows">
+          <p>No. You define one parameterized route like <code>/show/:id</code> and Angular matches any URL that fits that shape — <code>/show/1</code>, <code>/show/42</code>, and <code>/show/99</code> all hit the same route. The <code>:id</code> segment is a placeholder the router extracts and passes to the component, so one route definition handles the entire catalog regardless of its size.</p>
+        </app-collapsible>
         <p style="margin-top: 12px;">Before routing can look up a show by id, both <code>Browse</code> and <code>ShowDetail</code> need access to the same data. So the first move is a tiny refactor: lift the hardcoded array into a root service.</p>
         <app-code-block lang="typescript" [code]="showsServiceCode" />
         <p style="margin-top: 12px;">Now <code>Browse</code> becomes thinner. It injects the service and reads the shared signal instead of owning the array itself.</p>
@@ -62,7 +64,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <strong>Why this line matters:</strong> <code>withComponentInputBinding()</code> is what lets route params arrive as plain input-style signals on the component. No <code>ActivatedRoute</code> subscription ceremony needed.
         </div>
         <app-collapsible icon="💡" label="Hint — What if I forget withComponentInputBinding()?">
-          <p>The route still matches, but your required <code>id</code> input never gets populated. Students usually see a vague runtime error about a required input being missing — which is exactly the first bug we debug together in Step 4.</p>
+          <p>The route still matches, but your required <code>id</code> input never gets populated. You'll usually see a vague runtime error about a required input being missing — which is exactly the first bug you debug in Step 4.</p>
         </app-collapsible>
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can point to the route param and the router configuration line that makes it flow into the component.</div>
       </app-lesson-step>
@@ -90,24 +92,24 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
         <div class="think-about-it">
           <p class="tai-q">Change the id in the address bar by hand — the page reacts with no lifecycle hooks and no subscriptions. Why?</p>
-          <p class="tai-a">Because <code>withComponentInputBinding()</code> wires the route param directly into the <code>id = input.required&lt;string&gt;()</code> signal. When the URL changes, Angular updates that input signal, which automatically reruns the <code>computed()</code> that looks up the show, which triggers a template re-render. The entire chain is reactive — no manual subscription or <code>ngOnChanges</code> needed.</p>
         </div>
-        <div class="info-box">
-          <strong>Answer to listen for:</strong> the URL updates the <code>id</code> input signal, that reruns the <code>computed()</code> lookups, and the template re-renders. It is one fully reactive signal chain.
-        </div>
+        <app-collapsible icon="✅" label="Show Answer — one fully reactive signal chain">
+          <p>Because <code>withComponentInputBinding()</code> wires the route param directly into the <code>id = input.required&lt;string&gt;()</code> signal. When the URL changes, Angular updates that input signal, which automatically reruns the <code>computed()</code> that looks up the show, which triggers a template re-render. The entire chain is reactive — no manual subscription or <code>ngOnChanges</code> needed.</p>
+          <p style="margin-top: 8px;">Short version: the URL updates the <code>id</code> input signal, that reruns the <code>computed()</code> lookups, and the template re-renders. It is one fully reactive signal chain.</p>
+        </app-collapsible>
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can build a reactive detail page where the URL feeds an input signal, computed state, and a clean <code>&#64;if (...; as item)</code> template.</div>
       </app-lesson-step>
 
       <app-lesson-step stepId="d9-act1-debug" [stepNumber]="4" title="Debug It — Two Bugs Everyone Meets Today">
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
-        <p>These two mistakes are perfect teaching bugs because they force students to read the runtime error and reason about string-vs-number lookups.</p>
+        <p>These two mistakes are worth meeting deliberately, because both force you to read the runtime error and reason about string-vs-number lookups.</p>
         <h4>Buggy snippet A</h4>
         <app-code-block lang="typescript" [code]="buggyConfigCode" />
         <h4 style="margin-top: 16px;">Buggy snippet B</h4>
         <app-code-block lang="typescript" [code]="buggyLookupCode" />
         <app-collapsible icon="🧩" label="Bug 1 — The route matched, so why is id still missing?">
           <p>Without <code>withComponentInputBinding()</code>, the router never wires the param into the component input. The route activates, but <code>id = input.required&lt;string&gt;();</code> stays empty and Angular throws a required-input error at runtime.</p>
-          <p>Read that error together as a class. It sounds vague at first, but it is pointing at the missing binding configuration.</p>
+          <p>Read that error carefully. It sounds vague at first, but it is pointing at the missing binding configuration.</p>
           <app-code-block lang="typescript" [code]="bindingFixCode" />
         </app-collapsible>
         <app-collapsible icon="✅" label="Bug 2 — Why does byId() quietly return undefined?">
@@ -117,9 +119,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
         <div class="think-about-it">
           <p class="tai-q">Params are always strings. Why doesn't TypeScript catch this bug for us?</p>
-          <p class="tai-a">Because <code>input.required&lt;string&gt;()</code> is correctly typed as a string — that's exactly what the router delivers. TypeScript sees no mismatch. The bug only appears at runtime when you compare that string to a numeric <code>id</code> field using strict equality (<code>===</code>), which silently returns <code>false</code> for every show. TypeScript can only catch type mismatches it can see statically; the numeric vs. string comparison happens in your own lookup logic at runtime.</p>
         </div>
-        <div class="warning-box">This bug is a rite of passage — make sure everyone meets it today, in class, where it's cheap.</div>
+        <app-collapsible icon="✅" label="Show Answer — TypeScript sees no mismatch">
+          <p>Because <code>input.required&lt;string&gt;()</code> is correctly typed as a string — that's exactly what the router delivers. TypeScript sees no mismatch. The bug only appears at runtime when you compare that string to a numeric <code>id</code> field using strict equality (<code>===</code>), which silently returns <code>false</code> for every show. TypeScript can only catch type mismatches it can see statically; the numeric vs. string comparison happens in your own lookup logic at runtime.</p>
+        </app-collapsible>
+        <div class="warning-box">This bug is a rite of passage — meet it here, deliberately, where it's cheap to diagnose.</div>
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain why route params must be converted before being used to look up numeric ids.</div>
       </app-lesson-step>
 

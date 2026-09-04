@@ -38,9 +38,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <div class="think-about-it">
           <p class="tai-q">After you save a form, or after a login redirect — was a link clicked? What triggers that navigation?</p>
-          <p class="tai-a">Your TypeScript code triggers it. In these cases there is no anchor element for a user to click, so <code>routerLink</code> can't help. Instead you inject <code>Router</code> into the component and call <code>router.navigate(['/destination'])</code> from a method — exactly the same as a link click, but initiated programmatically in response to an event like a successful HTTP save or a resolved auth check.</p>
         </div>
-        <p>The answer is: <strong>your TypeScript code</strong>. In BingeBoard's <code>Header</code>, the destination is random, so a normal <code>routerLink</code> is not enough. The button click calls a method, that method picks a show, and then the router takes the user there.</p>
+        <app-collapsible icon="✅" label="Show Answer — your TypeScript code triggers it">
+          <p>Your TypeScript code triggers it. In these cases there is no anchor element for a user to click, so <code>routerLink</code> can't help. Instead you inject <code>Router</code> into the component and call <code>router.navigate(['/destination'])</code> from a method — exactly the same as a link click, but initiated programmatically in response to an event like a successful HTTP save or a resolved auth check.</p>
+        </app-collapsible>
+        <p>In BingeBoard's <code>Header</code>, the destination is random, so a normal <code>routerLink</code> is not enough. The button click calls a method, that method picks a show, and then the router takes the user there.</p>
 
         <p><strong>Header TypeScript:</strong></p>
         <app-code-block lang="typescript" [code]="surpriseTsCode" />
@@ -83,7 +85,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
 
         <div class="warning-box">
-          Students often hardcode <code>/show/1</code>-style links in nav for demos — that's fine for a one-off demo link, but insist on the array form for anything dynamic.
+          It's tempting to hardcode <code>/show/1</code>-style links in nav — that's fine for a one-off demo link, but use the array form for anything dynamic.
         </div>
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can explain, in one sentence, when to use routerLink and when to use router.navigate().</div>

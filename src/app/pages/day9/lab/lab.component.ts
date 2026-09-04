@@ -45,7 +45,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </li>
           <li>
             <strong>Expected Outcome:</strong>
-            Students can make and defend routing design decisions, not just follow steps.
+            You can make and defend routing design decisions, not just follow steps.
           </li>
         </ul>
       </section>
@@ -75,8 +75,10 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <div class="think-about-it">
           <p class="tai-q">Should prev/next be <code>routerLink</code> with a computed target id, or a <code>navigate()</code> method
           call? Both are defensible — which would you pick and why?</p>
-          <p class="tai-a">Use <code>routerLink</code> bound to a computed signal when the destination can be fully derived from reactive state — it keeps the navigation intent visible in the template and requires no method. Use <code>router.navigate()</code> when navigation must happen in response to an event with side effects (like saving data first). For prev/next, a computed <code>prevShowId</code>/<code>nextShowId</code> signal bound to <code>[routerLink]</code> is the cleaner choice because the destination is pure derived state with no side effects.</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — routerLink with a computed target">
+          <p>Use <code>routerLink</code> bound to a computed signal when the destination can be fully derived from reactive state — it keeps the navigation intent visible in the template and requires no method. Use <code>router.navigate()</code> when navigation must happen in response to an event with side effects (like saving data first). For prev/next, a computed <code>prevShowId</code>/<code>nextShowId</code> signal bound to <code>[routerLink]</code> is the cleaner choice because the destination is pure derived state with no side effects.</p>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -138,12 +140,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
         <div class="think-about-it">
           <p class="tai-q">Is rendering an inline "not found" state actually superior UX to redirecting?</p>
-          <p class="tai-a">Yes, in most cases. An inline not-found state keeps the user on the URL they tried to visit, explains what went wrong, and offers a recovery path — all without a disorienting page change. A redirect to a generic 404 page discards the context of which ID was bad and can confuse users who expected to land somewhere specific. The inline approach also avoids an extra navigation event, which matters for browser history.</p>
         </div>
-
-        <div class="info-box">
-          <strong>Instructor take:</strong> Yes, usually — ship the inline state; the debate itself is the lesson.
-        </div>
+        <app-collapsible icon="✅" label="Show Answer — inline keeps context, redirect discards it">
+          <p>Yes, in most cases. An inline not-found state keeps the user on the URL they tried to visit, explains what went wrong, and offers a recovery path — all without a disorienting page change. A redirect to a generic 404 page discards the context of which ID was bad and can confuse users who expected to land somewhere specific. The inline approach also avoids an extra navigation event, which matters for browser history.</p>
+          <p style="margin-top: 8px;">Short version: usually yes — ship the inline state. Working through the tradeoff is the point of the question.</p>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -193,19 +194,17 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <h4>What to build:</h4>
         <p>
           Try applying <code>hasWatchlistGuard</code> to the <code>/watchlist</code> route too, exactly like
-          <code>/stats</code>. Then discuss the behavior and back it out.
+          <code>/stats</code>. Observe the behavior, write yourself a one-line note about why it feels wrong, then
+          back it out.
         </p>
 
         <div class="think-about-it">
           <p class="tai-q">Why is guarding <code>/watchlist</code> with this same guard bad product thinking?</p>
-          <p class="tai-a">Because an empty watchlist page is still a useful state — it's the perfect place to show onboarding guidance like "Browse shows and add one to get started." Bouncing the user away when the list is empty hides that helpful empty state and leaves them confused about why they can't reach the page. Guards should block content that genuinely cannot be used without a precondition (like stats with no data to analyze), not block pages that have a valid empty-state design.</p>
         </div>
-
-        <div class="warning-box">
-          <strong>Instructor answer:</strong> An empty watchlist page with helpful guidance (e.g. "Add a show to get
-          started") beats a bounce/redirect. Guards protect content that genuinely shouldn't be seen — they shouldn't
-          hide an empty state that's actually useful UX.
-        </div>
+        <app-collapsible icon="✅" label="Show Answer — an empty state is useful, not broken">
+          <p>Because an empty watchlist page is still a useful state — it's the perfect place to show onboarding guidance like "Browse shows and add one to get started." Bouncing the user away when the list is empty hides that helpful empty state and leaves them confused about why they can't reach the page. Guards should block content that genuinely cannot be used without a precondition (like stats with no data to analyze), not block pages that have a valid empty-state design.</p>
+          <p style="margin-top: 8px;">So: leave <code>/watchlist</code> unguarded, and invest in its empty state instead.</p>
+        </app-collapsible>
 
         <div class="task-steps">
           <div class="task-step">
@@ -238,7 +237,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <app-collapsible icon="✅" label="Show Answer — Try it, then revert it">
           <p>
             The "answer" here is the judgment call: test the guarded version, then remove it. Keep the final route
-            unguarded so students can see and improve the empty watchlist state.
+            unguarded so the empty watchlist state stays visible and improvable.
           </p>
           <app-code-block lang="typescript" [code]="task3Answer" />
         </app-collapsible>
@@ -271,7 +270,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           </div>
           <div class="task-step">
             <span class="step-dot">3</span>
-            <span>Refresh and count the extra chunks so you can explain the bundle-size tradeoff out loud.</span>
+            <span>Refresh and count the extra chunks so you can explain the bundle-size tradeoff in your own words.</span>
           </div>
         </div>
 

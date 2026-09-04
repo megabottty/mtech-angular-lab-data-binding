@@ -25,7 +25,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
           <li><strong>Learning Goal:</strong> Split a route's code into its own downloaded-on-demand chunk.</li>
           <li><strong>Why It Matters:</strong> Smaller initial bundle = faster first load, especially for pages most users never open.</li>
           <li><strong>Build Steps:</strong> Convert a route to <code>loadComponent</code> → reload and confirm no chunk in Network tab → navigate to the route → confirm the chunk arrives just then.</li>
-          <li><strong>Expected Outcome:</strong> Students can convert any route to lazy loading and verify it in DevTools.</li>
+          <li><strong>Expected Outcome:</strong> You can convert any route to lazy loading and verify it in DevTools.</li>
         </ul>
       </section>
 
@@ -38,9 +38,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
         <p>Lazy loading in standalone Angular is delightfully boring: replace <code>component</code> with <code>loadComponent</code>, keep the rest of the route config, and let the browser fetch that page only when needed.</p>
         <div class="think-about-it">
-          <p class="tai-q">In your old curriculum this conversion involved NgModules and lazy-loaded module ceremony. What's different now?</p>
-          <p class="tai-a">With standalone components, you no longer need a dedicated <code>NgModule</code> wrapper just to create a lazy chunk. You replace the <code>component</code> property with <code>loadComponent: () => import('./stats/stats.component').then(m => m.StatsComponent)</code> and the bundler creates the separate chunk automatically. One property swap replaces what used to be a new module file, <code>RouterModule.forChild()</code> config, and a barrel export.</p>
+          <p class="tai-q">Older Angular tutorials do this conversion with NgModules and lazy-loaded module ceremony. What's different now?</p>
         </div>
+        <app-collapsible icon="✅" label="Show Answer — one property swap replaces a whole module">
+          <p>With standalone components, you no longer need a dedicated <code>NgModule</code> wrapper just to create a lazy chunk. You replace the <code>component</code> property with <code>loadComponent: () => import('./stats/stats.component').then(m => m.StatsComponent)</code> and the bundler creates the separate chunk automatically. One property swap replaces what used to be a new module file, <code>RouterModule.forChild()</code> config, and a barrel export.</p>
+        </app-collapsible>
 
         <app-code-block lang="typescript" [code]="statsRouteConversion" />
 
