@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Typing in a box updates a signal, and a computed does the rest.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/templates/two-way-binding" target="_blank" rel="noopener">Two-way binding</a> — plus <a href="https://angular.dev/guide/templates/defer" target="_blank" rel="noopener">Deferred loading</a> for the <code>&#64;defer</code> demo in Step 3.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">State that resets itself when its source changes — and two bugs to catch.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/signals/linked-signal" target="_blank" rel="noopener">linkedSignal</a> — skim only — recognition is enough at this stage.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">
@@ -136,7 +141,10 @@ export class Act3Component {
     }
   ];
 
-  linkedSignalCode = `season = signal(1);
+  linkedSignalCode = `import { Component, signal, computed, linkedSignal } from '@angular/core';
+// ...
+
+season = signal(1);
 nextEpisode = linkedSignal(() => {
   this.season();   // depends on season…
   return 1;        // …resets to 1 whenever season changes

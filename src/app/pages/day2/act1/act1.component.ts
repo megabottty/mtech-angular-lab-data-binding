@@ -25,6 +25,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         here forward lives in this project.
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/templates/binding" target="_blank" rel="noopener">Templates → Binding</a> — the property-binding section is exactly Step 2 below.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

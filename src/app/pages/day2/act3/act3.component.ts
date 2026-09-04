@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Any DOM event works the same way — and three classic bugs to catch before they catch you.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/essentials/templates" target="_blank" rel="noopener">Essentials → Templates</a> — a short overview that ties all three binding types together.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

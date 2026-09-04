@@ -26,6 +26,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         state handy? <a routerLink="/day3/start">Grab the Day 3 starting point</a> first.
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/essentials/signals" target="_blank" rel="noopener">Essentials → Signals</a> — plus the fuller <a href="https://angular.dev/guide/signals" target="_blank" rel="noopener">Signals guide</a> — read the "What are signals?" section before Step 3.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

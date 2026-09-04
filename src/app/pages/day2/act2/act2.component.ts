@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Clicks flow up into your class — and change how the card looks.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/templates/event-listeners" target="_blank" rel="noopener">Templates → Event listeners</a> — pairs directly with the click handler you write in Step 1.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

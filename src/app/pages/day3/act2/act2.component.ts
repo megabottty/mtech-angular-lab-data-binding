@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Parentheses in the template, read-only formulas, and reaching outside Angular.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/signals" target="_blank" rel="noopener">Signals guide</a> — the <code>computed</code> and <code>effect</code> sections map onto Steps 2 and 3.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">
@@ -145,7 +150,10 @@ export class Act2Component {
 
   computedSetAttemptCode = `this.minutesWatched.set(999);   // ❌ Property 'set' does not exist on type...`;
 
-  effectCode = `constructor() {
+  effectCode = `import { Component, signal, computed, effect } from '@angular/core';
+// ...
+
+constructor() {
   effect(() => {
     console.log(\`\${this.title}: \${this.episodesWatched()} episodes\`);
   });

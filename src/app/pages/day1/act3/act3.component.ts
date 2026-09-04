@@ -22,6 +22,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         already rendering above the page. If it isn't, finish <a routerLink="/day1/act2">Act 2</a> first.
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/tools/cli" target="_blank" rel="noopener">CLI reference</a> — plus <a href="https://git-scm.com/docs/gittutorial" target="_blank" rel="noopener">git's own tutorial</a> for the commit workflow in Step 1.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

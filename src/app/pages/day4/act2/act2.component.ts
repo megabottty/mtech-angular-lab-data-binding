@@ -17,6 +17,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         <p class="subtitle">Show different markup depending on what the data actually is.</p>
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/templates/control-flow" target="_blank" rel="noopener">Templates → Control flow</a> — this time the <code>&#64;if</code> and <code>&#64;switch</code> sections.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">

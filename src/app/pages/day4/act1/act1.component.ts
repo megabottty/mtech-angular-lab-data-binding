@@ -25,6 +25,11 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         Don't have that state handy? <a routerLink="/day4/start">Grab the Day 4 starting point</a> first.
       </div>
 
+      <div class="info-box">
+        <strong>📚 Worth reading alongside this act:</strong>
+        <a href="https://angular.dev/guide/templates/control-flow" target="_blank" rel="noopener">Templates → Control flow</a> — the <code>&#64;for</code> section explains why <code>track</code> is required.
+      </div>
+
       <app-mental-model-card [models]="models" />
 
       <section class="lesson-framework">
