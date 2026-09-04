@@ -174,6 +174,47 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">🔁 Day 4 — Control Flow &amp; Two-Way Binding</h2>
+      <p class="day-subheading">Render a real, filterable list of shows with &#64;for, &#64;if, &#64;switch, and [(ngModel)].</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day4/act1">
+          <div class="act-icon">🔁</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">A Real List</div>
+            <div class="act-desc">A Show interface, a signal array, and &#64;for + track + &#64;empty</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day4/act2">
+          <div class="act-icon">🚦</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Branching</div>
+            <div class="act-desc">&#64;if / &#64;else and &#64;switch genre badges</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day4/act3">
+          <div class="act-icon">🔍</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Two-Way Binding &amp; Debug It</div>
+            <div class="act-desc">[(ngModel)], a live filter, &#64;defer, and three classic bugs</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day4/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">4 Hands-On Tasks</div>
+            <div class="act-desc">Genre filter, ratings guard, result count, and a sort stretch</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">📘 Day 5 — Control Flow &amp; Two-Way Binding</h2>
       <div class="act-cards">
         <div class="act-card" routerLink="/lesson/1">

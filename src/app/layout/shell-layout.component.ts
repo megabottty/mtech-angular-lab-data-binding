@@ -65,7 +65,11 @@ const ALL_STEPS = [
   'd3-act1-warmup', 'd3-act1-problem', 'd3-act1-convert-signals',
   'd3-act2-template-parens', 'd3-act2-computed-readonly', 'd3-act2-effect',
   'd3-act3-linked-signal', 'd3-act3-debug-it',
-  'd3-lab-binge-level', 'd3-lab-budget', 'd3-lab-persistence-stretch'
+  'd3-lab-binge-level', 'd3-lab-budget', 'd3-lab-persistence-stretch',
+  'd4-act1-warmup', 'd4-act1-problem', 'd4-act1-show-list',
+  'd4-act2-if-else', 'd4-act2-switch',
+  'd4-act3-two-way-filter', 'd4-act3-defer', 'd4-act3-debug-it',
+  'd4-lab-genre-filter', 'd4-lab-ratings-guard', 'd4-lab-result-count', 'd4-lab-sort-stretch'
 ];
 
 interface DayNavItem {
@@ -117,6 +121,17 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day3/act2', label: '🔒 Act 2 — Reading Signals & computed' },
       { path: '/day3/act3', label: '🔄 Act 3 — linkedSignal & Debug It' },
       { path: '/day3/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day4',
+    label: '🔁 Day 4 — Control Flow & Two-Way Binding',
+    prefix: '/day4',
+    items: [
+      { path: '/day4/act1', label: '🔁 Act 1 — A Real List' },
+      { path: '/day4/act2', label: '🚦 Act 2 — Branching' },
+      { path: '/day4/act3', label: '🔍 Act 3 — Two-Way Binding & Debug It' },
+      { path: '/day4/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   },
   {

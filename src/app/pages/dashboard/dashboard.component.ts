@@ -60,7 +60,11 @@ const ALL_STEPS = [
   'd3-act1-warmup', 'd3-act1-problem', 'd3-act1-convert-signals',
   'd3-act2-template-parens', 'd3-act2-computed-readonly', 'd3-act2-effect',
   'd3-act3-linked-signal', 'd3-act3-debug-it',
-  'd3-lab-binge-level', 'd3-lab-budget', 'd3-lab-persistence-stretch'
+  'd3-lab-binge-level', 'd3-lab-budget', 'd3-lab-persistence-stretch',
+  'd4-act1-warmup', 'd4-act1-problem', 'd4-act1-show-list',
+  'd4-act2-if-else', 'd4-act2-switch',
+  'd4-act3-two-way-filter', 'd4-act3-defer', 'd4-act3-debug-it',
+  'd4-lab-genre-filter', 'd4-lab-ratings-guard', 'd4-lab-result-count', 'd4-lab-sort-stretch'
 ];
 
 @Component({
