@@ -333,6 +333,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">🏛️ Day 7 — Services &amp; Dependency Injection</h2>
+      <p class="day-subheading">Move shared state out of components, prove the singleton, and make the watchlist survive a refresh.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day7/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone the end-of-Day-6 project, or copy the files by hand</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day7/act1">
+          <div class="act-icon">🏛️</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Services &amp; Dependency Injection</div>
+            <div class="act-desc">Give the watchlist a home that is not a component</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day7/act2">
+          <div class="act-icon">🔗</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Proving the Singleton</div>
+            <div class="act-desc">Share a live badge between unrelated components with no wiring</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day7/act3">
+          <div class="act-icon">🧭</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Boundaries &amp; Debug It</div>
+            <div class="act-desc">Choose service versus input and fix three DI bugs</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day7/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">3 Hands-On Tasks</div>
+            <div class="act-desc">Refactor, build recently viewed state, and persist the watchlist</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">🧭 Day 9 — Routing II: Params, Navigation, Guards &amp; Lazy Loading</h2>
       <p class="day-subheading">Continuing BingeBoard: deep-link to a show, navigate from code, protect a route, and stop shipping code nobody asked for.</p>
       <div class="act-cards">

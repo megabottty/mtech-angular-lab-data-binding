@@ -72,7 +72,11 @@ const ALL_STEPS = [
   'd6-act1-warmup', 'd6-act1-problem', 'd6-act1-ng-content', 'd6-act1-wrapping', 'd6-act1-multi-slot',
   'd6-act2-instrument', 'd6-act2-constructor-rule', 'd6-act2-hooks-vs-computed', 'd6-act2-cleanup',
   'd6-act3-encapsulation', 'd6-act3-host', 'd6-act3-layout', 'd6-act3-debug',
-  'd6-lab-collapsible', 'd6-lab-empty-slot', 'd6-lab-lifecycle-proof', 'd6-lab-polish-stretch'
+  'd6-lab-collapsible', 'd6-lab-empty-slot', 'd6-lab-lifecycle-proof', 'd6-lab-polish-stretch',
+  'd7-act1-warmup', 'd7-act1-what-is-a-service', 'd7-act1-generate', 'd7-act1-inject', 'd7-act1-legacy',
+  'd7-act2-extract-header', 'd7-act2-badge', 'd7-act2-one-instance', 'd7-act2-inject-timing',
+  'd7-act3-boundaries', 'd7-act3-debug', 'd7-act3-checkpoint',
+  'd7-lab-refactor', 'd7-lab-recently-viewed', 'd7-lab-persistence'
 ];
 
 @Component({

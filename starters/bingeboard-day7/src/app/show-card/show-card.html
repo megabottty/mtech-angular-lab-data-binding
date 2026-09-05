@@ -1,0 +1,55 @@
+<article class="card"
+         [class.watched]="watched()"
+         [class.hot]="hype >= 5"
+         [class.over-budget]="isOverBudget()"
+         [class.compact]="compact()">
+
+  @if (!compact()) {
+    <img [src]="show().imageUrl" [alt]="show().name" width="140" />
+  }
+
+  <h3>{{ show().name }}</h3>
+  <p>{{ show().genre }} · ⭐ {{ show().rating }}</p>
+
+  @switch (show().genre) {
+    @case ('Kids') { <span class="badge">👨‍👩‍👧 Family</span> }
+    @case ('Thriller') { <span class="badge">🔪 Edge of seat</span> }
+    @default { <span class="badge">📺 {{ show().genre }}</span> }
+  }
+
+  @if (show().rating < 7) {
+    <span class="badge caution">⚠️ Proceed with caution</span>
+  } @else if (show().rating >= 9) {
+    <span class="badge banger">🏆 Certified banger</span>
+  }
+
+  @if (!compact()) {
+    <p>Your rating:</p>
+    <app-rating-stars [(rating)]="myRating" />
+
+    <button (click)="add()" [disabled]="alreadyAdded()">
+      @if (alreadyAdded()) {
+        On your watchlist
+      } @else {
+        + Add to watchlist
+      }
+    </button>
+
+    <button (click)="toggleWatched()">
+      {{ watched() ? 'Watched ✓' : 'Mark as watched' }}
+    </button>
+
+    <p>Episodes: {{ episodesWatched() }} · {{ hours() }} hrs</p>
+    <button (click)="watchEpisode()">+1 episode</button>
+
+    <p>Binge level: {{ bingeLevel() }}</p>
+    <p [class.over-budget-text]="isOverBudget()">{{ minutesRemaining() }} minutes left this week</p>
+
+    <p>S{{ season() }} · next up: E{{ nextEpisode() }}</p>
+    <button (click)="nextEpisode.update(e => e + 1)">skip</button>
+    <button (click)="season.update(s => s + 1)">next season →</button>
+
+    <button (dblclick)="hype = hype + 1">🔥 {{ hype }}</button>
+    <button (click)="hype = 0" [disabled]="hype === 0">Reset hype</button>
+  }
+</article>
