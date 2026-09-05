@@ -1,0 +1,29 @@
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 220px;
+}
+
+.card.watched {
+  opacity: 0.55;
+}
+
+.card.watched h3::after {
+  content: ' ✓';
+  color: green;
+}
+
+.card.hot {
+  border-color: #f44747;
+  box-shadow: 0 0 12px rgba(244, 71, 71, 0.6);
+}
+
+.card.over-budget {
+  border-color: #f44747;
+  box-shadow: 0 0 0 2px rgba(244, 71, 71, 0.3);
+}
+
+.over-budget-text {
+  color: #f44747;
+}

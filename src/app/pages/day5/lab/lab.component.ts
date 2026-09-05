@@ -183,7 +183,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </p>
 
         <div class="task-steps">
-          <div class="task-step"><span class="step-dot">1</span><span>In <code>App</code>, add <code>ratings = signal&lt;Record&lt;number, number&gt;&gt;(&#123;&#125;)</code> and a <code>setRating(id: number, value: number)</code> method that writes a new object with <code>update()</code>.</span></div>
+          <div class="task-step"><span class="step-dot">1</span><span>In <code>App</code>, add <code>ratings = signal&lt;Record&lt;number, number | undefined&gt;&gt;(&#123;&#125;)</code> and a <code>setRating(id: number, value: number)</code> method that writes a new object with <code>update()</code>.</span></div>
           <div class="task-step"><span class="step-dot">2</span><span>Change <code>ShowCard</code>'s <code>myRating</code> from a <code>signal()</code> to a <code>model(0)</code> so it can be bound from above and written from below.</span></div>
           <div class="task-step"><span class="step-dot">3</span><span>Bind it in the list: <code>[myRating]="ratings()[show.id] ?? 0"</code> plus <code>(myRatingChange)="setRating(show.id, $event)"</code>.</span></div>
           <div class="task-step"><span class="step-dot">4</span><span>Confirm it survives filtering: rate a show, type in the filter box until it disappears, clear the filter, and check the rating is still there.</span></div>
@@ -405,7 +405,7 @@ export class ShowCard {
 </button>`;
 
   ratingsParentCode = `export class App {
-  ratings = signal<Record<number, number>>({});
+  ratings = signal<Record<number, number | undefined>>({});
 
   setRating(id: number, value: number) {
     this.ratings.update(map => ({ ...map, [id]: value }));

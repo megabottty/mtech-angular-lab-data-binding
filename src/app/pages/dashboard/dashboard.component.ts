@@ -68,7 +68,11 @@ const ALL_STEPS = [
   'd5-act1-warmup', 'd5-act1-problem', 'd5-act1-input', 'd5-act1-passing-down', 'd5-act1-transform',
   'd5-act2-problem', 'd5-act2-output', 'd5-act2-listening', 'd5-act2-data-down-events-up',
   'd5-act3-long-way', 'd5-act3-model', 'd5-act3-rating-stars', 'd5-act3-debug',
-  'd5-lab-watchlist-panel', 'd5-lab-compact-input', 'd5-lab-already-added', 'd5-lab-model-stretch'
+  'd5-lab-watchlist-panel', 'd5-lab-compact-input', 'd5-lab-already-added', 'd5-lab-model-stretch',
+  'd6-act1-warmup', 'd6-act1-problem', 'd6-act1-ng-content', 'd6-act1-wrapping', 'd6-act1-multi-slot',
+  'd6-act2-instrument', 'd6-act2-constructor-rule', 'd6-act2-hooks-vs-computed', 'd6-act2-cleanup',
+  'd6-act3-encapsulation', 'd6-act3-host', 'd6-act3-layout', 'd6-act3-debug',
+  'd6-lab-collapsible', 'd6-lab-empty-slot', 'd6-lab-lifecycle-proof', 'd6-lab-polish-stretch'
 ];
 
 @Component({

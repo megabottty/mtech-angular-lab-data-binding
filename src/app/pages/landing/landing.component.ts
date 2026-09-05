@@ -283,6 +283,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">🧱 Day 6 — Component Composition</h2>
+      <p class="day-subheading">Pass markup with ng-content, meet lifecycle hooks, and learn why component CSS never leaks.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day6/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone the end-of-Day-5 project, or copy the files by hand</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day6/act1">
+          <div class="act-icon">🕳️</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Content Projection</div>
+            <div class="act-desc">A reusable Panel frame built on &lt;ng-content&gt;, plus multi-slot select</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day6/act2">
+          <div class="act-icon">🔄</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Lifecycle Hooks</div>
+            <div class="act-desc">Watch cards get born and destroyed, and learn when a computed beats a hook</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day6/act3">
+          <div class="act-icon">🎨</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Styling &amp; Debug It</div>
+            <div class="act-desc">View encapsulation, :host, a real grid layout, and two classic bugs</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day6/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">4 Hands-On Tasks</div>
+            <div class="act-desc">A collapsible panel, a projected empty state, a self-cleaning ticker, and polish</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">🧭 Day 9 — Routing II: Params, Navigation, Guards &amp; Lazy Loading</h2>
       <p class="day-subheading">Continuing BingeBoard: deep-link to a show, navigate from code, protect a route, and stop shipping code nobody asked for.</p>
       <div class="act-cards">
