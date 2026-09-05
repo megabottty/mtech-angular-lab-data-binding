@@ -1,0 +1,69 @@
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 24px;
+  border-bottom: 1px solid #2a2d35;
+}
+
+.brand { font-weight: 700; }
+
+main { padding: 24px; }
+
+.filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.filters input,
+.filters select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #3e3e42;
+  background: #1c1f26;
+  color: #e6e6e6;
+}
+
+.result-count {
+  color: #b0b0b0;
+  font-size: 14px;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0 32px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 180px;
+}
+
+.badge {
+  display: inline-block;
+  background: #2a2d35;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.badge.caution { background: #4a3524; color: #e0a76a; }
+.badge.banger { background: #23402f; color: #6ed3a5; }
+
+.empty-state {
+  padding: 24px;
+  border: 1px dashed #3e3e42;
+  border-radius: 8px;
+}
+
+.tracker {
+  border-top: 1px solid #2a2d35;
+  padding-top: 16px;
+}

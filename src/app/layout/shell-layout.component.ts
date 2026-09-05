@@ -69,7 +69,11 @@ const ALL_STEPS = [
   'd4-act1-warmup', 'd4-act1-problem', 'd4-act1-show-list',
   'd4-act2-if-else', 'd4-act2-switch',
   'd4-act3-two-way-filter', 'd4-act3-defer', 'd4-act3-debug-it',
-  'd4-lab-genre-filter', 'd4-lab-ratings-guard', 'd4-lab-result-count', 'd4-lab-sort-stretch'
+  'd4-lab-genre-filter', 'd4-lab-ratings-guard', 'd4-lab-result-count', 'd4-lab-sort-stretch',
+  'd5-act1-warmup', 'd5-act1-problem', 'd5-act1-input', 'd5-act1-passing-down', 'd5-act1-transform',
+  'd5-act2-problem', 'd5-act2-output', 'd5-act2-listening', 'd5-act2-data-down-events-up',
+  'd5-act3-long-way', 'd5-act3-model', 'd5-act3-rating-stars', 'd5-act3-debug',
+  'd5-lab-watchlist-panel', 'd5-lab-compact-input', 'd5-lab-already-added', 'd5-lab-model-stretch'
 ];
 
 interface DayNavItem {
@@ -134,6 +138,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day4/act2', label: '🚦 Act 2 — Branching' },
       { path: '/day4/act3', label: '🔍 Act 3 — Two-Way Binding & Debug It' },
       { path: '/day4/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day5',
+    label: '🔌 Day 5 — Component Communication',
+    prefix: '/day5',
+    items: [
+      { path: '/day5/start', label: '🎬 Starting Point' },
+      { path: '/day5/act1', label: '⬇️ Act 1 — Data Down with input()' },
+      { path: '/day5/act2', label: '⬆️ Act 2 — Events Up with output()' },
+      { path: '/day5/act3', label: '🔄 Act 3 — model() & Debug It' },
+      { path: '/day5/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   },
   {

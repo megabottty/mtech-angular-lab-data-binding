@@ -64,7 +64,11 @@ const ALL_STEPS = [
   'd4-act1-warmup', 'd4-act1-problem', 'd4-act1-show-list',
   'd4-act2-if-else', 'd4-act2-switch',
   'd4-act3-two-way-filter', 'd4-act3-defer', 'd4-act3-debug-it',
-  'd4-lab-genre-filter', 'd4-lab-ratings-guard', 'd4-lab-result-count', 'd4-lab-sort-stretch'
+  'd4-lab-genre-filter', 'd4-lab-ratings-guard', 'd4-lab-result-count', 'd4-lab-sort-stretch',
+  'd5-act1-warmup', 'd5-act1-problem', 'd5-act1-input', 'd5-act1-passing-down', 'd5-act1-transform',
+  'd5-act2-problem', 'd5-act2-output', 'd5-act2-listening', 'd5-act2-data-down-events-up',
+  'd5-act3-long-way', 'd5-act3-model', 'd5-act3-rating-stars', 'd5-act3-debug',
+  'd5-lab-watchlist-panel', 'd5-lab-compact-input', 'd5-lab-already-added', 'd5-lab-model-stretch'
 ];
 
 @Component({
