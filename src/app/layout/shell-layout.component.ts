@@ -81,7 +81,11 @@ const ALL_STEPS = [
   'd7-act1-warmup', 'd7-act1-what-is-a-service', 'd7-act1-generate', 'd7-act1-inject', 'd7-act1-legacy',
   'd7-act2-extract-header', 'd7-act2-badge', 'd7-act2-one-instance', 'd7-act2-inject-timing',
   'd7-act3-boundaries', 'd7-act3-debug', 'd7-act3-checkpoint',
-  'd7-lab-refactor', 'd7-lab-recently-viewed', 'd7-lab-persistence'
+  'd7-lab-refactor', 'd7-lab-recently-viewed', 'd7-lab-persistence',
+  'd8-act1-warmup', 'd8-act1-problem', 'd8-act1-page-components', 'd8-act1-routes', 'd8-act1-outlet',
+  'd8-act2-browse', 'd8-act2-watchlist', 'd8-act2-shell', 'd8-act2-spa-checks',
+  'd8-act3-not-found', 'd8-act3-active', 'd8-act3-about', 'd8-act3-debug',
+  'd8-lab-home-cta', 'd8-lab-about', 'd8-lab-surprise'
 ];
 
 interface DayNavItem {
@@ -182,6 +186,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day7/act2', label: '🔗 Act 2 — Proving the Singleton' },
       { path: '/day7/act3', label: '🧭 Act 3 — Boundaries & Debug It' },
       { path: '/day7/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day8',
+    label: '🧭 Day 8 — Routing Basics',
+    prefix: '/day8',
+    items: [
+      { path: '/day8/start', label: '🎬 Starting Point' },
+      { path: '/day8/act1', label: '🧭 Act 1 — Router Basics' },
+      { path: '/day8/act2', label: '🧩 Act 2 — Move UI into Pages' },
+      { path: '/day8/act3', label: '🛟 Act 3 — 404 & Debug It' },
+      { path: '/day8/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   },
   {

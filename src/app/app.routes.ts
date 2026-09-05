@@ -183,6 +183,31 @@ export const routes: Routes = [
           import('./pages/day7/lab/lab.component').then(m => m.Day7LabComponent)
       },
       {
+        path: 'day8/start',
+        loadComponent: () =>
+          import('./pages/day8/start/start.component').then(m => m.Day8StartComponent)
+      },
+      {
+        path: 'day8/act1',
+        loadComponent: () =>
+          import('./pages/day8/act1/act1.component').then(m => m.Day8Act1Component)
+      },
+      {
+        path: 'day8/act2',
+        loadComponent: () =>
+          import('./pages/day8/act2/act2.component').then(m => m.Day8Act2Component)
+      },
+      {
+        path: 'day8/act3',
+        loadComponent: () =>
+          import('./pages/day8/act3/act3.component').then(m => m.Day8Act3Component)
+      },
+      {
+        path: 'day8/lab',
+        loadComponent: () =>
+          import('./pages/day8/lab/lab.component').then(m => m.Day8LabComponent)
+      },
+      {
         path: 'lesson/1',
         loadComponent: () =>
           import('./pages/lesson/act1/act1.component').then(m => m.Act1Component)

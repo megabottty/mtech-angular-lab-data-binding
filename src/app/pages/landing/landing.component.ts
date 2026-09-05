@@ -383,6 +383,26 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">🧭 Day 8 — Routing Basics</h2>
+      <p class="day-subheading">Turn BingeBoard into a multi-page SPA with real URLs, active links, a 404, and a clean shell.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day8/start">
+          <div class="act-icon">🎬</div><div class="act-info"><div class="act-num">Starting Point</div><div class="act-name">Get BingeBoard Running</div><div class="act-desc">Clone the end-of-Day-7 project before the routing refactor</div></div><span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day8/act1">
+          <div class="act-icon">🧭</div><div class="act-info"><div class="act-num">Act 1</div><div class="act-name">The Router's Three Pieces</div><div class="act-desc">Route table, router outlet, and navigation without reloads</div></div><span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day8/act2">
+          <div class="act-icon">🧩</div><div class="act-info"><div class="act-num">Act 2</div><div class="act-name">Move the Real UI into Pages</div><div class="act-desc">Split Browse and Watchlist while the service keeps state shared</div></div><span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day8/act3">
+          <div class="act-icon">🛟</div><div class="act-info"><div class="act-num">Act 3</div><div class="act-name">404, Active Links &amp; Debug It</div><div class="act-desc">Finish navigation polish and fix three classic routing bugs</div></div><span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day8/lab">
+          <div class="act-icon">🛠️</div><div class="act-info"><div class="act-num">Student Lab</div><div class="act-name">3 Hands-On Tasks</div><div class="act-desc">Home CTAs, an About page, and the Surprise Me anticipation link</div></div><span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">🧭 Day 9 — Routing II: Params, Navigation, Guards &amp; Lazy Loading</h2>
       <p class="day-subheading">Continuing BingeBoard: deep-link to a show, navigate from code, protect a route, and stop shipping code nobody asked for.</p>
       <div class="act-cards">
