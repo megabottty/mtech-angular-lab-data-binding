@@ -58,7 +58,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
         </app-collapsible>
 
         <app-collapsible icon="🧩" label="Deep Dive — What does createUrlTree() actually return?">
-          <p><code>router.createUrlTree(['/browse'])</code> builds a navigable <code>UrlTree</code> object without navigating yet. Returning that object from the guard tells the Router, “Don't enter this route — redirect there instead.”</p>
+          <p><code>router.createUrlTree(['/browse'])</code> builds a navigable <code>UrlTree</code> object without navigating yet. Returning that object from the guard tells the Router, "Don't enter this route - redirect there instead."</p>
         </app-collapsible>
 
         <div class="outcome-check">✅ <strong>Expected outcome for this step:</strong> You can write a functional <code>CanActivateFn</code> guard that reads application state via <code>inject()</code>.</div>

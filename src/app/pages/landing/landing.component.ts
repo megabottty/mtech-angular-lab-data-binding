@@ -406,6 +406,15 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
       <h2 class="day-heading">🧭 Day 9 — Routing II: Params, Navigation, Guards &amp; Lazy Loading</h2>
       <p class="day-subheading">Continuing BingeBoard: deep-link to a show, navigate from code, protect a route, and stop shipping code nobody asked for.</p>
       <div class="act-cards">
+        <div class="act-card" routerLink="/day9/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone the routed app foundation before exploring parameters</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
         <div class="act-card" routerLink="/day9/act1">
           <div class="act-icon">🔗</div>
           <div class="act-info">

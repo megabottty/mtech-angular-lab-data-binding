@@ -51,7 +51,7 @@ describe('ShellLayoutComponent — day accordion', () => {
     expect(component.dayGroups.find(d => d.id === 'day6')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day7')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day8')?.items.length).toBe(5);
-    expect(component.dayGroups.find(d => d.id === 'day9')?.items.length).toBe(5);
+    expect(component.dayGroups.find(d => d.id === 'day9')?.items.length).toBe(6);
     expect(component.dayGroups.find(d => d.id === 'day13')?.items.length).toBe(5);
     expect(component.dayGroups.find(d => d.id === 'day14')?.items.length).toBe(4);
     expect(component.dayGroups.find(d => d.id === 'day15')?.items.length).toBe(5);
@@ -114,7 +114,7 @@ describe('ShellLayoutComponent — day accordion', () => {
 
     const day9Links = Array.from(el.querySelectorAll('.day-items a')).map(a => a.getAttribute('href'));
     expect(day9Links).toEqual([
-      '/day9/act1', '/day9/act2', '/day9/act3', '/day9/act4', '/day9/lab'
+      '/day9/start', '/day9/act1', '/day9/act2', '/day9/act3', '/day9/act4', '/day9/lab'
     ]);
   });
 });

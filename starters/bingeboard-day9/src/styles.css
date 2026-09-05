@@ -1,0 +1,69 @@
+/* BingeBoard - global styles.
+   The app-wide look lives here; component-specific look lives in the
+   component's own stylesheet (that is view encapsulation, Day 6 Act 3). */
+
+:root {
+  --bg: #14161b;
+  --surface: #1c1f26;
+  --border: #2a2d35;
+  --text: #e6e6e6;
+  --muted: #9aa0aa;
+  --accent: #4fc3f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1, h2, h3 { line-height: 1.25; }
+
+a {
+  color: var(--accent);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+input,
+button {
+  font-family: inherit;
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.error-box {
+  background: #2a1a1a;
+  border: 1px solid #5c1a1a;
+  color: #f4a3a3;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 12px 0;
+}
+
+.not-found-box {
+  background: #2a2a1a;
+  border: 1px solid #5c4a00;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+}

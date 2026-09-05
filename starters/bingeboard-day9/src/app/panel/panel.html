@@ -1,0 +1,23 @@
+<section class="panel">
+  <header class="panel-header">
+    <h2>{{ title() }}</h2>
+
+    <span class="header-actions">
+      <ng-content select="[panel-actions]" />
+      <button
+        type="button"
+        class="toggle"
+        [class.collapsed]="!expanded()"
+        (click)="toggle()"
+        [attr.aria-expanded]="expanded()"
+        [attr.aria-label]="expanded() ? 'Collapse panel' : 'Expand panel'"
+      >▾</button>
+    </span>
+  </header>
+
+  @if (expanded()) {
+    <div class="panel-body">
+      <ng-content />
+    </div>
+  }
+</section>

@@ -233,6 +233,11 @@ export const routes: Routes = [
           import('./pages/lesson/act5-lab/act5-lab.component').then(m => m.Act5LabComponent)
       },
       {
+        path: 'day9/start',
+        loadComponent: () =>
+          import('./pages/day9/start/start.component').then(m => m.Day9StartComponent)
+      },
+      {
         path: 'day9/act1',
         loadComponent: () =>
           import('./pages/day9/act1/act1.component').then(m => m.Act1Component)

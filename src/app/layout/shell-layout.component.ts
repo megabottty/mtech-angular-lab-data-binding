@@ -205,6 +205,7 @@ const DAY_GROUPS: DayGroup[] = [
     label: '🧭 Day 9 — Routing',
     prefix: '/day9',
     items: [
+      { path: '/day9/start', label: '🎬 Starting Point' },
       { path: '/day9/act1', label: '🔗 Act 1 — Route Params' },
       { path: '/day9/act2', label: '🚀 Act 2 — Navigation' },
       { path: '/day9/act3', label: '🛡️ Act 3 — Guards' },
