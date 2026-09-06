@@ -462,6 +462,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">📝 Day 10 — Reactive Forms I: The Review Form</h2>
+      <p class="day-subheading">BingeBoard gets its first reactive form: a typed FormGroup built with FormBuilder, wired with [formGroup] and formControlName, posting reviews into a signal-based service.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day10/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone the lazy-loaded Day 9 foundation before building the Review form</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day10/act1">
+          <div class="act-icon">📝</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Two Philosophies</div>
+            <div class="act-desc">Template-driven vs. reactive, then FormGroup/FormControl by hand and via FormBuilder</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day10/act2">
+          <div class="act-icon">🧾</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Building the Review Form</div>
+            <div class="act-desc">Review model, ReviewsService, and a working ReviewForm with getRawValue() + reset()</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day10/act3">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Reviews on the Show Page &amp; Debug It</div>
+            <div class="act-desc">&#64;for, spoiler reveal, a quick-fill button, and three classic reactive-forms bugs</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day10/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">4 Hands-On Tasks</div>
+            <div class="act-desc">Reviews across shows, empty state, a recommend quick-fill, and a live character count</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">🌐 Day 13 — HTTP I: Real Data from a Real API</h2>
       <p class="day-subheading">BingeBoard's hardcoded array dies today: real HttpClient calls, a typed &amp; adapted third-party API, loading/empty states, and the async bug everyone meets once.</p>
       <div class="act-cards">

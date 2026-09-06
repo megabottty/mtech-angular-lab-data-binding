@@ -18,6 +18,10 @@ const ALL_STEPS = [
   'd9-act3-guard-create', 'd9-act3-guard-wire',
   'd9-act4-lazy-convert', 'd9-act4-verify',
   'd9-lab-prevnext', 'd9-lab-notfound', 'd9-lab-guard-watchlist', 'd9-lab-stretch',
+  'd10-act1-td-vs-reactive', 'd10-act1-formgroup-formcontrol', 'd10-act1-formbuilder',
+  'd10-act2-review-model-service', 'd10-act2-reviewform-init', 'd10-act2-submit-reset',
+  'd10-act3-showdetail-reviews', 'd10-act3-quick-10', 'd10-act3-debug',
+  'd10-lab-post-across-shows', 'd10-lab-empty-state', 'd10-lab-recommend-patch', 'd10-lab-char-count', 'd10-lab-stretch-disable-button',
   'd13-act1-problem', 'd13-act1-httpclient', 'd13-act1-observable-model',
   'd13-act2-typing', 'd13-act2-adapter', 'd13-act2-service', 'd13-act2-subscribe-fires',
   'd13-act3-browse-component', 'd13-act3-three-state', 'd13-act3-debug',
@@ -211,6 +215,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day9/act3', label: '🛡️ Act 3 — Guards' },
       { path: '/day9/act4', label: '📦 Act 4 — Lazy Loading' },
       { path: '/day9/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day10',
+    label: '📝 Day 10 — Reactive Forms I',
+    prefix: '/day10',
+    items: [
+      { path: '/day10/start', label: '🎬 Starting Point' },
+      { path: '/day10/act1', label: '📝 Act 1 — Two Philosophies' },
+      { path: '/day10/act2', label: '🧾 Act 2 — Building the Review Form' },
+      { path: '/day10/act3', label: '🎬 Act 3 — Reviews on the Show Page & Debug It' },
+      { path: '/day10/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   },
   {
