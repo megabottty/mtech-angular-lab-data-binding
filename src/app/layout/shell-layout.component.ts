@@ -67,6 +67,10 @@ const ALL_STEPS = [
   'd21-act2-owner-id', 'd21-act2-user-query', 'd21-act2-auth-guard',
   'd21-act3-rules', 'd21-act3-error-ux', 'd21-act3-debug',
   'd21-lab-review-author', 'd21-lab-signin-nudge', 'd21-lab-return-url', 'd21-lab-profile-stretch',
+  'd22-act1-build-inspect', 'd22-act1-environments',
+  'd22-act2-hosting-init', 'd22-act2-spa-rewrite', 'd22-act2-deploy',
+  'd22-act3-ssr', 'd22-act3-debug',
+  'd22-lab-shipit-checklist', 'd22-lab-lighthouse', 'd22-lab-friend-test', 'd22-lab-preview-channel',
   'd1-act1-why-angular', 'd1-act1-scaffold', 'd1-act1-project-tour',
   'd1-act2-interpolation', 'd1-act2-generate-component', 'd1-act2-use-component',
   'd1-act3-git-commit', 'd1-act3-debug-it',
@@ -365,6 +369,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day21/act2', label: '👤 Act 2 — Private Watchlists & Guards' },
       { path: '/day21/act3', label: '🛂 Act 3 — Locked Doors & Debug It' },
       { path: '/day21/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day22',
+    label: '🚀 Day 22 — Ship It: Production & Hosting',
+    prefix: '/day22',
+    items: [
+      { path: '/day22/start', label: '🎬 Starting Point' },
+      { path: '/day22/act1', label: '🏗️ Act 1 — The Production Build' },
+      { path: '/day22/act2', label: '☁️ Act 2 — Firebase Hosting' },
+      { path: '/day22/act3', label: '🎭 Act 3 — SSR & Production Incidents' },
+      { path: '/day22/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];

@@ -1032,6 +1032,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
             </div>
             <span class="act-arrow">→</span>
           </div>
+
+          <h2 class="day-heading">🚀 Day 22 — Ship It: Production Builds and Firebase Hosting</h2>
+          <p class="day-subheading">Produce a real production build, deploy it to Firebase Hosting with the SPA rewrite that makes deep links work, and end the day with a live, shareable URL.</p>
+          <div class="act-cards">
+            <div class="act-card" routerLink="/day22/start">
+              <div class="act-icon">🎬</div>
+              <div class="act-info">
+                <div class="act-num">Starting Point</div>
+                <div class="act-name">Get BingeBoard Running</div>
+                <div class="act-desc">The end-of-Day-21 project, ready to become a production build</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+            <div class="act-card" routerLink="/day22/act1">
+              <div class="act-icon">🏗️</div>
+              <div class="act-info">
+                <div class="act-num">Act 1</div>
+                <div class="act-name">The Production Build</div>
+                <div class="act-desc">Run ng build, tour dist/, and split dev configuration from prod configuration</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+            <div class="act-card" routerLink="/day22/act2">
+              <div class="act-icon">☁️</div>
+              <div class="act-info">
+                <div class="act-num">Act 2</div>
+                <div class="act-name">Firebase Hosting</div>
+                <div class="act-desc">Initialize hosting, read the SPA rewrite, and deploy to a live URL</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+            <div class="act-card" routerLink="/day22/act3">
+              <div class="act-icon">🎭</div>
+              <div class="act-info">
+                <div class="act-num">Act 3</div>
+                <div class="act-name">SSR and Production Incidents</div>
+                <div class="act-desc">State the CSR/SSR tradeoff in one sentence, then diagnose a two-bug incident report</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+            <div class="act-card lab" routerLink="/day22/lab">
+              <div class="act-icon">🛠️</div>
+              <div class="act-info">
+                <div class="act-num">Student Lab</div>
+                <div class="act-name">Ship It, Measure It, Show Someone</div>
+                <div class="act-desc">A ship-it checklist and reship, real Lighthouse numbers, and the friend test</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
