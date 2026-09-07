@@ -512,6 +512,97 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         </div>
       </div>
 
+      <h2 class="day-heading">✅ Day 11 — Reactive Forms II: Validation That Doesn't Annoy People</h2>
+      <p class="day-subheading">Make the ReviewForm helpful instead of noisy: built-in and custom validators, timely errors, FormArray tags, cross-field rules, and accessible submit feedback.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day11/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get BingeBoard Running</div>
+            <div class="act-desc">Clone the end-of-Day-10 reactive forms project before adding validation</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day11/act1">
+          <div class="act-icon">✅</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Validators &amp; Control State</div>
+            <div class="act-desc">Built-in rules plus valid, errors, touched, dirty, and timely error timing</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day11/act2">
+          <div class="act-icon">🏷️</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Custom Validators &amp; FormArray</div>
+            <div class="act-desc">Write your own rule, grow a tags list, and fix the button-type bug</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day11/act3">
+          <div class="act-icon">🛡️</div>
+          <div class="act-info">
+            <div class="act-num">Act 3</div>
+            <div class="act-name">Cross-Field Rules &amp; Accessibility</div>
+            <div class="act-desc">Spoiler detail, max tags, error summaries, and keyboard-friendly feedback</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day11/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">5 Hands-On Tasks</div>
+            <div class="act-desc">Full validation UX, cross-field spoilers, max tags, summaries, and Debug It</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
+      <h2 class="day-heading">🧭 Day 12 — The Forms Landscape</h2>
+      <p class="day-subheading">A lighter survey and a heavier build: compare template-driven, reactive, and signal forms, then ship a carefully chosen Suggest a Show feature.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day12/start">
+          <div class="act-icon">🎬</div>
+          <div class="act-info">
+            <div class="act-num">Starting Point</div>
+            <div class="act-name">Get the Validated BingeBoard Running</div>
+            <div class="act-desc">Carry forward the complete Day 11 form-validation experience</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day12/act1">
+          <div class="act-icon">📬</div>
+          <div class="act-info">
+            <div class="act-num">Act 1</div>
+            <div class="act-name">Template-Driven Forms</div>
+            <div class="act-desc">Build a newsletter form and translate it to reactive-forms terms</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card" routerLink="/day12/act2">
+          <div class="act-icon">📡</div>
+          <div class="act-info">
+            <div class="act-num">Act 2</div>
+            <div class="act-name">Signal Forms &amp; Choosing Well</div>
+            <div class="act-desc">Use the current docs, then choose a form API from real constraints</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+        <div class="act-card lab" routerLink="/day12/lab">
+          <div class="act-icon">🛠️</div>
+          <div class="act-info">
+            <div class="act-num">Student Lab</div>
+            <div class="act-name">Ship Suggest a Show</div>
+            <div class="act-desc">A lazy route, validated form, read-only signal state, and Debug It</div>
+          </div>
+          <span class="act-arrow">→</span>
+        </div>
+      </div>
+
       <h2 class="day-heading">🌐 Day 13 — HTTP I: Real Data from a Real API</h2>
       <p class="day-subheading">BingeBoard's hardcoded array dies today: real HttpClient calls, a typed &amp; adapted third-party API, loading/empty states, and the async bug everyone meets once.</p>
       <div class="act-cards">

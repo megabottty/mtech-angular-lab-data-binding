@@ -1,0 +1,10 @@
+<header class="app-nav">
+  <span class="brand">📺 BingeBoard</span>
+  <nav>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/browse" routerLinkActive="active">Browse</a>
+    <a routerLink="/watchlist" routerLinkActive="active">My Watchlist ({{ count() }})</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+    <button (click)="surprise()">🎲 Surprise me</button>
+  </nav>
+</header>

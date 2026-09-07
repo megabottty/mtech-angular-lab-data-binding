@@ -8,8 +8,8 @@ import { ProgressService } from '../core/services/progress.service';
 import { environment } from '../../environments/environment';
 
 const ALL_STEPS = [
-  'act1-for', 'act1-track', 'act1-empty',
-  'act2-if', 'act2-switch',
+  'act1-for', 'act1-track', 'act1-track-deep', 'act1-empty',
+  'act2-if', 'act2-switch', 'act2-choose',
   'act3-oneway-down', 'act3-oneway-up', 'act3-twoway',
   'act4-signals', 'act4-computed', 'act4-full',
   'lab-task1', 'lab-task2', 'lab-task3',
@@ -22,6 +22,15 @@ const ALL_STEPS = [
   'd10-act2-review-model-service', 'd10-act2-reviewform-init', 'd10-act2-submit-reset',
   'd10-act3-showdetail-reviews', 'd10-act3-quick-10', 'd10-act3-debug',
   'd10-lab-post-across-shows', 'd10-lab-empty-state', 'd10-lab-recommend-patch', 'd10-lab-char-count', 'd10-lab-stretch-disable-button',
+  'd11-act1-builtin-validators', 'd11-act1-control-state', 'd11-act1-timely-errors',
+  'd11-act2-noshouting-validator', 'd11-act2-formarray-tags', 'd11-act2-debug',
+  'd11-act3-cross-field-spoiler', 'd11-act3-max-tags', 'd11-act3-error-summary-accessibility',
+  'd11-lab-full-validation-ux', 'd11-lab-cross-field-spoilers', 'd11-lab-formarray-max-tags',
+  'd11-lab-error-summary', 'd11-lab-debug-it',
+  'd12-act1-newsletter-form', 'd12-act1-template-validation', 'd12-act1-rosetta-stone',
+  'd12-act2-signal-forms-docs', 'd12-act2-decision-rule', 'd12-act2-choosing-well',
+  'd12-lab-route-lazy-loading', 'd12-lab-suggestions-service', 'd12-lab-suggestion-validation',
+  'd12-lab-newest-first-empty', 'd12-lab-choice-justification', 'd12-lab-debug-readonly',
   'd13-act1-problem', 'd13-act1-httpclient', 'd13-act1-observable-model',
   'd13-act2-typing', 'd13-act2-adapter', 'd13-act2-service', 'd13-act2-subscribe-fires',
   'd13-act3-browse-component', 'd13-act3-three-state', 'd13-act3-debug',
@@ -227,6 +236,29 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day10/act2', label: '🧾 Act 2 — Building the Review Form' },
       { path: '/day10/act3', label: '🎬 Act 3 — Reviews on the Show Page & Debug It' },
       { path: '/day10/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day11',
+    label: '✅ Day 11 — Reactive Forms II',
+    prefix: '/day11',
+    items: [
+      { path: '/day11/start', label: '🎬 Starting Point' },
+      { path: '/day11/act1', label: '✅ Act 1 — Validators & Control State' },
+      { path: '/day11/act2', label: '🏷️ Act 2 — Custom Validators & FormArray' },
+      { path: '/day11/act3', label: '🛡️ Act 3 — Cross-Field Rules & Accessibility' },
+      { path: '/day11/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day12',
+    label: '🧭 Day 12 — The Forms Landscape',
+    prefix: '/day12',
+    items: [
+      { path: '/day12/start', label: '🎬 Starting Point' },
+      { path: '/day12/act1', label: '📬 Act 1 — Template-Driven Forms' },
+      { path: '/day12/act2', label: '📡 Act 2 — Signal Forms & Choosing Well' },
+      { path: '/day12/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   },
   {

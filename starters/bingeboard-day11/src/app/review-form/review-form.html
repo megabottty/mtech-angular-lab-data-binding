@@ -1,0 +1,31 @@
+<form [formGroup]="reviewForm" (ngSubmit)="submit()">
+  <label>
+    Rating (0-10)
+    <input type="number" formControlName="rating" min="0" max="10" />
+  </label>
+
+  <label>
+    Headline
+    <input type="text" formControlName="headline" maxlength="60" placeholder="Sum it up in one line" />
+  </label>
+  <p class="char-count" [class.over-limit]="reviewForm.controls.headline.value.length > 60">
+    {{ reviewForm.controls.headline.value.length }}/60 characters
+  </p>
+
+  <label>
+    Full review
+    <textarea formControlName="body" rows="4" placeholder="What did you think?"></textarea>
+  </label>
+
+  <label class="checkbox-row">
+    <input type="checkbox" formControlName="spoilers" />
+    Contains spoilers
+  </label>
+
+  <div class="quick-fill-row">
+    <button type="button" (click)="quickFillTen()">10/10, loved it</button>
+    <button type="button" (click)="recommendPreset()">👍 Recommend</button>
+  </div>
+
+  <button type="submit">Post review</button>
+</form>

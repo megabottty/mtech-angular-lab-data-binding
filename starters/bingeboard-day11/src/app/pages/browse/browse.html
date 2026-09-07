@@ -1,0 +1,13 @@
+<app-panel title="Browse shows">
+  <section class="filters">
+    <input placeholder="Filter shows..." [(ngModel)]="searchTerm" />
+    <select [(ngModel)]="selectedGenre">@for (genre of genres(); track genre) { <option [value]="genre">{{ genre }}</option> }</select>
+    <select [(ngModel)]="sortBy"><option value="name">Sort by name</option><option value="rating">Sort by rating</option></select>
+  </section>
+  <p>Showing {{ filteredShows().length }} of {{ shows().length }} shows</p>
+  <div class="card-grid">
+    @for (show of filteredShows(); track show.id) {
+      <app-show-card [show]="show" [alreadyAdded]="watchlistIds().has(show.id)" [myRating]="ratings()[show.id] ?? 0" (myRatingChange)="setRating(show.id, $event)" (addToWatchlist)="addShow($event)" (viewed)="recordView($event)" />
+    } @empty { <p>No shows match those filters. <button (click)="clearFilters()">Clear filters</button></p> }
+  </div>
+</app-panel>

@@ -1,0 +1,76 @@
+<form [formGroup]="reviewForm" (ngSubmit)="submit()">
+  @if (submitAttempted() && errorSummary.length > 0) {
+    <div class="error-box" role="alert" aria-live="polite">
+      <p>Please fix these fields before posting:</p>
+      <ul>
+        @for (field of errorSummary; track field) {
+          <li>{{ field }} needs attention.</li>
+        }
+      </ul>
+    </div>
+  }
+
+  <label>
+    Rating (0-10)
+    <input type="number" formControlName="rating" min="0" max="10" [attr.aria-invalid]="showError(reviewForm.controls.rating)" />
+  </label>
+  @if (showError(reviewForm.controls.rating)) {
+    <p class="field-error">Rating must be between 0 and 10.</p>
+  }
+
+  <label>
+    Headline
+    <input type="text" formControlName="headline" maxlength="80" placeholder="Sum it up in one line" [attr.aria-invalid]="showError(reviewForm.controls.headline)" />
+  </label>
+  <p class="char-count" [class.over-limit]="reviewForm.controls.headline.value.length > 80">
+    {{ reviewForm.controls.headline.value.length }}/80 characters
+  </p>
+  @if (showError(reviewForm.controls.headline)) {
+    <p class="field-error">
+      @if (reviewForm.controls.headline.hasError('required')) { A headline is required. }
+      @if (reviewForm.controls.headline.hasError('maxlength')) { Keep the headline under 80 characters. }
+      @if (reviewForm.controls.headline.hasError('noShouting')) { Try not to shout in the headline. }
+    </p>
+  }
+
+  <label>
+    Full review
+    <textarea formControlName="body" rows="4" placeholder="What did you think?" [attr.aria-invalid]="showError(reviewForm.controls.body)"></textarea>
+  </label>
+  @if (showError(reviewForm.controls.body)) {
+    <p class="field-error">Write at least 20 characters.</p>
+  }
+
+  <label class="checkbox-row">
+    <input type="checkbox" formControlName="spoilers" />
+    Contains spoilers
+  </label>
+  @if (showError(reviewForm) && reviewForm.hasError('spoilersNeedDetail')) {
+    <p class="field-error">Spoiler reviews need at least 50 characters.</p>
+  }
+
+  <div formArrayName="tags">
+    <p>Tags</p>
+    @for (tag of tags.controls; track $index; let i = $index) {
+      <label>
+        Tag {{ i + 1 }}
+        <input type="text" [formControlName]="i" maxlength="20" />
+        <button type="button" (click)="removeTag(i)">Remove tag</button>
+      </label>
+      @if (showError(tag)) {
+        <p class="field-error">Tags need 2 to 20 characters.</p>
+      }
+    }
+  </div>
+  <button type="button" (click)="addTag()" [disabled]="tags.length >= 5">+ Add tag</button>
+  @if (showError(tags) && tags.hasError('duplicateTags')) {
+    <p class="field-error">Each tag must be unique.</p>
+  }
+
+  <div class="quick-fill-row">
+    <button type="button" (click)="quickFillTen()">10/10, loved it</button>
+    <button type="button" (click)="recommendPreset()">👍 Recommend</button>
+  </div>
+
+  <button type="submit" [disabled]="reviewForm.invalid">Post review</button>
+</form>
