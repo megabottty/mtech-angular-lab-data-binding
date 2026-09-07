@@ -77,7 +77,7 @@ const ALL_STEPS = [
   'd23-lab-finish-timeago-suite', 'd23-lab-test-toshow-adapter', 'd23-lab-test-noshouting', 'd23-lab-coverage-stretch',
   'd24-act1-testbed-service', 'd24-act1-di-fake',
   'd24-act2-component-fixture', 'd24-act2-component-output',
-  'd24-act3-http-happy-path', 'd24-act3-http-error-debug',
+  'd24-act3-http-happy-path', 'd24-act3-http-error-debug', 'd24-act3-debug-component-tests',
   'd24-lab-watchlist-panel', 'd24-lab-search-error', 'd24-lab-auth-ui', 'd24-lab-guard-stretch',
   'd25-act1-coverage-map', 'd25-act1-pyramid-triage', 'd25-act1-test-plan', 'd25-act1-reviewform-spy',
   'd25-act2-rubric', 'd25-act2-scope-cut', 'd25-act2-milestones', 'd25-act2-pitch-homework', 'd25-act2-teammate-debug',

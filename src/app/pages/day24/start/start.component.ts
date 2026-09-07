@@ -12,18 +12,18 @@ import { CollapsibleComponent } from '../../../shared/components/collapsible/col
       <div class="page-header">
         <span class="act-label">Day 24 · Starting Point</span>
         <h1>🎬 Get BingeBoard Running</h1>
-        <p class="subtitle">The end-of-Day-22 BingeBoard, now with real titles, a favicon, and a meta description — plus two small, real pieces of logic that have never had a single test written against them: <code>bingeLevel()</code> and <code>noShouting()</code>.</p>
+        <p class="subtitle">The end-of-Day-23 BingeBoard: a real, green test suite covering every pure function and pipe, plus one revived service — <code>RecentlyViewedService</code> — that's never been touched by a single test.</p>
       </div>
       <div class="info-box"><strong>Two ways to get there:</strong> run the reference starter (fastest), or compare every source file below with your own project.</div>
       <section class="lesson-framework">
         <h3>Option A — Run the starter (fastest)</h3>
-        <ul><li>Clone the teaching repository, then enter <code>starters/bingeboard-day24/</code>.</li><li>Run <code>npm install</code>, paste your own Firebase config into <code>src/environments/environment.ts</code>, then run <code>npm start</code>.</li></ul>
+        <ul><li>Clone the teaching repository, then enter <code>starters/bingeboard-day24/</code>.</li><li>Run <code>npm install</code>, paste your own Firebase config into <code>src/environments/environment.ts</code>, then run <code>npm start</code> — and confirm <code>npm test</code> passes.</li></ul>
         <app-code-block lang="bash" [code]="cloneCommand" />
         <p>Browse it on GitHub: <a href="https://github.com/megabottty/mtech-angular-lab-data-binding/tree/main/starters/bingeboard-day24" target="_blank" rel="noopener">starters/bingeboard-day24</a>.</p>
       </section>
       <section class="lesson-framework">
         <h3>Option B — Bring your own project</h3>
-        <p>Expand every source file to copy or compare the exact end-of-Day-22 reference implementation.</p>
+        <p>Expand every source file to copy or compare the exact end-of-Day-23 reference implementation. The <code>test</code> architect target, <code>vitest</code>/<code>jsdom</code> dev dependencies, and <code>tsconfig.spec.json</code> that Day 23 Act 1 walked through adding aren't repeated here — see <a routerLink="/day23/act1">Day 23 Act 1</a> for those exact diffs, and Day 23's Acts 1-3 and Lab for the five spec files themselves, all carried forward into this starter unchanged.</p>
         @for (group of starterGroups; track group.folder) {
           <h4 style="margin-top: 20px;">{{ group.folder }}</h4>
           @for (file of group.files; track file.path) {
@@ -31,10 +31,10 @@ import { CollapsibleComponent } from '../../../shared/components/collapsible/col
           }
         }
       </section>
-      <section class="lesson-framework"><h3>What this code already does</h3><ul><li><strong>Days 9-17:</strong> routing, guards, real HTTP, typeahead, pipes, and a 404 page.</li><li><strong>Days 18-20:</strong> Firestore reads, watchlist CRUD, authored reviews via a server-side query.</li><li><strong>Day 21:</strong> Google sign-in, per-user watchlists, route guards with return-URL preservation, and Firestore rules that enforce ownership.</li><li><strong>Day 22:</strong> a real production build, real route titles, a favicon, a meta description, and a live Firebase Hosting URL.</li></ul></section>
-      <section class="lesson-framework"><h3>Verify before you start</h3><ul class="task-checklist"><li><span class="checkbox">✅</span> <code>npm start</code> runs and every route's browser tab title is descriptive.</li><li><span class="checkbox">✅</span> Show Detail's episode line reads something like <code>12 episodes · Quick Watch</code>.</li><li><span class="checkbox">✅</span> No test files exist yet anywhere in <code>src/</code> — today changes that.</li></ul></section>
-      <div class="warning-box">If a check fails, return to the day and act that built it before continuing. Day 24 does not change any app behavior — it writes the first tests against behavior that already exists.</div>
-      <div class="nav-footer"><a routerLink="/day22/lab" class="btn-secondary">← Day 23 Lab</a><a routerLink="/day24/act1" class="btn-primary">Act 1: Why Tests Matter →</a></div>
+      <section class="lesson-framework"><h3>What this code already does</h3><ul><li><strong>Days 9-17:</strong> routing, guards, real HTTP, typeahead, pipes, and a 404 page.</li><li><strong>Days 18-20:</strong> Firestore reads, watchlist CRUD, authored reviews via a server-side query.</li><li><strong>Day 21:</strong> Google sign-in, per-user watchlists, route guards with return-URL preservation, and Firestore rules that enforce ownership.</li><li><strong>Day 22:</strong> a real production build, real route titles, a favicon, and a meta description.</li><li><strong>Day 23:</strong> a working <code>npm test</code>, Arrange-Act-Assert, a full red-green TDD cycle on <code>TimeAgoPipe</code>, and five green spec files covering every pure function and pipe in the app.</li><li><strong>Day 24 — new:</strong> <code>RecentlyViewedService</code> is back, recording every show <code>ShowDetail</code> loads and rendering a "Recently viewed" strip on Browse — real app state, and completely untested.</li></ul></section>
+      <section class="lesson-framework"><h3>Verify before you start</h3><ul class="task-checklist"><li><span class="checkbox">✅</span> <code>npm start</code> runs and every route's browser tab title is descriptive.</li><li><span class="checkbox">✅</span> <code>npm test</code> reports <strong>5 test files, 20 tests, all passing</strong>.</li><li><span class="checkbox">✅</span> Opening a show, then returning to Browse, shows it under a new "Recently viewed" strip.</li></ul></section>
+      <div class="warning-box">If a check fails, return to the day and act that built it before continuing. Day 24 does not change any app behavior beyond the new <code>RecentlyViewedService</code> — it writes tests against services, components, and HTTP calls that already exist.</div>
+      <div class="nav-footer"><a routerLink="/day23/lab" class="btn-secondary">← Day 23 Lab</a><a routerLink="/day24/act1" class="btn-primary">Act 1: TestBed and Your First Service Test →</a></div>
     </div>
   `
 })
@@ -475,6 +475,28 @@ export class AnnouncementsService {
     [...this.announcements()].sort((a, b) => b.postedAt.toMillis() - a.postedAt.toMillis())
   );
 }` },
+      { path: 'src/app/core/recently-viewed.service.ts', lang: 'typescript', code: `import { Injectable, signal } from '@angular/core';
+import { Show } from '../models/show';
+
+// Revived for Day 24: this is the exact Day 7 lab service (record a show,
+// keep the 5 most recent, no duplicates) -- dropped from the app when
+// Day 13 rewrote Browse's search around real HTTP and never got wired
+// back in. It's worth having again here for one reason only: it's a
+// plain signal() with zero constructor dependencies, which makes it the
+// simplest possible thing to reach for TestBed on (Act 1) before Act 2
+// tackles a service-with-dependencies test.
+@Injectable({ providedIn: 'root' })
+export class RecentlyViewedService {
+  private items = signal<Show[]>([]);
+  readonly recent = this.items.asReadonly();
+
+  record(show: Show) {
+    this.items.update(list => [
+      show,
+      ...list.filter(item => item.id !== show.id)
+    ].slice(0, 5));
+  }
+}` },
       { path: 'src/app/core/guards/auth.guard.ts', lang: 'typescript', code: `import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -580,7 +602,8 @@ export class RatingBadgePipe implements PipeTransform {
 
 // Day 17 lab Tier 1 -- finally gets a real attachment point on Day 19's
 // watchlist addedAt field. Handles just-now, singular/plural, and a
-// future-dated value (clock skew) gracefully.
+// future-dated value (clock skew) gracefully. Day 23 Act 2's TDD cycle
+// added the week-scale branch below (red test first, then this fix).
 @Pipe({ name: 'timeAgo' })
 export class TimeAgoPipe implements PipeTransform {
   transform(value: string | Date | null | undefined): string {
@@ -597,7 +620,10 @@ export class TimeAgoPipe implements PipeTransform {
     if (hours < 24) return \`\${hours} hour\${hours === 1 ? '' : 's'} ago\`;
 
     const days = Math.floor(hours / 24);
-    return \`\${days} day\${days === 1 ? '' : 's'} ago\`;
+    if (days < 7) return \`\${days} day\${days === 1 ? '' : 's'} ago\`;
+
+    const weeks = Math.floor(days / 7);
+    return \`\${weeks} week\${weeks === 1 ? '' : 's'} ago\`;
   }
 }` },
       { path: 'src/app/shared/show-card.ts', lang: 'typescript', code: `import { Component, inject, input } from '@angular/core';
@@ -690,7 +716,7 @@ export class ShowCard {
   }
 }` },
     ] },
-    { folder: 'Utils and validators — new for Day 24', files: [
+    { folder: 'Utils and validators — carried over from Day 23', files: [
       { path: 'src/app/utils/binge-level.ts', lang: 'typescript', code: `// Day 3's lab taught this exact branching logic as a computed() signal
 // inside ShowCard, driven by a fake episodesWatched counter: 0 episodes,
 // 1-4, 5-9, 10+. Now that Show Detail has a real episode count from the
@@ -736,6 +762,7 @@ import { Subject, catchError, debounceTime, distinctUntilChanged, filter, fromEv
 import { Show } from '../../models/show';
 import { ShowsService } from '../../core/shows.service';
 import { FeaturedService } from '../../core/featured.service';
+import { RecentlyViewedService } from '../../core/recently-viewed.service';
 import { ShowCard } from '../../shared/show-card';
 
 // End-of-Day-18 Browse: the full Day 16 typeahead pipeline (Subject ->
@@ -743,7 +770,8 @@ import { ShowCard } from '../../shared/show-card';
 // (loading) -> switchMap with catchError INSIDE the projection -> tap
 // (loading false)), the Day 16 lab's minimum-viable-query idle hint, the
 // Day 15 lab's '/' keyboard shortcut, and Day 18 Act 2's "Shows of the
-// week" panel -- Browse is this app's real '' / home route.
+// week" panel -- Browse is this app's real '' / home route. Day 24 --
+// a "Recently viewed" strip backed by the revived RecentlyViewedService.
 @Component({
   selector: 'app-browse',
   standalone: true,
@@ -763,6 +791,17 @@ import { ShowCard } from '../../shared/show-card';
           <p class="muted">Nothing featured yet.</p>
         }
       </section>
+
+      @if (recentlySvc.recent().length) {
+        <section class="recent-panel">
+          <h2>Recently viewed</h2>
+          <div class="recent-row">
+            @for (s of recentlySvc.recent(); track s.id) {
+              <app-show-card [show]="s" />
+            }
+          </div>
+        </section>
+      }
 
       <div class="search-row">
         <input
@@ -797,6 +836,10 @@ import { ShowCard } from '../../shared/show-card';
     .featured-panel h2 { margin: 0 0 10px; font-size: 16px; }
     .featured-card { padding: 8px 0; border-top: 1px solid #2a2d35; }
     .featured-card:first-of-type { border-top: none; }
+    .recent-panel { margin-bottom: 24px; }
+    .recent-panel h2 { margin: 0 0 10px; font-size: 16px; }
+    .recent-row { display: flex; gap: 16px; overflow-x: auto; }
+    .recent-row app-show-card { flex: 0 0 160px; }
     .search-row { display: flex; gap: 8px; margin-bottom: 20px; max-width: 480px; }
     .search-row input { flex: 1; padding: 8px 10px; border-radius: 6px; border: 1px solid #3e3e42; background: #1c1f26; color: #e6e6e6; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
@@ -805,6 +848,7 @@ import { ShowCard } from '../../shared/show-card';
 export class Browse {
   private showsSvc = inject(ShowsService);
   featuredSvc = inject(FeaturedService);
+  recentlySvc = inject(RecentlyViewedService);
 
   searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
@@ -855,12 +899,13 @@ export class Browse {
   }
 }` },
       { path: 'src/app/pages/show-detail/show-detail.ts', lang: 'typescript', code: `import { httpResource } from '@angular/common/http';
-import { Component, computed, ElementRef, inject, input, viewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, input, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Show, TvMazeEpisode, TvMazeShow, toShow } from '../../models/show';
 import { WatchlistService } from '../../core/watchlist.service';
 import { ReviewsService } from '../../core/reviews.service';
 import { AuthService } from '../../core/auth.service';
+import { RecentlyViewedService } from '../../core/recently-viewed.service';
 import { bingeLevel } from '../../utils/binge-level';
 
 // End-of-Day-21 ShowDetail: two independent httpResource()s (show +
@@ -868,7 +913,8 @@ import { bingeLevel } from '../../utils/binge-level';
 // WatchlistService, a review form + list backed by ReviewsService with
 // authored reviews and author-only delete (Day 21 lab Task 1), and a
 // sign-in nudge in place of the form/watchlist button for signed-out
-// visitors (Day 21 lab Task 2).
+// visitors (Day 21 lab Task 2). Day 24 -- records every successfully
+// loaded show with the revived RecentlyViewedService.
 @Component({
   selector: 'app-show-detail',
   standalone: true,
@@ -977,6 +1023,7 @@ export class ShowDetail {
   watchlistSvc = inject(WatchlistService);
   reviewsSvc = inject(ReviewsService);
   authSvc = inject(AuthService);
+  recentlySvc = inject(RecentlyViewedService);
 
   // Exposed so the template can call it directly -- templates only see
   // component instance members, not bare module-level imports.
@@ -991,6 +1038,13 @@ export class ShowDetail {
   episodesRes = httpResource<TvMazeEpisode[]>(() => \`\${this.base}/shows/\${this.id()}/episodes\`);
 
   show = computed(() => (this.showRes.hasValue() ? toShow(this.showRes.value()) : undefined));
+
+  constructor() {
+    effect(() => {
+      const s = this.show();
+      if (s) this.recentlySvc.record(s);
+    });
+  }
 
   // forShow() returns a computed(); reading it inside this outer computed()
   // means \`reviews\` re-derives correctly whenever the route id changes.
