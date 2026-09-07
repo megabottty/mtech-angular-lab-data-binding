@@ -1131,6 +1131,15 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
               </div>
               <span class="act-arrow">→</span>
             </div>
+      <h2 class="day-heading">🧰 Day 24 — Testing II: Services, Components, and Faking the World</h2>
+      <p class="day-subheading">Use TestBed as a tiny Angular app, swap real dependencies for fakes, test component contracts, and control HTTP without a network.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day24/start"><div class="act-icon">🎬</div><div class="act-info"><div class="act-num">Starting Point</div><div class="act-name">Get BingeBoard Running</div><div class="act-desc">The tested Day 23 baseline, ready for Angular-aware tests</div></div><span class="act-arrow">→</span></div>
+        <div class="act-card" routerLink="/day24/act1"><div class="act-icon">🧰</div><div class="act-info"><div class="act-num">Act 1</div><div class="act-name">TestBed and DI Fakes</div><div class="act-desc">Create fresh services and replace dependencies safely</div></div><span class="act-arrow">→</span></div>
+        <div class="act-card" routerLink="/day24/act2"><div class="act-icon">🧩</div><div class="act-info"><div class="act-num">Act 2</div><div class="act-name">Component Contracts</div><div class="act-desc">Inputs in, DOM out, and events through a fixture</div></div><span class="act-arrow">→</span></div>
+        <div class="act-card" routerLink="/day24/act3"><div class="act-icon">🌐</div><div class="act-info"><div class="act-num">Act 3</div><div class="act-name">HTTP Without a Network</div><div class="act-desc">Expect, flush, and verify requests with a testing backend</div></div><span class="act-arrow">→</span></div>
+        <div class="act-card lab" routerLink="/day24/lab"><div class="act-icon">🛠️</div><div class="act-info"><div class="act-num">Student Lab</div><div class="act-name">Fake the World, Test the Contract</div><div class="act-desc">Service, component, HTTP, auth, and guard contract tests</div></div><span class="act-arrow">→</span></div>
+      </div>
           </div>
         </div>
       </div>

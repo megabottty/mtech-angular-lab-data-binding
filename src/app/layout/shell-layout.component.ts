@@ -75,6 +75,10 @@ const ALL_STEPS = [
   'd23-act2-runtime-pipe-tests', 'd23-act2-tdd-timeago-weeks',
   'd23-act3-lying-assertion', 'd23-act3-wrong-dash', 'd23-act3-leaked-fake-timers',
   'd23-lab-finish-timeago-suite', 'd23-lab-test-toshow-adapter', 'd23-lab-test-noshouting', 'd23-lab-coverage-stretch',
+  'd24-act1-testbed-service', 'd24-act1-di-fake',
+  'd24-act2-component-fixture', 'd24-act2-component-output',
+  'd24-act3-http-happy-path', 'd24-act3-http-error-debug',
+  'd24-lab-watchlist-panel', 'd24-lab-search-error', 'd24-lab-auth-ui', 'd24-lab-guard-stretch',
   'd1-act1-why-angular', 'd1-act1-scaffold', 'd1-act1-project-tour',
   'd1-act2-interpolation', 'd1-act2-generate-component', 'd1-act2-use-component',
   'd1-act3-git-commit', 'd1-act3-debug-it',
@@ -397,6 +401,19 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day23/act2', label: '🔧 Act 2 — Testing Pipes & TDD' },
       { path: '/day23/act3', label: '🐛 Act 3 — Debug It: Three Tests That Lie' },
       { path: '/day23/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  }
+  ,
+  {
+    id: 'day24',
+    label: '🧰 Day 24 — Testing II: Services & Components',
+    prefix: '/day24',
+    items: [
+      { path: '/day24/start', label: '🎬 Starting Point' },
+      { path: '/day24/act1', label: '🧰 Act 1 — TestBed & DI Fakes' },
+      { path: '/day24/act2', label: '🧩 Act 2 — Component Contracts' },
+      { path: '/day24/act3', label: '🌐 Act 3 — HTTP Testing' },
+      { path: '/day24/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];
