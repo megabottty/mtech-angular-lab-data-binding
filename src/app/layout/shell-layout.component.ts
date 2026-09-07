@@ -71,6 +71,10 @@ const ALL_STEPS = [
   'd22-act2-hosting-init', 'd22-act2-spa-rewrite', 'd22-act2-deploy',
   'd22-act3-ssr', 'd22-act3-debug',
   'd22-lab-shipit-checklist', 'd22-lab-lighthouse', 'd22-lab-friend-test', 'd22-lab-preview-channel',
+  'd23-act1-wire-up-ng-test', 'd23-act1-arrange-act-assert', 'd23-act1-bingelevel-first-spec',
+  'd23-act2-runtime-pipe-tests', 'd23-act2-tdd-timeago-weeks',
+  'd23-act3-lying-assertion', 'd23-act3-wrong-dash', 'd23-act3-leaked-fake-timers',
+  'd23-lab-finish-timeago-suite', 'd23-lab-test-toshow-adapter', 'd23-lab-test-noshouting', 'd23-lab-coverage-stretch',
   'd1-act1-why-angular', 'd1-act1-scaffold', 'd1-act1-project-tour',
   'd1-act2-interpolation', 'd1-act2-generate-component', 'd1-act2-use-component',
   'd1-act3-git-commit', 'd1-act3-debug-it',
@@ -381,6 +385,18 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day22/act2', label: '☁️ Act 2 — Firebase Hosting' },
       { path: '/day22/act3', label: '🎭 Act 3 — SSR & Production Incidents' },
       { path: '/day22/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day23',
+    label: '🧪 Day 23 — Testing I: Your First Real Tests',
+    prefix: '/day23',
+    items: [
+      { path: '/day23/start', label: '🎬 Starting Point' },
+      { path: '/day23/act1', label: '🧪 Act 1 — Why Tests Matter' },
+      { path: '/day23/act2', label: '🔧 Act 2 — Testing Pipes & TDD' },
+      { path: '/day23/act3', label: '🐛 Act 3 — Debug It: Three Tests That Lie' },
+      { path: '/day23/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];

@@ -1082,6 +1082,56 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
               <span class="act-arrow">→</span>
             </div>
           </div>
+
+          <h2 class="day-heading">🧪 Day 23 — Testing I: Why, What, and Your First Real Tests</h2>
+          <p class="day-subheading">Wire up ng test, write your first pure-function spec with Arrange-Act-Assert, run a real TDD cycle on a pipe, and learn to spot three tests that lie.</p>
+          <div class="act-cards">
+            <div class="act-card" routerLink="/day23/start">
+              <div class="act-icon">🎬</div>
+              <div class="act-info">
+                <div class="act-num">Starting Point</div>
+                <div class="act-name">Get BingeBoard Running</div>
+                <div class="act-desc">The end-of-Day-22 project, plus two small pure functions that have never been tested</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+            <div class="act-card" routerLink="/day23/act1">
+              <div class="act-icon">🧪</div>
+              <div class="act-info">
+                <div class="act-num">Act 1</div>
+                <div class="act-name">Why Tests Matter</div>
+                <div class="act-desc">Wire up ng test, read its real output, and write bingeLevel's first spec with Arrange-Act-Assert</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+            <div class="act-card" routerLink="/day23/act2">
+              <div class="act-icon">🔧</div>
+              <div class="act-info">
+                <div class="act-num">Act 2</div>
+                <div class="act-name">Testing Pipes, and a Real TDD Cycle</div>
+                <div class="act-desc">Test RuntimePipe directly, then run one full red-green cycle adding a week-scale case to TimeAgoPipe</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+            <div class="act-card" routerLink="/day23/act3">
+              <div class="act-icon">🐛</div>
+              <div class="act-info">
+                <div class="act-num">Act 3</div>
+                <div class="act-name">Debug It — Three Tests That Lie</div>
+                <div class="act-desc">A lying assertion, a wrong dash character, and leaked fake-timer state between tests</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+            <div class="act-card lab" routerLink="/day23/lab">
+              <div class="act-icon">🛠️</div>
+              <div class="act-info">
+                <div class="act-num">Student Lab</div>
+                <div class="act-name">Cover the Rest of Today's Real Code</div>
+                <div class="act-desc">Finish the TimeAgoPipe suite, test toShow and noShouting, and try coverage reporting</div>
+              </div>
+              <span class="act-arrow">→</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
