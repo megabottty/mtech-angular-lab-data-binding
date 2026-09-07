@@ -1140,6 +1140,14 @@ import { MentalModelCardComponent, MentalModel } from '../../shared/components/m
         <div class="act-card" routerLink="/day24/act3"><div class="act-icon">🌐</div><div class="act-info"><div class="act-num">Act 3</div><div class="act-name">HTTP Without a Network</div><div class="act-desc">Expect, flush, and verify requests with a testing backend</div></div><span class="act-arrow">→</span></div>
         <div class="act-card lab" routerLink="/day24/lab"><div class="act-icon">🛠️</div><div class="act-info"><div class="act-num">Student Lab</div><div class="act-name">Fake the World, Test the Contract</div><div class="act-desc">Service, component, HTTP, auth, and guard contract tests</div></div><span class="act-arrow">→</span></div>
       </div>
+      <h2 class="day-heading">🗺️ Day 25 — Testing III: Test the Real App + Capstone Kickoff</h2>
+      <p class="day-subheading">Read coverage as a map, rank real risk with the testing pyramid, write a real test plan, then plan and pitch your own capstone project for Days 26-33.</p>
+      <div class="act-cards">
+        <div class="act-card" routerLink="/day25/start"><div class="act-icon">🎬</div><div class="act-info"><div class="act-num">Starting Point</div><div class="act-name">Get BingeBoard Running</div><div class="act-desc">The end-of-Day-24 baseline, with real service, component, HTTP, and guard specs</div></div><span class="act-arrow">→</span></div>
+        <div class="act-card" routerLink="/day25/act1"><div class="act-icon">🗺️</div><div class="act-info"><div class="act-num">Act 1</div><div class="act-name">Coverage, Risk, and a Test Plan</div><div class="act-desc">Read coverage as a map, triage real risk, and write a test plan</div></div><span class="act-arrow">→</span></div>
+        <div class="act-card" routerLink="/day25/act2"><div class="act-icon">🚀</div><div class="act-info"><div class="act-num">Act 2</div><div class="act-name">Capstone Kickoff</div><div class="act-desc">Rubric, scope cutting, milestones, and your pitch homework</div></div><span class="act-arrow">→</span></div>
+        <div class="act-card lab" routerLink="/day25/lab"><div class="act-icon">🛠️</div><div class="act-info"><div class="act-num">Student Lab</div><div class="act-name">The Safety Net Lab</div><div class="act-desc">Risk queue, mutation proof, coverage before/after, extraction log, pitch draft</div></div><span class="act-arrow">→</span></div>
+      </div>
           </div>
         </div>
       </div>

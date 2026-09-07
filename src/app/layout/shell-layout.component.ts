@@ -79,6 +79,9 @@ const ALL_STEPS = [
   'd24-act2-component-fixture', 'd24-act2-component-output',
   'd24-act3-http-happy-path', 'd24-act3-http-error-debug',
   'd24-lab-watchlist-panel', 'd24-lab-search-error', 'd24-lab-auth-ui', 'd24-lab-guard-stretch',
+  'd25-act1-coverage-map', 'd25-act1-pyramid-triage', 'd25-act1-test-plan', 'd25-act1-reviewform-spy',
+  'd25-act2-rubric', 'd25-act2-scope-cut', 'd25-act2-milestones', 'd25-act2-pitch-homework', 'd25-act2-teammate-debug',
+  'd25-lab-red-painful-queue', 'd25-lab-mutation-proof', 'd25-lab-coverage-before-after', 'd25-lab-extraction-log', 'd25-lab-capstone-pitch-draft',
   'd1-act1-why-angular', 'd1-act1-scaffold', 'd1-act1-project-tour',
   'd1-act2-interpolation', 'd1-act2-generate-component', 'd1-act2-use-component',
   'd1-act3-git-commit', 'd1-act3-debug-it',
@@ -414,6 +417,17 @@ const DAY_GROUPS: DayGroup[] = [
       { path: '/day24/act2', label: '🧩 Act 2 — Component Contracts' },
       { path: '/day24/act3', label: '🌐 Act 3 — HTTP Testing' },
       { path: '/day24/lab', label: '🛠️ Student Lab', isLab: true }
+    ]
+  },
+  {
+    id: 'day25',
+    label: '🗺️ Day 25 — Testing III: Test the Real App + Capstone Kickoff',
+    prefix: '/day25',
+    items: [
+      { path: '/day25/start', label: '🎬 Starting Point' },
+      { path: '/day25/act1', label: '🗺️ Act 1 — Coverage, Risk & a Test Plan' },
+      { path: '/day25/act2', label: '🚀 Act 2 — Capstone Kickoff' },
+      { path: '/day25/lab', label: '🛠️ Student Lab', isLab: true }
     ]
   }
 ];
