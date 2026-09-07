@@ -47,8 +47,9 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
       <app-lesson-step stepId="d25-act1-reviewform-spy" [stepNumber]="4" title="Worked Example — Testing the Review Form's Submit">
         <p><span class="effort-tag effort-medium">Effort: Medium</span></p>
-        <p>Show Detail's review form calls <code>submitReview()</code>, which reads two DOM values and calls <code>reviewsSvc.add(showId, text, rating)</code>. Faking <code>ReviewsService</code> and watching that call is enough to prove the form's contract — no Firestore write required.</p>
+        <p>Show Detail's review form calls <code>submitReview()</code>, which reads two DOM values and calls <code>reviewsSvc.add(showId, text, rating)</code>. Faking the component's service neighbors and watching that call is enough to prove the form's contract — no Firestore write required. The example includes the HTTP, router, auth, watchlist, and recently-viewed fakes that this real component needs to be created.</p>
         <app-code-block lang="typescript" [code]="reviewFormSpecCode" />
+        <p class="muted">The app-specific imports (<code>TestBed</code>, <code>ShowDetail</code>, and the four service classes) are left out of this focused excerpt; add the imports from your starter's file paths before running it.</p>
         <p>A <strong>spy</strong> is a fake function that also remembers whether, how many times, and with what arguments it was called. <code>vi.fn()</code> is Vitest's spy constructor; <code>toHaveBeenCalledWith(...)</code> reads its call history. This is a "runner drift" spot: on the Karma/Jasmine engine mentioned back in Day 23 Act 1, the same idea is spelled <code>jasmine.createSpy('add')</code> or <code>spyOn(realService, 'add')</code> instead. Same concept, same assertion shape, different constructor name — check which runner an example online is using before assuming your own spy syntax is wrong.</p>
         <div class="think-about-it"><p class="tai-q">Why fake <code>ReviewsService</code> here instead of letting the test write to real Firestore?</p></div>
         <app-collapsible icon="✅" label="Show Answer — fake the neighbor, keep the resident real"><p>Day 24 Act 1's rule still applies: <code>ShowDetail</code>'s own logic — reading the two form values and calling <code>add()</code> with them — is what this test is proving. <code>ReviewsService</code> is a neighbor. Faking it keeps the test fast, offline, and free of leftover documents in a real database.</p></app-collapsible>
@@ -66,7 +67,7 @@ export class Act1Component {
     { concept: 'risk triage', plainEnglish: 'Ranking untested code by how likely it is to break and how bad it would be if it broke silently.', analogy: '🚑 An emergency room treating the worst case first, not whoever walked in first.' },
     { concept: 'spy', plainEnglish: 'A fake function that also remembers whether, how often, and with what arguments it was called.', analogy: '🛎️ A doorman who logs everyone who walks in but never actually opens the door himself.' }
   ];
-  coverageCommand = `ng test -- --coverage`;
+  coverageCommand = `ng test --coverage`;
   coverageSample = `File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Lines
 ----------------------------|---------|----------|---------|---------|----------------
 core/shows.service.ts        |   71.4  |   50.0   |  66.7   |  71.4   | 24-27
@@ -87,17 +88,29 @@ core/shows.service.ts           | Wrong rating/runtime shown to everyone | Unit 
 core/watchlist.service.ts       | Users lose saved shows silently        | Unit+HTTP | remove() calls deleteDoc with the right docId
 shared/show-card.ts             | Wrong button shown for wrong auth state | Component | Signed-out visitor sees "Sign in to save"
 core/guards/auth.guard.ts       | A broken redirect locks out real users | Unit      | Signed-out visitor's UrlTree keeps returnUrl`;
-  reviewFormSpecCode = `const fakeReviews = { add: vi.fn(), delete: vi.fn(), forShow: () => () => [] };
+  reviewFormSpecCode = `import { signal } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
 
-beforeEach(() => {
-  TestBed.configureTestingModule({
+const fakeReviews = { add: vi.fn(), delete: vi.fn(), forShow: () => signal([]) };
+const fakeAuth = { isLoggedIn: () => true, user: signal(null), signIn: vi.fn() };
+const fakeWatchlist = { has: () => false, add: vi.fn(), remove: vi.fn() };
+const fakeRecentlyViewed = { record: vi.fn() };
+
+beforeEach(async () => {
+  await TestBed.configureTestingModule({
     imports: [ShowDetail],
     providers: [
-      { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: '1' }) } } },
+      provideHttpClient(),
+      provideHttpClientTesting(),
+      provideRouter([]),
       { provide: ReviewsService, useValue: fakeReviews },
       { provide: AuthService, useValue: fakeAuth },
+      { provide: WatchlistService, useValue: fakeWatchlist },
+      { provide: RecentlyViewedService, useValue: fakeRecentlyViewed },
     ],
-  });
+  }).compileComponents();
   fixture = TestBed.createComponent(ShowDetail);
   fixture.componentRef.setInput('id', '1');
   fixture.detectChanges();
@@ -106,7 +119,7 @@ beforeEach(() => {
 it('submits the trimmed text and numeric rating', () => {
   const textarea = fixture.nativeElement.querySelector('textarea');
   const ratingInput = fixture.nativeElement.querySelector('input[type=number]');
-  textarea.value = '  Great binge, would recommend.  '.trim();
+  textarea.value = '  Great binge, would recommend.  ';
   ratingInput.value = '9';
   fixture.nativeElement.querySelector('form').dispatchEvent(new Event('submit'));
 

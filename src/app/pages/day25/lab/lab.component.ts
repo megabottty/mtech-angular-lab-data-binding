@@ -34,7 +34,7 @@ import { LessonStepComponent } from '../../../shared/components/lesson-step/less
 
       <app-lesson-step stepId="d25-lab-coverage-before-after" [stepNumber]="'Task 3'" title="Capture Coverage Before and After">
         <div class="task-meta"><span class="difficulty medium">⚡ Medium</span><span class="concepts">Concepts: coverage reporting, measuring your own progress.</span></div>
-        <h4>What to build:</h4><p>Run <code>ng test -- --coverage</code> before adding Task 1's new spec file and record your queue's #1 target's line/branch percentage. Add the test, rerun coverage, and record the after numbers.</p>
+        <h4>What to build:</h4><p>Run <code>ng test --coverage</code> before adding Task 1's new spec file and record your queue's #1 target's line/branch percentage. Add the test, rerun coverage, and record the after numbers.</p>
         <app-code-block lang="text" [code]="coverageBeforeAfterTemplate" />
         <div class="outcome-check">✅ <strong>Expected outcome:</strong> A short before/after coverage note for one real file, plus one sentence about what the percentage change does and doesn't prove (tie this back to Task 2's mutation result).</div>
       </app-lesson-step>

@@ -261,5 +261,5 @@ describe('noShouting', () => {
 
   coverageInstallCommand = `npm install -D @vitest/coverage-v8`;
 
-  coverageRunCommand = `ng test -- --coverage`;
+  coverageRunCommand = `ng test --coverage`;
 }
